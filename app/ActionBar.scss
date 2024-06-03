@@ -1,0 +1,9 @@
+@tailwind components;
+
+@layer components {
+  .action-bar {
+    @apply w-full h-16 fixed flex justify-between items-center px-4 bg-neutral-100 text-neutral-800;
+    @apply border-b border-neutral-200 shadow-sm;
+    @apply dark:bg-neutral-900 dark:text-neutral-200 dark:border-neutral-800;
+  }
+}
