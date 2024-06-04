@@ -78,7 +78,7 @@ export default function Home() {
             <FloatCard
               href={ '/gallery' }
               className={ 'mb-4 md:float-end md:ml-6 md:mb-2' }
-              label={ '我的 QSL 卡面' }
+              label={ '浏览 QSL 卡面' }
               content={
                 <>
                   2 <span className={ `opacity-70 ${ noto_sc.className }` }>张</span>
