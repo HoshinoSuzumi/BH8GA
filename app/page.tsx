@@ -7,28 +7,32 @@ import TablerBrandGithub from '@/components/Icons/TablerBrandGithub'
 import TablerBrandTelegram from '@/components/Icons/TablerBrandTelegram'
 import TablerBrandSteam from '@/components/Icons/TablerBrandSteam'
 import { ContactCard } from '@/app/ContactCard'
+import Link from 'next/link'
 
 const FloatCard = ({
   label,
   content,
   icon,
   className,
+  href,
 }: {
   label: string
   content: ReactNode
   icon?: ReactNode
   className?: string
+  href: string
 }) => {
   return (
-    <div
-      className={ `px-4 py-3 rounded-lg bg-neutral-100 dark:bg-neutral-800 bg-gradient-to-br from-primary-600 to-purple-600 overflow-hidden relative group cursor-pointer ${ className }` }
+    <Link
+      href={ href }
+      className={ `block px-4 py-3 rounded-lg bg-neutral-100 dark:bg-neutral-800 bg-gradient-to-br from-primary-600 to-purple-600 overflow-hidden relative group cursor-pointer ${ className }` }
     >
       <div
         className={ 'absolute inset-0 group-hover:inset-[1px] transition-all bg-neutral-100 dark:bg-neutral-800 opacity-90 group-hover:opacity-80 backdrop-blur-md rounded-lg group-hover:rounded-[7px]' }
       ></div>
       <div className={ 'flex flex-col justify-between gap-3 pr-16 relative' }>
         <h1
-          className={ `text-primary-800 dark:text-primary-200 text-xs font-bold opacity-70 ${ noto_sc.className }` }>
+          className={ `text-primary-800 text-xs font-bold opacity-70 ${ noto_sc.className }` }>
           { label }
         </h1>
         <h2 className={ `text-lg font-medium ${ saira.className }` }>
@@ -36,7 +40,7 @@ const FloatCard = ({
         </h2>
         { icon }
       </div>
-    </div>
+    </Link>
   )
 }
 
@@ -72,6 +76,7 @@ export default function Home() {
           </h1>
           <article>
             <FloatCard
+              href={ '/gallery' }
               className={ 'mb-4 md:float-end md:ml-6 md:mb-2' }
               label={ '我的 QSL 卡面' }
               content={
@@ -81,7 +86,7 @@ export default function Home() {
               }
               icon={
                 <TablerCards
-                  className={ 'absolute -right-1 bottom-0.5 text-primary-800 dark:text-primary-200 text-5xl opacity-25' }
+                  className={ 'absolute -right-1 bottom-0.5 text-primary-800 text-5xl opacity-25' }
                 />
               }
             />
@@ -115,7 +120,7 @@ export default function Home() {
               href={ 'https://github.com/HoshinoSuzumi' }
               icon={
                 <TablerBrandGithub
-                  className={ 'absolute -right-1 bottom-0 text-primary-800 dark:text-primary-200 text-5xl opacity-25' }
+                  className={ 'absolute -right-1 bottom-0 text-primary-800 text-5xl opacity-25' }
                 />
               }
             />
@@ -126,7 +131,7 @@ export default function Home() {
               href={ 'https://space.bilibili.com/158985588' }
               icon={
                 <TablerBrandBilibili
-                  className={ 'absolute -right-1 bottom-0 text-primary-800 dark:text-primary-200 text-5xl opacity-25' }
+                  className={ 'absolute -right-1 bottom-0 text-primary-800 text-5xl opacity-25' }
                 />
               }
             />
@@ -136,7 +141,7 @@ export default function Home() {
               href={ 'https://steamcommunity.com/id/Hoshino_suzumi/' }
               icon={
                 <TablerBrandSteam
-                  className={ 'absolute -right-1 bottom-0 text-primary-800 dark:text-primary-200 text-5xl opacity-25' }
+                  className={ 'absolute -right-1 bottom-0 text-primary-800 text-5xl opacity-25' }
                 />
               }
             />
@@ -146,7 +151,7 @@ export default function Home() {
               href={ 'https://t.me/Hoshino_suzumi' }
               icon={
                 <TablerBrandTelegram
-                  className={ 'absolute -right-1 bottom-0 text-primary-800 dark:text-primary-200 text-5xl opacity-25' }
+                  className={ 'absolute -right-1 bottom-0 text-primary-800 text-5xl opacity-25' }
                 />
               }
             />

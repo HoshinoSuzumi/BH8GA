@@ -3,11 +3,12 @@
 import './ActionBar.scss'
 import TablerBuildingBroadcastTower from '@/components/Icons/TablerBuildingBroadcastTower'
 import { noto_sc, saira } from '@/app/fonts'
+import Link from 'next/link'
 
 export const ActionBar = () => {
   return (
     <header className={ `action-bar ${ noto_sc.className }` }>
-      <div className={ 'flex items-center gap-2' }>
+      <Link className={ 'flex items-center gap-2 select-none' } href={ '/' }>
         <TablerBuildingBroadcastTower className={ 'text-2xl' }/>
         <h1 className={ `flex flex-col leading-tight text-xl font-medium ${ saira.className }` }>
           <span>
@@ -18,7 +19,7 @@ export const ActionBar = () => {
             QSL Gallery & Confirms
           </span>
         </h1>
-      </div>
+      </Link>
     </header>
   )
 }

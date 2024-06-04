@@ -27,7 +27,7 @@ export const ContactCard = ({
     >
       <div className={ 'flex flex-col justify-between gap-1 pr-16 relative' }>
         <h1
-          className={ `text-primary-800 dark:text-primary-200 text-xs font-semibold opacity-70 ${ notoFont ? noto_sc.className : saira.className }` }
+          className={ `text-primary-800 text-xs font-semibold opacity-70 ${ notoFont ? noto_sc.className : saira.className }` }
         >
           { title }
         </h1>
