@@ -128,7 +128,7 @@ export const Main = () => {
                 {/*Ryo Yamada*/ }
               </ModalHeader>
               <ModalBody>
-                <div className={ 'w-full h-full grid grid-cols-1 sm:grid-cols-2 gap-6' }>
+                <div className={ 'grid grid-cols-1 sm:grid-cols-2 gap-6' }>
                   <div className={ 'flex justify-center items-start' }>
                     <Image
                       src={ '/qsl/QSL_H_RyoYamada.png' }
