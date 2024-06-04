@@ -1,52 +1,104 @@
-import Image from 'next/image'
-import { noto_sc, saira } from '@/app/fonts'
-import TablerAlbum from '@/components/Icons/TablerAlbum'
-import TablerGiftCard from '@/components/Icons/TablerGiftCard'
+import './page.scss'
+import { noto_sc, pacifico, saira } from '@/app/fonts'
 import TablerCards from '@/components/Icons/TablerCards'
+import { ReactNode } from 'react'
+
+const Card = ({
+  label,
+  content,
+  icon,
+  className,
+}: {
+  label: string
+  content: ReactNode
+  icon?: ReactNode
+  className?: string
+}) => {
+  return (
+    <div
+      className={ `px-4 py-3 rounded-lg bg-neutral-100 dark:bg-neutral-800 bg-gradient-to-br from-primary-600 to-purple-600 overflow-hidden relative group cursor-pointer ${ className }` }
+    >
+      <div
+        className={ 'absolute inset-0 group-hover:inset-[1px] transition-all bg-neutral-100 dark:bg-neutral-800 opacity-90 group-hover:opacity-80 backdrop-blur-md rounded-lg group-hover:rounded-[7px]' }
+      ></div>
+      <div className={ 'flex flex-col justify-between gap-3 pr-16 relative' }>
+        <h1
+          className={ `text-primary-800 dark:text-primary-200 text-xs font-bold opacity-70 ${ saira.className }` }>
+          { label }
+        </h1>
+        <h2 className={ `text-lg font-medium ${ saira.className }` }>
+          { content }
+        </h2>
+        { icon }
+      </div>
+    </div>
+  )
+}
 
 export default function Home() {
   return (
-    <main className="min-h-screen pt-16">
-      {/*<div className={ 'container mx-auto p-4 md:p-0 md:pt-8 grid grid-cols-1 md:grid-cols-2 gap-4' }>*/ }
-      {/*  <div className={''}>*/ }
-      {/*    <h1>Bio</h1>*/ }
-      {/*    <p>扽发热出地方扽发热出地方扽发热出地方扽发热出地方扽发热出地方扽发热出地方扽发热出地方扽发热出地方扽发热出地方扽发热出地方扽发热出地方扽发热出地方扽发热出地方扽发热出地方扽发热出地方扽发热出地方扽发热出地方扽发热出地方扽发热出地方扽发热出地方</p>*/ }
-      {/*    <div className={ `w-full aspect-video rounded-lg bg-neutral-100 border ${ noto_sc.className }` }>*/ }
-      {/*      <h1>QSL 卡片展</h1>*/ }
-      {/*    </div>*/ }
-      {/*  </div>*/ }
-      {/*</div>*/ }
-      <div className={ 'container max-w-[762px] p-4 md:p-0 md:pt-8' }>
-        <div className={ `${ noto_sc.className }` }>
-          <h1 className={ `text-xl font-medium mb-4 ${ saira.className }` }>
-            About BH8GA
-          </h1>
-          <div>
-            <div
-              className={ `px-4 py-3 rounded-lg bg-neutral-100 dark:bg-neutral-800 mb-4 md:float-end md:ml-6 md:mb-6 bg-gradient-to-br from-primary-600 to-purple-600 overflow-hidden relative group cursor-pointer` }
-            >
-              <div
-                className={ 'absolute inset-0 group-hover:inset-[1px] transition-all bg-neutral-100 dark:bg-neutral-800 opacity-90 group-hover:opacity-80 backdrop-blur-md rounded-lg group-hover:rounded-[7px]' }
-              ></div>
-              <div className={ 'flex flex-col justify-between gap-3 pr-16 relative' }>
-                <h1
-                  className={ `text-primary-800 dark:text-primary-200 text-xs font-bold opacity-70 ${ saira.className }` }>
-                  设计 QSL 卡面
-                </h1>
-                <h2 className={ `text-lg font-medium ${ saira.className }` }>
-                  2 <span className={ 'opacity-70' }>张</span>
-                </h2>
-                <TablerCards
-                  className={ 'absolute -right-1 bottom-0.5 text-primary-800 dark:text-primary-200 text-5xl opacity-25' }/>
-              </div>
-            </div>
-            <p className={ `indent-8 text-sm leading-6 text-neutral-700 dark:text-neutral-400 ${ saira.className }` }>
-              非常高兴能够与您在电波中相遇！这里是 <b className={ 'text-primary-400' }>BH8GA</b>，QTH 位于重庆 (
-              <span className={ 'text-primary-400' }>OL39</span>
-              )，一座美丽的山城。QSL 卡片确认是业余无线电中的一个重要环节，它不仅是通联的见证，更是我们之间友谊的象征。我非常重视每一次通联，并会认真确认和回复每一张 QSL 卡片。
-            </p>
+    <main className="min-h-screen pt-16 relative">
+      <div className={ 'w-full h-96 hero' }>
+        <div className={ 'w-full h-full flex flex-col justify-center items-center' }>
+          <div className={ 'flex flex-col items-center' }>
+            <h1 className={ `text-6xl font-bold drop-shadow-lg ${ saira.className }` }>
+              <span className={ 'text-neutral-600 dark:text-neutral-200' }>BH8</span>
+              <span className={ 'text-amber-400' }>GA</span>
+            </h1>
+            <h2 className={ `text-sm font-bold ${ saira.className }` }>
+              <span className={ 'text-neutral-400' }>
+                ITU 24 | CQ 43 | OL39
+              </span>
+            </h2>
+            <h2 className={ `mt-6 text-2xl relative ${ pacifico.className }` }>
+              Let&apos;s get hands dirty
+            </h2>
           </div>
         </div>
+      </div>
+      <div className={ `container max-w-[762px] p-4 md:p-0 md:pt-8 space-y-12 ${ noto_sc.className }` }>
+        <section>
+          <h1
+            className={ `text-xl font-medium mb-4 ${ saira.className } relative before:absolute before:block before:content-[''] before:w-1 before:inset-y-1 before:rounded before:bg-primary-400` }
+          >
+            <span className={ 'pl-2.5' }>About BH8GA</span>
+          </h1>
+          <div>
+            <Card
+              className={ 'mb-4 md:float-end md:ml-6 md:mb-2' }
+              label={ '我的 QSL 卡面' }
+              content={
+                <>
+                  2 <span className={ 'opacity-70' }>张</span>
+                </>
+              }
+              icon={
+                <TablerCards
+                  className={ 'absolute -right-1 bottom-0.5 text-primary-800 dark:text-primary-200 text-5xl opacity-25' }
+                />
+              }
+            />
+            <p className={ `indent-6 text-sm leading-6 text-neutral-700 dark:text-neutral-400 ${ saira.className }` }>
+              非常高兴能够与您在电波中相遇！这里是 <b className={ 'text-primary-400' }>BH8GA</b>，QTH 位于重庆 (
+              <span className={ 'text-primary-400' }>OL39</span>
+              )，一座美丽的山城。我是一名独立前端开发者（在校），开发了一些有趣的东西，目前在维护&nbsp;
+              <a className={ 'font-bold text-primary-400' } href="https://ham-dev.c5r.app/">HAM set</a>、
+              <a className={ 'font-bold text-primary-400' } href="https://ctfever.uniiem.com/">CTFever</a>，
+              这两个项目都是在线工具类网站，前者是一个业余无线电工具箱，包含字母解释法速查、考试题库、卫星数据库和梅登黑德网格定位等功能；后者是为网络安全夺旗赛开发的一站式工具箱。
+              我贯彻 <span className={ `${ pacifico.className }` }>get hands dirty</span>
+              &nbsp;的思想，热爱将脑子里的灵光一现变为现实。当你想做一件事情的时候，那就立刻放手去做，不要受制于各种“先决条件”：当你想要阅读一本书，就立刻打开书开始阅读，不要泡好一杯咖啡、洗好一盘水果再开始；
+              当你想到一个 idea，就立刻打开电脑尝试实现，不要先去学习各种技术、先去了解各种知识再开始。
+              <b>永远不要等到你的热情开始消退之时再开始行动。</b>
+            </p>
+          </div>
+        </section>
+        {/*<section>*/}
+        {/*  <h1*/}
+        {/*    className={ `text-xl font-medium mb-4 ${ saira.className } relative before:absolute before:block before:content-[''] before:w-1 before:inset-y-1 before:rounded before:bg-primary-400` }*/}
+        {/*  >*/}
+        {/*    <span className={ 'pl-2.5' }>What kind of person to become</span>*/}
+        {/*  </h1>*/}
+        {/*</section>*/}
       </div>
     </main>
   )

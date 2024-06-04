@@ -1,4 +1,4 @@
-import { Noto_Sans_SC, Rubik, Saira } from 'next/font/google'
+import { Noto_Sans_SC, Rubik, Saira, Pacifico } from 'next/font/google'
 
 export const noto_sc = Noto_Sans_SC({
   subsets: ['cyrillic'],
@@ -14,5 +14,12 @@ export const rubik = Rubik({
 export const saira = Saira({
   subsets: ['latin'],
   display: 'swap',
+  fallback: ['Noto Sans SC', 'sans-serif'],
+})
+
+export const pacifico = Pacifico({
+  subsets: ['latin'],
+  display: 'swap',
+  weight: '400',
   fallback: ['Noto Sans SC', 'sans-serif'],
 })
