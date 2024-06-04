@@ -2,8 +2,13 @@ import './page.scss'
 import { noto_sc, pacifico, saira } from '@/app/fonts'
 import TablerCards from '@/components/Icons/TablerCards'
 import { ReactNode } from 'react'
+import TablerBrandBilibili from '@/components/Icons/TablerBrandBilibili'
+import TablerBrandGithub from '@/components/Icons/TablerBrandGithub'
+import TablerBrandTelegram from '@/components/Icons/TablerBrandTelegram'
+import TablerBrandSteam from '@/components/Icons/TablerBrandSteam'
+import { ContactCard } from '@/app/ContactCard'
 
-const Card = ({
+const FloatCard = ({
   label,
   content,
   icon,
@@ -23,7 +28,7 @@ const Card = ({
       ></div>
       <div className={ 'flex flex-col justify-between gap-3 pr-16 relative' }>
         <h1
-          className={ `text-primary-800 dark:text-primary-200 text-xs font-bold opacity-70 ${ saira.className }` }>
+          className={ `text-primary-800 dark:text-primary-200 text-xs font-bold opacity-70 ${ noto_sc.className }` }>
           { label }
         </h1>
         <h2 className={ `text-lg font-medium ${ saira.className }` }>
@@ -61,15 +66,17 @@ export default function Home() {
           <h1
             className={ `text-xl font-medium mb-4 ${ saira.className } relative before:absolute before:block before:content-[''] before:w-1 before:inset-y-1 before:rounded before:bg-primary-400` }
           >
-            <span className={ 'pl-2.5' }>About BH8GA</span>
+            <span className={ 'pl-2.5' }>
+              About <ruby>BH8GA<rt>Radio Callsign</rt></ruby>
+            </span>
           </h1>
-          <div>
-            <Card
+          <article>
+            <FloatCard
               className={ 'mb-4 md:float-end md:ml-6 md:mb-2' }
               label={ '我的 QSL 卡面' }
               content={
                 <>
-                  2 <span className={ 'opacity-70' }>张</span>
+                  2 <span className={ `opacity-70 ${ noto_sc.className }` }>张</span>
                 </>
               }
               icon={
@@ -90,15 +97,60 @@ export default function Home() {
               当你想到一个 idea，就立刻打开电脑尝试实现，不要先去学习各种技术、先去了解各种知识再开始。
               <b>永远不要等到你的热情开始消退之时再开始行动。</b>
             </p>
+          </article>
+        </section>
+        <section>
+          <h1
+            className={ `text-xl font-medium mb-4 ${ saira.className } relative before:absolute before:block before:content-[''] before:w-1 before:inset-y-1 before:rounded before:bg-primary-400` }
+          >
+            <span className={ 'pl-2.5' }>
+              <ruby>Find Me<rt>On the Internet</rt></ruby>
+            </span>
+          </h1>
+          <div className={ 'grid grid-cols-2 md:grid-cols-4 gap-4' }>
+            <ContactCard
+              title={ 'GitHub' }
+              content={ 'HoshinoSuzumi' }
+              href={ 'https://github.com/HoshinoSuzumi' }
+              icon={
+                <TablerBrandGithub
+                  className={ 'absolute -right-1 bottom-0 text-primary-800 dark:text-primary-200 text-5xl opacity-25' }
+                />
+              }
+            />
+            <ContactCard
+              notoFont
+              title={ '哔哩哔哩' }
+              content={ '星野鈴美' }
+              href={ 'https://space.bilibili.com/158985588' }
+              icon={
+                <TablerBrandBilibili
+                  className={ 'absolute -right-1 bottom-0 text-primary-800 dark:text-primary-200 text-5xl opacity-25' }
+                />
+              }
+            />
+            <ContactCard
+              title={ 'Steam' }
+              content={ 'Hoshino_suzumi' }
+              href={ 'https://steamcommunity.com/id/Hoshino_suzumi/' }
+              icon={
+                <TablerBrandSteam
+                  className={ 'absolute -right-1 bottom-0 text-primary-800 dark:text-primary-200 text-5xl opacity-25' }
+                />
+              }
+            />
+            <ContactCard
+              title={ 'Telegram' }
+              content={ '@Hoshino_suzumi' }
+              href={ 'https://t.me/Hoshino_suzumi' }
+              icon={
+                <TablerBrandTelegram
+                  className={ 'absolute -right-1 bottom-0 text-primary-800 dark:text-primary-200 text-5xl opacity-25' }
+                />
+              }
+            />
           </div>
         </section>
-        {/*<section>*/}
-        {/*  <h1*/}
-        {/*    className={ `text-xl font-medium mb-4 ${ saira.className } relative before:absolute before:block before:content-[''] before:w-1 before:inset-y-1 before:rounded before:bg-primary-400` }*/}
-        {/*  >*/}
-        {/*    <span className={ 'pl-2.5' }>What kind of person to become</span>*/}
-        {/*  </h1>*/}
-        {/*</section>*/}
       </div>
     </main>
   )

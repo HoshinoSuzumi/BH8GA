@@ -15,6 +15,7 @@ export const saira = Saira({
   subsets: ['latin'],
   display: 'swap',
   fallback: ['Noto Sans SC', 'sans-serif'],
+  adjustFontFallback: true,
 })
 
 export const pacifico = Pacifico({
