@@ -55,7 +55,7 @@ export const Main = () => {
           </div>
         </div>
 
-        <div className={ `container md:max-w-[1280px] p-4 md:p-0 md:pt-8 space-y-12 ${ noto_sc.className }` }>
+        <div className={ `container lg:max-w-[1280px] p-4 md:p-0 md:pt-8 space-y-12 ${ noto_sc.className }` }>
           <div className={ 'grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-8' }>
             <div
               className={ 'w-full aspect-[14/9] cursor-zoom-in relative' }
