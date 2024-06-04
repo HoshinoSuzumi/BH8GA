@@ -71,7 +71,7 @@ export default function Home() {
             className={ `text-xl font-medium mb-4 ${ saira.className } relative before:absolute before:block before:content-[''] before:w-1 before:inset-y-1 before:rounded before:bg-primary-400` }
           >
             <span className={ 'pl-2.5' }>
-              About <ruby>BH8GA<rt>Radio Callsign</rt></ruby>
+              About <ruby>BH8GA<rt className={ 'leading-none' }>Radio Callsign</rt></ruby>
             </span>
           </h1>
           <article>
