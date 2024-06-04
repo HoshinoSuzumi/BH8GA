@@ -55,7 +55,7 @@ export const Main = () => {
           </div>
         </div>
 
-        <div className={ `container lg:max-w-[1280px] p-4 md:p-0 md:pt-8 space-y-12 ${ noto_sc.className }` }>
+        <div className={ `container xl:max-w-[1280px] p-4 md:p-0 md:pt-8 space-y-12 ${ noto_sc.className }` }>
           <div className={ 'grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-8' }>
             <div
               className={ 'w-full aspect-[14/9] cursor-zoom-in relative' }
@@ -128,7 +128,7 @@ export const Main = () => {
                 {/*Ryo Yamada*/ }
               </ModalHeader>
               <ModalBody>
-                <div className={ 'w-full h-full grid grid-cols-1 md:grid-cols-2 gap-6' }>
+                <div className={ 'w-full h-full grid grid-cols-1 sm:grid-cols-2 gap-6' }>
                   <div className={ 'flex justify-center items-start' }>
                     <Image
                       src={ '/qsl/QSL_H_RyoYamada.png' }
@@ -137,44 +137,42 @@ export const Main = () => {
                       isBlurred
                     />
                   </div>
-                  <div>
-                    <Card className={ 'px-4 py-2 md:aspect-[14/9]' }>
-                      <ul className={ `grid grid-cols-2 gap-3 ${ noto_sc.className }` }>
-                        <li className={ 'col-span-2' }>
-                          <h2 className={ 'text-xs font-bold text-primary-500' }>
-                            卡面 <span className={ `text-sm ${ saira.className }` }>#2</span>
-                          </h2>
-                          <p className={ 'text-sm font-semibold' }>
-                            Ryo Yamada
-                          </p>
-                        </li>
-                        <li>
-                          <h2 className={ 'text-xs font-bold text-primary-500' }>
-                            启用日期
-                          </h2>
-                          <p className={ `text-sm font-medium ${ saira.className }` }>
-                            2024/06/04
-                          </p>
-                        </li>
-                        <li>
-                          <h2 className={ 'text-xs font-bold text-primary-500' }>
-                            印刷批次 / 张数
-                          </h2>
-                          <p className={ `text-sm font-medium ${ saira.className }` }>
-                            1 / 100
-                          </p>
-                        </li>
-                        <li className={ 'col-span-2 relative overflow-hidden' }>
-                          <h2 className={ 'text-xs font-bold text-primary-500' }>
-                            描述
-                          </h2>
-                          <p className={ 'text-sm' }>
-                            这里写对这张卡片的描述
-                          </p>
-                        </li>
-                      </ul>
-                    </Card>
-                  </div>
+                  <Card className={ 'px-4 py-2 md:aspect-[14/9]' }>
+                    <ul className={ `grid grid-cols-2 gap-3 ${ noto_sc.className }` }>
+                      <li className={ 'col-span-2' }>
+                        <h2 className={ 'text-xs font-bold text-primary-500' }>
+                          卡面 <span className={ `text-sm ${ saira.className }` }>#2</span>
+                        </h2>
+                        <p className={ 'text-sm font-semibold' }>
+                          Ryo Yamada
+                        </p>
+                      </li>
+                      <li>
+                        <h2 className={ 'text-xs font-bold text-primary-500' }>
+                          启用日期
+                        </h2>
+                        <p className={ `text-sm font-medium ${ saira.className }` }>
+                          2024/06/04
+                        </p>
+                      </li>
+                      <li>
+                        <h2 className={ 'text-xs font-bold text-primary-500' }>
+                          印刷批次 / 张数
+                        </h2>
+                        <p className={ `text-sm font-medium ${ saira.className }` }>
+                          1 / 100
+                        </p>
+                      </li>
+                      <li className={ 'col-span-2 relative overflow-hidden' }>
+                        <h2 className={ 'text-xs font-bold text-primary-500' }>
+                          描述
+                        </h2>
+                        <p className={ 'text-sm' }>
+                          这里写对这张卡片的描述
+                        </p>
+                      </li>
+                    </ul>
+                  </Card>
                 </div>
               </ModalBody>
               <ModalFooter className={ 'justify-between md:justify-start' }>
