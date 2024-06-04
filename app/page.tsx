@@ -28,7 +28,7 @@ const FloatCard = ({
       className={ `block px-4 py-3 rounded-lg bg-neutral-100 dark:bg-neutral-800 bg-gradient-to-br from-primary-600 to-purple-600 overflow-hidden relative group cursor-pointer ${ className }` }
     >
       <div
-        className={ 'absolute inset-0 group-hover:inset-[1px] transition-all bg-neutral-100 dark:bg-neutral-800 opacity-90 group-hover:opacity-80 backdrop-blur-md rounded-lg group-hover:rounded-[7px]' }
+        className={ 'absolute -inset-0.5 group-hover:inset-[1px] transition-all bg-neutral-100 dark:bg-neutral-800 opacity-80 group-hover:opacity-75 backdrop-blur-md rounded-lg group-hover:rounded-[7px]' }
       ></div>
       <div className={ 'flex flex-col justify-between gap-3 pr-16 relative' }>
         <h1
