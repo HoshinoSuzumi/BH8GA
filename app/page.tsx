@@ -85,8 +85,9 @@ export default function Home() {
                 />
               }
             />
-            <p className={ `indent-6 text-sm leading-6 text-neutral-700 dark:text-neutral-400 ${ saira.className }` }>
-              非常高兴能够与您在电波中相遇！这里是 <b className={ 'text-primary-400' }>BH8GA</b>，QTH 位于重庆 (
+            <p className={ `indent-6 text-sm leading-6 text-neutral-700 dark:text-neutral-400 ${ noto_sc.className }` }>
+              非常高兴能够与您在电波中相遇！这里是&nbsp;
+              <b className={ `text-primary-400 ${ saira.className }` }>BH8GA</b>，QTH 位于重庆 (
               <span className={ 'text-primary-400' }>OL39</span>
               )，一座美丽的山城。我是一名独立前端开发者（在校），开发了一些有趣的东西，目前在维护&nbsp;
               <a className={ 'font-bold text-primary-400' } href="https://ham-dev.c5r.app/">HAM set</a>、
