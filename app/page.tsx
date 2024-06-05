@@ -56,7 +56,7 @@ export default function Home() {
             </h1>
             <h2 className={ `text-sm font-bold ${ saira.className }` }>
               <span className={ 'text-neutral-400' }>
-                ITU 24 | CQ 43 | OL39
+                ITU 43 | CQ 24 | OL39
               </span>
             </h2>
             <h2 className={ `mt-6 text-2xl relative ${ pacifico.className }` }>
