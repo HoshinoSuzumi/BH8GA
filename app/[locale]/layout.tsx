@@ -41,7 +41,7 @@ export default function RootLayout({
       messages={ messages }
     >
       <Providers>
-        <ActionBar/>
+        <ActionBar locale={ locale }/>
         { children }
       </Providers>
     </NextIntlClientProvider>
