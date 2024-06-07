@@ -1,7 +1,7 @@
 'use client'
 
 import '../page.scss'
-import { noto_sc, pacifico, saira } from '@/app/fonts'
+import { noto_sc, pacifico, saira } from '@/app/[locale]/fonts'
 import { Image } from '@nextui-org/image'
 import {
   Button, Card, Checkbox, Chip, Divider,

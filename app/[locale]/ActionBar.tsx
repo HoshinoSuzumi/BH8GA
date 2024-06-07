@@ -2,8 +2,9 @@
 
 import './ActionBar.scss'
 import TablerBuildingBroadcastTower from '@/components/Icons/TablerBuildingBroadcastTower'
-import { noto_sc, saira } from '@/app/fonts'
+import { noto_sc, saira } from '@/app/[locale]/fonts'
 import Link from 'next/link'
+import { LanguageChanger } from '@/components/LanguageChanger'
 
 export const ActionBar = () => {
   return (
@@ -20,6 +21,7 @@ export const ActionBar = () => {
           </span>
         </h1>
       </Link>
+      <LanguageChanger />
     </header>
   )
 }

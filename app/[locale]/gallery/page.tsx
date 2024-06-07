@@ -1,4 +1,4 @@
-import { Main } from '@/app/gallery/Main'
+import { Main } from '@/app/[locale]/gallery/Main'
 import { Metadata } from 'next'
 
 export const metadata: Metadata = {
