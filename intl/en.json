@@ -1,5 +1,6 @@
 {
-  "title": {
-    "about": "About"
+  "home": {
+    "my_qsl_faces": "Browse QSL Cards",
+    "bilibili": "BiliBili"
   }
 }

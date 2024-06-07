@@ -45,7 +45,11 @@ const FloatCard = ({
   )
 }
 
-export default function Home() {
+export default function Home({
+  params: { locale },
+}: {
+  params: { locale: string }
+}) {
   const t = useTranslations()
 
   return (
@@ -81,7 +85,7 @@ export default function Home() {
             <FloatCard
               href={ '/gallery' }
               className={ 'mb-4 md:float-end md:ml-6 md:mb-2' }
-              label={ '我的 QSL 卡面' }
+              label={ t('home.my_qsl_faces') }
               content={
                 <>
                   2 <span className={ `opacity-70 ${ noto_sc.className }` }>张</span>
@@ -93,7 +97,9 @@ export default function Home() {
                 />
               }
             />
-            <p className={ `indent-6 text-sm leading-6 text-neutral-700 dark:text-neutral-400 ${ noto_sc.className }` }>
+            <p
+              className={ `indent-6 text-sm leading-6 text-neutral-700 dark:text-neutral-400 text-justify ${ noto_sc.className }` }
+            >
               非常高兴能够与您在电波中相遇！这里是&nbsp;
               <b className={ `text-primary-400 ${ saira.className }` }>BH8GA</b>，QTH 位于重庆 (
               <span className={ 'text-primary-400' }>OL39</span>
@@ -105,6 +111,10 @@ export default function Home() {
               &nbsp;的思想，热爱将脑子里的灵光一现变为现实。当你想做一件事情的时候，那就立刻放手去做，不要受制于各种“先决条件”：当你想要阅读一本书，就立刻打开书开始阅读，不要泡好一杯咖啡、洗好一盘水果再开始；
               当你想到一个 idea，就立刻打开电脑尝试实现，不要先去学习各种技术、先去了解各种知识再开始。
               <b>永远不要等到你的热情开始消退之时再开始行动。</b>
+              { locale !== 'zh'
+                ? <span className={ 'font-bold opacity-50' }>(Only available in Chinese)</span>
+                : null
+              }
             </p>
           </article>
         </section>
@@ -129,7 +139,7 @@ export default function Home() {
             />
             <ContactCard
               notoFont
-              title={ '哔哩哔哩' }
+              title={ t('home.bilibili') }
               content={ '星野鈴美' }
               href={ 'https://space.bilibili.com/158985588' }
               icon={
