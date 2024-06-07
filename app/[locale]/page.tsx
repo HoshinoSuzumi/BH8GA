@@ -1,13 +1,14 @@
 import './page.scss'
-import { noto_sc, pacifico, saira } from '@/app/fonts'
+import { noto_sc, pacifico, saira } from '@/app/[locale]/fonts'
 import TablerCards from '@/components/Icons/TablerCards'
 import { ReactNode } from 'react'
 import TablerBrandBilibili from '@/components/Icons/TablerBrandBilibili'
 import TablerBrandGithub from '@/components/Icons/TablerBrandGithub'
 import TablerBrandTelegram from '@/components/Icons/TablerBrandTelegram'
 import TablerBrandSteam from '@/components/Icons/TablerBrandSteam'
-import { ContactCard } from '@/app/ContactCard'
+import { ContactCard } from '@/app/[locale]/ContactCard'
 import Link from 'next/link'
+import { useTranslations } from 'next-intl'
 
 const FloatCard = ({
   label,
@@ -45,6 +46,8 @@ const FloatCard = ({
 }
 
 export default function Home() {
+  const t = useTranslations()
+
   return (
     <main className="min-h-screen pt-16 relative">
       <div className={ 'w-full h-96 hero' }>
