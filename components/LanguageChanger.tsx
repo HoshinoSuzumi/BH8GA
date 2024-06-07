@@ -1,6 +1,7 @@
 import { Button, Dropdown, DropdownItem, DropdownMenu, DropdownTrigger } from '@nextui-org/react'
 import RiTranslate2 from '@/components/Icons/RiTranslate2'
 import { useRouter, usePathname } from '@/navigation'
+import { useMemo, useState } from 'react'
 
 export const LanguageChanger = ({ locale }: { locale: string }) => {
   const router = useRouter()
@@ -9,6 +10,8 @@ export const LanguageChanger = ({ locale }: { locale: string }) => {
   const changeLocale = (locale: string) => {
     router.push(pathname, { locale })
   }
+
+  const [selectedKeys, setSelectedKeys] = useState(new Set([locale]))
 
   return (
     <Dropdown>
@@ -22,29 +25,23 @@ export const LanguageChanger = ({ locale }: { locale: string }) => {
       </DropdownTrigger>
       <DropdownMenu
         selectionMode={ 'single' }
-        selectedKeys={ [locale] }
+        onSelectionChange={ (keys) => {
+          setSelectedKeys(new Set(keys as string))
+          changeLocale(Array.from(new Set(keys as string))[0])
+        } }
+        selectedKeys={ selectedKeys }
       >
         <DropdownItem
-          className={ 'active' }
-          onClick={
-            () => changeLocale('zh')
-          }
           key="zh"
         >
           简体中文
         </DropdownItem>
         <DropdownItem
-          onClick={
-            () => changeLocale('en')
-          }
           key="en"
         >
           English
         </DropdownItem>
         <DropdownItem
-          onClick={
-            () => changeLocale('ja')
-          }
           key="ja"
         >
           Japanese
