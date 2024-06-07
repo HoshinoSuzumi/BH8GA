@@ -1,5 +1,6 @@
 {
-  "title": {
-    "about": "关于"
+  "home": {
+    "my_qsl_faces": "浏览 QSL 卡面",
+    "bilibili": "哔哩哔哩"
   }
 }
