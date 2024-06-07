@@ -7,8 +7,8 @@ import TablerBrandGithub from '@/components/Icons/TablerBrandGithub'
 import TablerBrandTelegram from '@/components/Icons/TablerBrandTelegram'
 import TablerBrandSteam from '@/components/Icons/TablerBrandSteam'
 import { ContactCard } from '@/app/[locale]/ContactCard'
-import Link from 'next/link'
 import { useTranslations } from 'next-intl'
+import { Link } from '@/navigation'
 
 const FloatCard = ({
   label,
@@ -23,6 +23,8 @@ const FloatCard = ({
   className?: string
   href: string
 }) => {
+  const t = useTranslations()
+
   return (
     <Link
       href={ href }
@@ -33,7 +35,7 @@ const FloatCard = ({
       ></div>
       <div className={ 'flex flex-col justify-between gap-3 pr-16 relative' }>
         <h1
-          className={ `text-primary-800 text-xs font-bold opacity-70 ${ noto_sc.className }` }>
+          className={ `text-primary-800 text-xs font-bold opacity-70 ${ saira.className }` }>
           { label }
         </h1>
         <h2 className={ `text-lg font-medium ${ saira.className }` }>
@@ -45,7 +47,11 @@ const FloatCard = ({
   )
 }
 
-export default function Home() {
+export default function Home({
+  params: { locale },
+}: {
+  params: { locale: string }
+}) {
   const t = useTranslations()
 
   return (
@@ -57,7 +63,7 @@ export default function Home() {
               <span className={ 'text-neutral-600 dark:text-neutral-200' }>BH8</span>
               <span className={ 'text-amber-400' }>GA</span>
             </h1>
-            <h2 className={ `text-sm font-bold ${ saira.className }` }>
+            <h2 className={ `text-sm font-bold mt-1 ${ saira.className }` }>
               <span className={ 'text-neutral-400' }>
                 ITU 43 | CQ 24 | OL39
               </span>
@@ -74,18 +80,16 @@ export default function Home() {
             className={ `text-xl font-medium mb-4 ${ saira.className } relative before:absolute before:block before:content-[''] before:w-1 before:inset-y-1 before:rounded before:bg-primary-400` }
           >
             <span className={ 'pl-2.5' }>
-              About <ruby>BH8GA<rt className={ 'leading-none' }>Radio Callsign</rt></ruby>
+              { t('home.about', { callsign: 'BH8GA' }) }
             </span>
           </h1>
           <article>
             <FloatCard
               href={ '/gallery' }
               className={ 'mb-4 md:float-end md:ml-6 md:mb-2' }
-              label={ '浏览 QSL 卡面' }
+              label={ t('home.my_qsl_faces') }
               content={
-                <>
-                  2 <span className={ `opacity-70 ${ noto_sc.className }` }>张</span>
-                </>
+                <>{ t('home.my_qsl_count', { count: 1 }) }</>
               }
               icon={
                 <TablerCards
@@ -93,7 +97,8 @@ export default function Home() {
                 />
               }
             />
-            <p className={ `indent-6 text-sm leading-6 text-neutral-700 dark:text-neutral-400 ${ noto_sc.className }` }>
+            <p
+              className={ `indent-6 text-sm leading-6 text-neutral-700 dark:text-neutral-400 text-justify ${ noto_sc.className }` }>
               非常高兴能够与您在电波中相遇！这里是&nbsp;
               <b className={ `text-primary-400 ${ saira.className }` }>BH8GA</b>，QTH 位于重庆 (
               <span className={ 'text-primary-400' }>OL39</span>
@@ -105,6 +110,10 @@ export default function Home() {
               &nbsp;的思想，热爱将脑子里的灵光一现变为现实。当你想做一件事情的时候，那就立刻放手去做，不要受制于各种“先决条件”：当你想要阅读一本书，就立刻打开书开始阅读，不要泡好一杯咖啡、洗好一盘水果再开始；
               当你想到一个 idea，就立刻打开电脑尝试实现，不要先去学习各种技术、先去了解各种知识再开始。
               <b>永远不要等到你的热情开始消退之时再开始行动。</b>
+              { locale !== 'zh'
+                ? <span className={ 'font-bold opacity-50' }>(Only available in Chinese)</span>
+                : null
+              }
             </p>
           </article>
         </section>
@@ -113,7 +122,7 @@ export default function Home() {
             className={ `text-xl font-medium mb-4 ${ saira.className } relative before:absolute before:block before:content-[''] before:w-1 before:inset-y-1 before:rounded before:bg-primary-400` }
           >
             <span className={ 'pl-2.5' }>
-              <ruby>Find Me<rt>On the Internet</rt></ruby>
+              { t('home.find_me') }
             </span>
           </h1>
           <div className={ 'grid grid-cols-2 md:grid-cols-4 gap-4' }>
@@ -129,7 +138,7 @@ export default function Home() {
             />
             <ContactCard
               notoFont
-              title={ '哔哩哔哩' }
+              title={ t('home.bilibili') }
               content={ '星野鈴美' }
               href={ 'https://space.bilibili.com/158985588' }
               icon={

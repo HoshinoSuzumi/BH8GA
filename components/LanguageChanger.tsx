@@ -7,7 +7,7 @@ export const LanguageChanger = ({ locale }: { locale: string }) => {
   const pathname = usePathname()
 
   const changeLocale = (locale: string) => {
-    router.push(pathname, { locale })
+    router.replace(pathname, { locale })
   }
 
   return (
