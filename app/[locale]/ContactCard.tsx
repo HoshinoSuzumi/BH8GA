@@ -1,7 +1,7 @@
 'use client'
 
 import { ReactNode } from 'react'
-import { noto_sc, saira } from '@/app/fonts'
+import { noto_sc, saira } from '@/app/[locale]/fonts'
 
 export const ContactCard = ({
   title,

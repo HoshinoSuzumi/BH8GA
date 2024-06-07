@@ -1,0 +1,13 @@
+{
+  "home": {
+    "about": "{callsign}について",
+    "find_me": "私を見つける",
+    "my_qsl_faces": "QSLカード面を閲覧",
+    "my_qsl_count": "{count}枚",
+    "bilibili": "ビリビリ"
+  },
+  "gallery": {
+    "title": "ギャラリー",
+    "subtitle": "{callsign}のQSLカードギャラリー"
+  }
+}

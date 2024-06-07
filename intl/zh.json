@@ -1,0 +1,13 @@
+{
+  "home": {
+    "about": "关于 {callsign}",
+    "find_me": "找到我",
+    "my_qsl_faces": "浏览 QSL 卡面",
+    "my_qsl_count": "{count} 张",
+    "bilibili": "哔哩哔哩"
+  },
+  "gallery": {
+    "title": "展柜",
+    "subtitle": "{callsign} 的 QSL 卡片展柜"
+  }
+}

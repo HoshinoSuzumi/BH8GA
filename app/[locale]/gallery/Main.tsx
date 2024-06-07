@@ -1,7 +1,7 @@
 'use client'
 
 import '../page.scss'
-import { noto_sc, pacifico, saira } from '@/app/fonts'
+import { noto_sc, pacifico, saira } from '@/app/[locale]/fonts'
 import { Image } from '@nextui-org/image'
 import {
   Button, Card, Checkbox, Chip, Divider,
@@ -22,8 +22,10 @@ import TablerUser from '@/components/Icons/TablerUser'
 import TablerMailFast from '@/components/Icons/TablerMailFast'
 import TablerGiftCard from '@/components/Icons/TablerGiftCard'
 import TablerGift from '@/components/Icons/TablerGift'
+import { useTranslations } from 'next-intl'
 
 export const Main = () => {
+  const t = useTranslations()
   const { isOpen, onOpen, onClose } = useDisclosure()
   const {
     isOpen: isExOpen,
@@ -40,12 +42,13 @@ export const Main = () => {
             <div className={ 'flex flex-col items-center' }>
               <h1 className={ `text-4xl md:text-6xl font-bold drop-shadow-lg ${ saira.className }` }>
                 <span className={ 'text-amber-400' }>QSL</span>&nbsp;
-                <span className={ 'text-neutral-600 dark:text-neutral-200' }>Gallery</span>
+                <span className={ 'text-neutral-600 dark:text-neutral-200' }>
+                  { t('gallery.title') }
+                </span>
               </h1>
-              <h2 className={ `text-sm font-bold ${ saira.className }` }>
-              <span className={ 'text-neutral-400' }>
-                BH8GA <span className={ noto_sc.className }>的</span> QSL <span
-                className={ noto_sc.className }>卡片展柜</span>
+              <h2 className={ `text-sm font-bold mt-1 ${ saira.className }` }>
+              <span className={ `text-neutral-400 ${ saira.className }` }>
+                { t('gallery.subtitle', { callsign: 'BH8GA' }) }
               </span>
               </h2>
               <h2 className={ `mt-6 text-2xl relative opacity-45 ${ pacifico.className }` }>

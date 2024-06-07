@@ -2,10 +2,15 @@
 
 import './ActionBar.scss'
 import TablerBuildingBroadcastTower from '@/components/Icons/TablerBuildingBroadcastTower'
-import { noto_sc, saira } from '@/app/fonts'
-import Link from 'next/link'
+import { noto_sc, saira } from '@/app/[locale]/fonts'
+import { Link } from '@/navigation'
+import { LanguageChanger } from '@/components/LanguageChanger'
 
-export const ActionBar = () => {
+export const ActionBar = ({
+  locale,
+}: {
+  locale: string
+}) => {
   return (
     <header className={ `action-bar ${ noto_sc.className }` }>
       <Link className={ 'flex items-center gap-2 select-none' } href={ '/' }>
@@ -20,6 +25,7 @@ export const ActionBar = () => {
           </span>
         </h1>
       </Link>
+      <LanguageChanger locale={ locale }/>
     </header>
   )
 }

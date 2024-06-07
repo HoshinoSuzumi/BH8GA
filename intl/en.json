@@ -1,0 +1,13 @@
+{
+  "home": {
+    "about": "About {callsign}",
+    "find_me": "Find Me",
+    "my_qsl_faces": "Browse QSL Cards",
+    "my_qsl_count": "{count} cards",
+    "bilibili": "BiliBili"
+  },
+  "gallery": {
+    "title": "Gallery",
+    "subtitle": "{callsign}'s QSL Card Gallery"
+  }
+}
