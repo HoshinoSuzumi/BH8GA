@@ -1,7 +1,15 @@
 'use client'
 
 import './auth-components.scss'
-import { Avatar, Button, Dropdown, DropdownItem, DropdownMenu, DropdownTrigger } from '@nextui-org/react'
+import {
+  Avatar,
+  Button, Chip,
+  Dropdown,
+  DropdownItem,
+  DropdownMenu,
+  DropdownSection,
+  DropdownTrigger,
+} from '@nextui-org/react'
 import { fetchAuth, handleSignIn, handleSignOut } from '@/app/actions/auths'
 import TablerShieldStar from '@/components/Icons/TablerShieldStar'
 import { useEffect, useState } from 'react'
@@ -9,6 +17,13 @@ import { Session } from 'next-auth'
 import { noto_sc, saira } from '@/app/[locale]/fonts'
 import { useTranslations } from 'next-intl'
 import { signIn } from 'next-auth/react'
+import { Link } from '@/navigation'
+import TablerLogin2 from '@/components/Icons/TablerLogin2'
+import TablerCards from '@/components/Icons/TablerCards'
+import TablerLogout from '@/components/Icons/TablerLogout'
+import TablerBoxSeam from '@/components/Icons/TablerBoxSeam'
+import TablerArrowsExchange from '@/components/Icons/TablerArrowsExchange'
+import TablerMailFast from '@/components/Icons/TablerMailFast'
 
 export function SignIn() {
   const t = useTranslations()
@@ -31,9 +46,9 @@ export function SignIn() {
             isIconOnly
             type="submit"
             variant={ 'light' }
-            className={ 'auto-hidden' }
+            className={ '' }
           >
-            <TablerShieldStar className={ 'text-xl' }/>
+            <TablerLogin2 className={ 'text-xl' }/>
           </Button>
         </form>
       )
@@ -54,26 +69,58 @@ export function SignIn() {
             variant="flat"
           >
             <DropdownItem key="profile" className="h-14 gap-2" textValue={ 'Signed in as account' }>
-              <p className="font-semibold text-xs opacity-60">{ t('avatar.signed_in_as') }</p>
+              <p className="font-semibold text-xs opacity-60">{ t('menu.signed_in_as') }</p>
               <p className="">{ session.user?.email }</p>
             </DropdownItem>
             <DropdownItem
-              key="dashboard"
+              as={ Link }
+              href={ '/dashboard/send-card' }
+              key="send-card"
+              startContent={ <TablerMailFast className={ 'text-lg' }/> }
             >
-              { t('avatar.dashboard') }
+              { t('menu.send-card') }
             </DropdownItem>
-            <DropdownItem
-              key="logout"
-              color="danger"
-              onPress={
-                async () => {
-                  await handleSignOut()
-                  setSession(null)
+            <DropdownSection title={ t('menu.management') } showDivider>
+              <DropdownItem
+                as={ Link }
+                href={ '/dashboard/card-faces' }
+                key="card-faces"
+                startContent={ <TablerCards className={ 'text-lg' }/> }
+              >
+                { t('menu.card-faces') }
+              </DropdownItem>
+              <DropdownItem
+                as={ Link }
+                href={ '/dashboard/card-stock' }
+                key="card-stock"
+                startContent={ <TablerBoxSeam className={ 'text-lg' }/> }
+              >
+                { t('menu.card-stock') }
+              </DropdownItem>
+              <DropdownItem
+                as={ Link }
+                href={ '/dashboard/exchanges' }
+                key="exchanges"
+                startContent={ <TablerArrowsExchange className={ 'text-lg' }/> }
+              >
+                { t('menu.exchanges') }
+              </DropdownItem>
+            </DropdownSection>
+            <DropdownSection title={ t('menu.account') }>
+              <DropdownItem
+                key="logout"
+                color="danger"
+                startContent={ <TablerLogout className={ 'text-lg' }/> }
+                onPress={
+                  async () => {
+                    await handleSignOut()
+                    setSession(null)
+                  }
                 }
-              }
-            >
-              { t('avatar.sign_out') }
-            </DropdownItem>
+              >
+                { t('menu.sign_out') }
+              </DropdownItem>
+            </DropdownSection>
           </DropdownMenu>
         </Dropdown>
       )
