@@ -8,12 +8,11 @@ export const {
   auth,
 } = NextAuth({
   providers: [
-    GitHub
+    GitHub,
   ],
   callbacks: {
-    jwt({ token, user }) {
-      if (user) token.uid = user.id
-      return token
+    signIn({ profile }) {
+      return profile?.email === process.env.ADMIN_EMAIL || false
     },
   },
 })
