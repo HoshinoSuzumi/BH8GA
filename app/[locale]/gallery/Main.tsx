@@ -14,7 +14,6 @@ import {
   useDisclosure,
 } from '@nextui-org/react'
 import TablerCards from '@/components/Icons/TablerCards'
-import { LockFilledIcon, MailIcon } from '@nextui-org/shared-icons'
 import TablerId from '@/components/Icons/TablerId'
 import TablerMailPin from '@/components/Icons/TablerMailPin'
 import TablerDeviceMobile from '@/components/Icons/TablerDeviceMobile'
@@ -23,6 +22,7 @@ import TablerMailFast from '@/components/Icons/TablerMailFast'
 import TablerGiftCard from '@/components/Icons/TablerGiftCard'
 import TablerGift from '@/components/Icons/TablerGift'
 import { useTranslations } from 'next-intl'
+import { QSLFace } from '@/types'
 
 export const Main = () => {
   const t = useTranslations()
@@ -33,6 +33,27 @@ export const Main = () => {
     onOpenChange: onExOpenChange,
     onClose: onExClose,
   } = useDisclosure()
+
+  const cards: QSLFace[] = [
+    {
+      no: 2,
+      id: 'card2',
+      name: 'Ryo Yamada',
+      image: '/qsl/QSL_H_RyoYamada.png',
+      description: '这里写对这张卡片的描述',
+      date: '2024/06/04',
+      batch: '1 / 100',
+    },
+    {
+      no: 1,
+      id: 'card1',
+      name: 'Earth Horizon',
+      image: '/qsl/QSL_H_EarthHorizon.png',
+      description: '这里写对这张卡片的描述',
+      date: '2024/06/04',
+      batch: '1 / 100',
+    }
+  ]
 
   return (
     <>
