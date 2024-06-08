@@ -1,4 +1,9 @@
 {
+  "avatar": {
+    "signed_in_as": "已登录为",
+    "dashboard": "控制面板",
+    "sign_out": "退出登录"
+  },
   "home": {
     "about": "关于 {callsign}",
     "find_me": "找到我",
