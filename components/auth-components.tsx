@@ -8,6 +8,7 @@ import { useEffect, useState } from 'react'
 import { Session } from 'next-auth'
 import { noto_sc, saira } from '@/app/[locale]/fonts'
 import { useTranslations } from 'next-intl'
+import { signIn } from 'next-auth/react'
 
 export function SignIn() {
   const t = useTranslations()
@@ -24,7 +25,7 @@ export function SignIn() {
     !session
       ? (
         <form
-          action={ handleSignIn }
+          action={ () => signIn() }
         >
           <Button
             isIconOnly
@@ -59,7 +60,7 @@ export function SignIn() {
             <DropdownItem
               key="dashboard"
             >
-              {t('avatar.dashboard')}
+              { t('avatar.dashboard') }
             </DropdownItem>
             <DropdownItem
               key="logout"
@@ -71,7 +72,7 @@ export function SignIn() {
                 }
               }
             >
-              {t('avatar.sign_out')}
+              { t('avatar.sign_out') }
             </DropdownItem>
           </DropdownMenu>
         </Dropdown>

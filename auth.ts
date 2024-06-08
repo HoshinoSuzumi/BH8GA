@@ -8,7 +8,7 @@ export const {
   auth,
 } = NextAuth({
   providers: [
-    GitHub,
+    GitHub
   ],
   callbacks: {
     jwt({ token, user }) {
