@@ -1,4 +1,9 @@
 {
+  "avatar": {
+    "signed_in_as": "Signed in as",
+    "dashboard": "Dashboard",
+    "sign_out": "Sign out"
+  },
   "home": {
     "about": "About {callsign}",
     "find_me": "Find Me",

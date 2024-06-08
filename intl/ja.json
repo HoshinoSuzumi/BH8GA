@@ -1,4 +1,9 @@
 {
+  "avatar": {
+    "signed_in_as": "ログイン中のユーザー",
+    "dashboard": "ダッシュボード",
+    "sign_out": "ログアウト"
+  },
   "home": {
     "about": "{callsign}について",
     "find_me": "私を見つける",

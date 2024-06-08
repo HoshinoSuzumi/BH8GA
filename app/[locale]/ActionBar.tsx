@@ -5,6 +5,7 @@ import TablerBuildingBroadcastTower from '@/components/Icons/TablerBuildingBroad
 import { noto_sc, saira } from '@/app/[locale]/fonts'
 import { Link } from '@/navigation'
 import { LanguageChanger } from '@/components/LanguageChanger'
+import { SignIn } from '@/components/auth-components'
 
 export const ActionBar = ({
   locale,
@@ -25,7 +26,10 @@ export const ActionBar = ({
           </span>
         </h1>
       </Link>
-      <LanguageChanger locale={ locale }/>
+      <div className={ 'flex items-center gap-4' }>
+        <SignIn/>
+        <LanguageChanger locale={ locale }/>
+      </div>
     </header>
   )
 }
