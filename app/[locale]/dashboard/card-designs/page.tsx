@@ -14,7 +14,7 @@ import {
 } from '@nextui-org/react'
 import useSWR from 'swr'
 import { GaCardDesigns } from 'kysely-codegen'
-import { useMemo, useState } from 'react'
+import { ChangeEvent, useCallback, useMemo, useState } from 'react'
 import TablerPlus from '@/components/Icons/TablerPlus'
 import TablerSearch from '@/components/Icons/TablerSearch'
 import { ChevronDownIcon } from '@nextui-org/shared-icons'
@@ -38,11 +38,13 @@ export default function Page() {
     ]
   }, [])
 
-  const statusOptions = [
-    { name: '未启用', uid: 'disabled' },
-    { name: '已启用', uid: 'enabled' },
-    { name: '监修中', uid: 'paused' },
-  ]
+  const statusOptions = useMemo(() => {
+    return [
+      { name: '未启用', uid: 'disabled' },
+      { name: '已启用', uid: 'enabled' },
+      { name: '监修中', uid: 'paused' },
+    ]
+  }, [])
 
   const designStatus = (status: string) => {
     switch (status) {
@@ -63,7 +65,13 @@ export default function Page() {
   })
 
   const [page, setPage] = useState(1)
+  const [rowsPerPage, setRowsPerPage] = useState(10)
   const [statusFilter, setStatusFilter] = useState<Selection>('all')
+
+  const onRowsPerPageChange = useCallback((e: ChangeEvent<HTMLSelectElement>) => {
+    setRowsPerPage(Number(e.target.value))
+    setPage(1)
+  }, [])
 
   const filteredItems = useMemo(() => {
     let filteredData = [...data || []]
@@ -77,14 +85,14 @@ export default function Page() {
     return filteredData
   }, [data, statusFilter, statusOptions])
 
-  const pages = Math.ceil(filteredItems.length / 10)
+  const pages = Math.ceil(filteredItems.length / rowsPerPage)
 
   const items = useMemo(() => {
-    const start = (page - 1) * 10
-    const end = start + 10
+    const start = (page - 1) * rowsPerPage
+    const end = start + rowsPerPage
 
     return filteredItems.slice(start, end)
-  }, [page, filteredItems])
+  }, [page, rowsPerPage, filteredItems])
 
   const sortedItems = useMemo(() => {
     return [...items].sort((a: GaCardDesigns, b: GaCardDesigns) => {
@@ -138,11 +146,12 @@ export default function Page() {
           <label className="flex items-center text-default-400 text-small">
             每页展示
             <select
+              onChange={ onRowsPerPageChange }
               className="bg-transparent outline-none text-default-400 text-small"
             >
-              <option value="5">5</option>
               <option value="10">10</option>
-              <option value="15">15</option>
+              <option value="20">20</option>
+              <option value="50">50</option>
             </select>
           </label>
         </div>
