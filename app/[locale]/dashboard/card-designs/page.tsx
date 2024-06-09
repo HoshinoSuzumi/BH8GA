@@ -4,7 +4,7 @@ import { noto_sc, rubik, saira } from '@/app/[locale]/fonts'
 import {
   Button, Chip,
   Dropdown, DropdownItem, DropdownMenu, DropdownTrigger,
-  Input,
+  Input, SortDescriptor,
   Spinner,
   Table,
   TableBody,
@@ -16,7 +16,11 @@ import {
 import useSWR from 'swr'
 import { GaCardDesigns } from 'kysely-codegen'
 import { ChevronDownIcon, SearchIcon } from '@nextui-org/shared-icons'
-import { useMemo } from 'react'
+import { useMemo, useState } from 'react'
+import { Infer } from 'next/dist/compiled/superstruct'
+import TablerAlbum from '@/components/Icons/TablerAlbum'
+import TablerPlus from '@/components/Icons/TablerPlus'
+import TablerSearch from '@/components/Icons/TablerSearch'
 
 export default function Page() {
 
@@ -27,14 +31,24 @@ export default function Page() {
     return await (await fetch(url)).json()
   })
 
-  const designStatus = (status: number) => {
+  const headerColumns = useMemo(() => {
+    return [
+      { key: 'no', title: 'No.', sortable: true },
+      { key: 'name', title: '标题', sortable: true },
+      { key: 'description', title: '描述' },
+      { key: 'status', title: '状态', sortable: true },
+      { key: 'create_at', title: '创建时间', sortable: true },
+    ]
+  }, [])
+
+  const designStatus = (status: string) => {
     switch (status) {
-      case -1:
-        return 'Draft'
-      case 0:
-        return 'Published'
-      case 1:
-        return 'Archived'
+      case '-1':
+        return '未启用'
+      case '0':
+        return '监修中'
+      case '1':
+        return '已启用'
       default:
         return 'Unknown'
     }
@@ -47,17 +61,19 @@ export default function Page() {
           <Input
             isClearable
             className="w-full sm:max-w-[44%]"
-            placeholder="Search by name..."
-            startContent={ <SearchIcon/> }
+            placeholder="搜索卡面"
+            startContent={ <TablerSearch className={ 'text-xl' }/> }
           />
           <div className="flex gap-3">
-            asda
+            <Button color="primary" endContent={ <TablerPlus className={ 'text-xl' }/> }>
+              新建卡面
+            </Button>
           </div>
         </div>
         <div className="flex justify-between items-center">
-          <span className="text-default-400 text-small">Total 1 users</span>
+          <span className="text-default-400 text-small">共 { data?.length || '-' } 个卡面</span>
           <label className="flex items-center text-default-400 text-small">
-            Rows per page:
+            每页展示
             <select
               className="bg-transparent outline-none text-default-400 text-small"
             >
@@ -69,7 +85,22 @@ export default function Page() {
         </div>
       </div>
     )
-  }, [])
+  }, [data])
+
+  const [sortDescriptor, setSortDescriptor] = useState<SortDescriptor>({
+    column: 'no',
+    direction: 'ascending',
+  })
+
+  const sortedItems = useMemo(() => {
+    return [...data || []].sort((a: GaCardDesigns, b: GaCardDesigns) => {
+      const first = a[sortDescriptor.column as keyof GaCardDesigns] as string
+      const second = b[sortDescriptor.column as keyof GaCardDesigns] as string
+      const cmp = first < second ? -1 : first > second ? 1 : 0
+
+      return sortDescriptor.direction === 'descending' ? -cmp : cmp
+    })
+  }, [sortDescriptor, data])
 
   return (
     <div className={ 'px-4' }>
@@ -78,25 +109,45 @@ export default function Page() {
         <Table
           topContent={ topContent }
           topContentPlacement="outside"
+          sortDescriptor={ sortDescriptor }
+          onSortChange={ setSortDescriptor }
           className={ noto_sc.className }
-          aria-label="Example static collection table"
+          aria-label="Card Designs"
         >
-          <TableHeader>
-            <TableColumn>No.</TableColumn>
-            <TableColumn>标题</TableColumn>
-            <TableColumn>描述</TableColumn>
-            <TableColumn>状态</TableColumn>
-            <TableColumn>创建时间</TableColumn>
+          <TableHeader columns={ headerColumns }>
+            { (column) => (
+              <TableColumn
+                key={ column.key }
+                align={ column.key === 'actions' ? 'center' : 'start' }
+                allowsSorting={ column.sortable }
+              >
+                { column.title }
+              </TableColumn>
+            ) }
           </TableHeader>
-          <TableBody items={ data || [] } emptyContent={ 'No rows to display.' }>
+          <TableBody
+            items={ sortedItems }
+            isLoading={ isLoading }
+            loadingContent={ <Spinner/> }
+            emptyContent={ 'No rows to display.' }
+          >
             { item => (
               <TableRow key={ item.id }>
                 <TableCell>{ `${ item.no }` }</TableCell>
                 <TableCell>{ item.name }</TableCell>
                 <TableCell>{ item.description }</TableCell>
                 <TableCell>
-                  <Chip color="warning" variant="flat" size={ 'sm' }>
-                    { designStatus(parseInt(`${ item.status }`)) }
+                  <Chip
+                    color={
+                      `${ item.status }` === '-1' ? 'warning' :
+                        `${ item.status }` === '0' ? 'primary' :
+                          `${ item.status }` === '1' ? 'success' :
+                            undefined
+                    }
+                    variant="flat"
+                    size={ 'sm' }
+                  >
+                    { designStatus(`${ item.status }`) }
                   </Chip>
                 </TableCell>
                 <TableCell>{ `${ item.create_at }` }</TableCell>
@@ -104,7 +155,6 @@ export default function Page() {
             ) }
           </TableBody>
         </Table>
-        <pre>{ JSON.stringify(data, null, 2) }</pre>
       </div>
     </div>
   )
