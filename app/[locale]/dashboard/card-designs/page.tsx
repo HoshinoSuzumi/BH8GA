@@ -1,9 +1,8 @@
 'use client'
 
-import { noto_sc, rubik, saira } from '@/app/[locale]/fonts'
+import { noto_sc, saira } from '@/app/[locale]/fonts'
 import {
   Button, Chip,
-  Dropdown, DropdownItem, DropdownMenu, DropdownTrigger,
   Input, SortDescriptor,
   Spinner,
   Table,
@@ -11,16 +10,14 @@ import {
   TableCell,
   TableColumn,
   TableHeader,
-  TableRow,
+  TableRow, Selection, Dropdown, DropdownTrigger, DropdownMenu, DropdownItem,
 } from '@nextui-org/react'
 import useSWR from 'swr'
 import { GaCardDesigns } from 'kysely-codegen'
-import { ChevronDownIcon, SearchIcon } from '@nextui-org/shared-icons'
 import { useMemo, useState } from 'react'
-import { Infer } from 'next/dist/compiled/superstruct'
-import TablerAlbum from '@/components/Icons/TablerAlbum'
 import TablerPlus from '@/components/Icons/TablerPlus'
 import TablerSearch from '@/components/Icons/TablerSearch'
+import { ChevronDownIcon } from '@nextui-org/shared-icons'
 
 export default function Page() {
 
@@ -41,18 +38,63 @@ export default function Page() {
     ]
   }, [])
 
+  const statusOptions = [
+    { name: '未启用', uid: 'disabled' },
+    { name: '已启用', uid: 'enabled' },
+    { name: '监修中', uid: 'paused' },
+  ]
+
   const designStatus = (status: string) => {
     switch (status) {
-      case '-1':
+      case 'disabled':
         return '未启用'
-      case '0':
+      case 'paused':
         return '监修中'
-      case '1':
+      case 'enabled':
         return '已启用'
       default:
-        return 'Unknown'
+        return '未知'
     }
   }
+
+  const [sortDescriptor, setSortDescriptor] = useState<SortDescriptor>({
+    column: 'no',
+    direction: 'ascending',
+  })
+
+  const [page, setPage] = useState(1)
+  const [statusFilter, setStatusFilter] = useState<Selection>('all')
+
+  const filteredItems = useMemo(() => {
+    let filteredData = [...data || []]
+
+    if (statusFilter !== 'all' && Array.from(statusFilter).length !== statusOptions.length) {
+      filteredData = filteredData.filter((card) =>
+        Array.from(statusFilter).includes(`${ card.status }`),
+      )
+    }
+
+    return filteredData
+  }, [data, statusFilter, statusOptions])
+
+  const pages = Math.ceil(filteredItems.length / 10)
+
+  const items = useMemo(() => {
+    const start = (page - 1) * 10
+    const end = start + 10
+
+    return filteredItems.slice(start, end)
+  }, [page, filteredItems])
+
+  const sortedItems = useMemo(() => {
+    return [...items].sort((a: GaCardDesigns, b: GaCardDesigns) => {
+      const first = a[sortDescriptor.column as keyof GaCardDesigns] as string
+      const second = b[sortDescriptor.column as keyof GaCardDesigns] as string
+      const cmp = first < second ? -1 : first > second ? 1 : 0
+
+      return sortDescriptor.direction === 'descending' ? -cmp : cmp
+    })
+  }, [sortDescriptor, items])
 
   const topContent = useMemo(() => {
     return (
@@ -65,6 +107,27 @@ export default function Page() {
             startContent={ <TablerSearch className={ 'text-xl' }/> }
           />
           <div className="flex gap-3">
+            <Dropdown>
+              <DropdownTrigger className="hidden sm:flex">
+                <Button endContent={ <ChevronDownIcon className="text-small"/> } variant="flat">
+                  状态筛选
+                </Button>
+              </DropdownTrigger>
+              <DropdownMenu
+                disallowEmptySelection
+                aria-label="Table Columns"
+                closeOnSelect={ false }
+                selectedKeys={ statusFilter }
+                selectionMode="multiple"
+                onSelectionChange={ setStatusFilter }
+              >
+                { statusOptions.map((status) => (
+                  <DropdownItem key={ status.uid } className="capitalize">
+                    { status.name }
+                  </DropdownItem>
+                )) }
+              </DropdownMenu>
+            </Dropdown>
             <Button color="primary" endContent={ <TablerPlus className={ 'text-xl' }/> }>
               新建卡面
             </Button>
@@ -85,22 +148,7 @@ export default function Page() {
         </div>
       </div>
     )
-  }, [data])
-
-  const [sortDescriptor, setSortDescriptor] = useState<SortDescriptor>({
-    column: 'no',
-    direction: 'ascending',
-  })
-
-  const sortedItems = useMemo(() => {
-    return [...data || []].sort((a: GaCardDesigns, b: GaCardDesigns) => {
-      const first = a[sortDescriptor.column as keyof GaCardDesigns] as string
-      const second = b[sortDescriptor.column as keyof GaCardDesigns] as string
-      const cmp = first < second ? -1 : first > second ? 1 : 0
-
-      return sortDescriptor.direction === 'descending' ? -cmp : cmp
-    })
-  }, [sortDescriptor, data])
+  }, [data?.length, statusFilter, statusOptions])
 
   return (
     <div className={ 'px-4' }>
@@ -139,9 +187,9 @@ export default function Page() {
                 <TableCell>
                   <Chip
                     color={
-                      `${ item.status }` === '-1' ? 'warning' :
-                        `${ item.status }` === '0' ? 'primary' :
-                          `${ item.status }` === '1' ? 'success' :
+                      `${ item.status }` === 'disabled' ? 'default' :
+                        `${ item.status }` === 'paused' ? 'warning' :
+                          `${ item.status }` === 'enabled' ? 'success' :
                             undefined
                     }
                     variant="flat"
