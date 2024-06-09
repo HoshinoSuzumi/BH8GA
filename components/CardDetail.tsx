@@ -1,70 +1,30 @@
-'use client'
-
-import '../page.scss'
-import { noto_sc, pacifico, saira } from '@/app/[locale]/fonts'
-import { Image } from '@nextui-org/image'
+import { QSLFace } from '@/types'
 import {
-  Button, Card, Checkbox, Chip, Divider,
-  Input, Link,
+  Button,
+  Card,
+  Input,
   Modal,
   ModalBody,
   ModalContent,
   ModalFooter,
-  ModalHeader, ScrollShadow, Table, TableBody, TableCell, TableColumn, TableHeader, TableRow, Textarea, Tooltip,
-  useDisclosure,
+  ModalHeader,
+  Textarea, Tooltip, useDisclosure,
 } from '@nextui-org/react'
+import { Image } from '@nextui-org/image'
+import { noto_sc, saira } from '@/app/[locale]/fonts'
 import TablerCards from '@/components/Icons/TablerCards'
-import TablerId from '@/components/Icons/TablerId'
-import TablerMailPin from '@/components/Icons/TablerMailPin'
-import TablerDeviceMobile from '@/components/Icons/TablerDeviceMobile'
-import TablerUser from '@/components/Icons/TablerUser'
-import TablerMailFast from '@/components/Icons/TablerMailFast'
-import TablerGiftCard from '@/components/Icons/TablerGiftCard'
 import TablerGift from '@/components/Icons/TablerGift'
-import { useTranslations } from 'next-intl'
-import { QSLFace } from '@/types'
+import TablerId from '@/components/Icons/TablerId'
+import TablerUser from '@/components/Icons/TablerUser'
+import TablerDeviceMobile from '@/components/Icons/TablerDeviceMobile'
+import TablerMailPin from '@/components/Icons/TablerMailPin'
+import TablerMailFast from '@/components/Icons/TablerMailFast'
 
-const QSLCard = ({
-  cardFace,
-  onClick,
+export const CardDetail = ({
+  card,
 }: {
-  cardFace: QSLFace,
-  onClick?: () => void
+  card: QSLFace
 }) => {
-  return (
-    <div
-      className={ 'w-full aspect-[14/9] cursor-zoom-in relative' }
-      onClick={ onClick }
-    >
-      <div className={ 'absolute top-1 right-2 z-20' }>
-        <span
-          className={ `text-xl text-primary-400 dark:text-primary-500 font-bold drop-shadow-lg` }
-        >
-          <Chip
-            size={ 'sm' }
-            variant="solid"
-            color={ 'primary' }
-            classNames={ {
-              base: 'border-small border-white/50',
-              content: `drop-shadow shadow-black text-white font-medium`,
-            } }
-          >
-            #{ cardFace.no }
-          </Chip>
-        </span>
-      </div>
-      <Image
-        src={ cardFace.image }
-        alt={ cardFace.name }
-        className={ 'object-cover w-full h-full rounded-lg' }
-        isBlurred
-      />
-    </div>
-  )
-}
-
-export const Main = () => {
-  const t = useTranslations()
   const { isOpen, onOpen, onClose } = useDisclosure()
   const {
     isOpen: isExOpen,
@@ -73,60 +33,8 @@ export const Main = () => {
     onClose: onExClose,
   } = useDisclosure()
 
-  const cards: QSLFace[] = [
-    {
-      no: 2,
-      id: 'card2',
-      name: 'Ryo Yamada',
-      description: '这里写对这张卡片的描述',
-      image: '/qsl/QSL_H_RyoYamada.png',
-    },
-    {
-      no: 1,
-      id: 'card1',
-      name: 'Earth Horizon',
-      description: '这里写对这张卡片的描述',
-      image: '/qsl/QSL_H_EarthHorizon.png',
-    },
-  ]
-
   return (
     <>
-      <main className="min-h-screen pt-16 relative">
-        <div className={ 'w-full h-80 md:h-96 hero' }>
-          <div className={ 'w-full h-full flex flex-col justify-center items-center' }>
-            <div className={ 'flex flex-col items-center' }>
-              <h1 className={ `text-4xl md:text-6xl font-bold drop-shadow-lg ${ saira.className }` }>
-                <span className={ 'text-amber-400' }>QSL</span>&nbsp;
-                <span className={ 'text-neutral-600 dark:text-neutral-200' }>
-                  { t('gallery.title') }
-                </span>
-              </h1>
-              <h2 className={ `text-sm font-bold mt-1 ${ saira.className }` }>
-              <span className={ `text-neutral-400 ${ saira.className }` }>
-                { t('gallery.subtitle', { callsign: 'BH8GA' }) }
-              </span>
-              </h2>
-              <h2 className={ `mt-6 text-2xl relative opacity-45 ${ pacifico.className }` }>
-                Let&apos;s get hands dirty
-              </h2>
-            </div>
-          </div>
-        </div>
-
-        <div className={ `container xl:max-w-[1280px] p-4 md:p-0 md:pt-8 space-y-12 ${ saira.className }` }>
-          <div className={ 'grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-8' }>
-
-            { cards.map(card => (
-              <QSLCard
-                cardFace={ card }
-                onClick={ onOpen }
-              />
-            )) }
-
-          </div>
-        </div>
-      </main>
       <Modal
         size={ '3xl' }
         hideCloseButton
