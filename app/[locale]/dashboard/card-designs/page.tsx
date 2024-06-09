@@ -96,7 +96,7 @@ export default function Page() {
                 <TableCell>{ item.description }</TableCell>
                 <TableCell>
                   <Chip color="warning" variant="flat" size={ 'sm' }>
-                    { designStatus(item.status) }
+                    { designStatus(parseInt(`${ item.status }`)) }
                   </Chip>
                 </TableCell>
                 <TableCell>{ `${ item.create_at }` }</TableCell>
