@@ -24,7 +24,7 @@ import TablerGift from '@/components/Icons/TablerGift'
 import { useTranslations } from 'next-intl'
 import { QSLFace } from '@/types'
 
-const QSLCard = ({
+const QSLDesign = ({
   cardFace,
   onClick,
 }: {
@@ -118,7 +118,8 @@ export const Main = () => {
           <div className={ 'grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-8' }>
 
             { cards.map(card => (
-              <QSLCard
+              <QSLDesign
+                key={ card.id }
                 cardFace={ card }
                 onClick={ onOpen }
               />

@@ -83,11 +83,11 @@ export function SignIn() {
             <DropdownSection title={ t('menu.management') } showDivider>
               <DropdownItem
                 as={ Link }
-                href={ '/dashboard/card-faces' }
-                key="card-faces"
+                href={ '/dashboard/card-designs' }
+                key="card-designs"
                 startContent={ <TablerCards className={ 'text-lg' }/> }
               >
-                { t('menu.card-faces') }
+                { t('menu.card-designs') }
               </DropdownItem>
               <DropdownItem
                 as={ Link }
