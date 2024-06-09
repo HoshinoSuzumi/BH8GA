@@ -7,6 +7,7 @@ import { Providers } from '@/app/[locale]/providers'
 import { NextIntlClientProvider, useMessages } from 'next-intl'
 import { notFound } from 'next/navigation'
 import { locales } from '@/navigation'
+import { SessionProvider } from 'next-auth/react'
 
 export const metadata: Metadata = {
   title: `BH8GA`,
@@ -36,15 +37,17 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
     <body className={ noto_sc.className }>
-    <NextIntlClientProvider
-      locale={ locale }
-      messages={ messages }
-    >
-      <Providers>
-        <ActionBar locale={ locale }/>
-        { children }
-      </Providers>
-    </NextIntlClientProvider>
+    <SessionProvider>
+      <NextIntlClientProvider
+        locale={ locale }
+        messages={ messages }
+      >
+        <Providers>
+          <ActionBar locale={ locale }/>
+          { children }
+        </Providers>
+      </NextIntlClientProvider>
+    </SessionProvider>
     </body>
     </html>
   )

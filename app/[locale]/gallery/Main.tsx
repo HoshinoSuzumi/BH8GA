@@ -19,16 +19,17 @@ import TablerMailPin from '@/components/Icons/TablerMailPin'
 import TablerDeviceMobile from '@/components/Icons/TablerDeviceMobile'
 import TablerUser from '@/components/Icons/TablerUser'
 import TablerMailFast from '@/components/Icons/TablerMailFast'
-import TablerGiftCard from '@/components/Icons/TablerGiftCard'
 import TablerGift from '@/components/Icons/TablerGift'
 import { useTranslations } from 'next-intl'
 import { QSLFace } from '@/types'
+import useSWR from 'swr'
+import { GaCardDesigns } from 'kysely-codegen'
 
 const QSLDesign = ({
   cardFace,
   onClick,
 }: {
-  cardFace: QSLFace,
+  cardFace: GaCardDesigns,
   onClick?: () => void
 }) => {
   return (
@@ -49,13 +50,13 @@ const QSLDesign = ({
               content: `drop-shadow shadow-black text-white font-medium`,
             } }
           >
-            #{ cardFace.no }
+            #{ cardFace.no as unknown as string || 'N/A' }
           </Chip>
         </span>
       </div>
       <Image
         src={ cardFace.image }
-        alt={ cardFace.name }
+        alt={ cardFace.name || 'QSL Image' }
         className={ 'object-cover w-full h-full rounded-lg' }
         isBlurred
       />
@@ -73,22 +74,29 @@ export const Main = () => {
     onClose: onExClose,
   } = useDisclosure()
 
-  const cards: QSLFace[] = [
-    {
-      no: 2,
-      id: 'card2',
-      name: 'Ryo Yamada',
-      description: '这里写对这张卡片的描述',
-      image: '/qsl/QSL_H_RyoYamada.png',
-    },
-    {
-      no: 1,
-      id: 'card1',
-      name: 'Earth Horizon',
-      description: '这里写对这张卡片的描述',
-      image: '/qsl/QSL_H_EarthHorizon.png',
-    },
-  ]
+  const {
+    data: cards,
+  } = useSWR<GaCardDesigns[]>('/api/card/design', async () => {
+    const response = await fetch('/api/card/design')
+    return response.json()
+  })
+
+  // const cards: QSLFace[] = [
+  //   {
+  //     no: 2,
+  //     id: 'card2',
+  //     name: 'Ryo Yamada',
+  //     description: '这里写对这张卡片的描述',
+  //     image: '/qsl/QSL_H_RyoYamada.png',
+  //   },
+  //   {
+  //     no: 1,
+  //     id: 'card1',
+  //     name: 'Earth Horizon',
+  //     description: '这里写对这张卡片的描述',
+  //     image: '/qsl/QSL_H_EarthHorizon.png',
+  //   },
+  // ]
 
   return (
     <>
@@ -117,7 +125,7 @@ export const Main = () => {
         <div className={ `container xl:max-w-[1280px] p-4 md:p-0 md:pt-8 space-y-12 ${ saira.className }` }>
           <div className={ 'grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-8' }>
 
-            { cards.map(card => (
+            { (cards || []).map((card: GaCardDesigns) => (
               <QSLDesign
                 key={ card.id }
                 cardFace={ card }
