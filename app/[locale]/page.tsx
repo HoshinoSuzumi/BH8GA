@@ -97,7 +97,7 @@ export default function Home({
               className={ 'mb-4 md:float-end md:ml-6 md:mb-2' }
               label={ t('home.my_qsl_faces') }
               content={
-                <>{ t('home.my_qsl_count', { count: cards?.length || '-' }) }</>
+                <>{ t('home.my_qsl_count', { count: cards?.filter(card => card.status !== 'disabled').length || '-' }) }</>
               }
               icon={
                 <TablerCards
