@@ -1,5 +1,11 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { changeCardDesignStatus, fetchCardDesigns, newCardDesign, updateCardDesign } from '@/app/actions/card'
+import {
+  changeCardDesignStatus,
+  deleteCardDesign,
+  fetchCardDesigns,
+  newCardDesign,
+  updateCardDesign,
+} from '@/app/actions/card'
 import { auth } from '@/auth'
 
 export const GET = auth(async function GET(
@@ -49,5 +55,20 @@ export const PATCH = auth(async function PATCH(
     return NextResponse.json(null, { status: 400 })
   }
   await changeCardDesignStatus(id, status)
+  return NextResponse.json(null, { status: 200 })
+})
+
+export const DELETE = auth(async function DELETE(
+  req: NextRequest & { auth?: any },
+) {
+  if (!req.auth) {
+    return NextResponse.json(null, { status: 401 })
+  }
+  const searchParams = req.nextUrl.searchParams
+  const id = searchParams.get('id')
+  if (!id) {
+    return NextResponse.json(null, { status: 400 })
+  }
+  await deleteCardDesign(id)
   return NextResponse.json(null, { status: 200 })
 })

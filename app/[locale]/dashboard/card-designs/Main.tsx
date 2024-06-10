@@ -3,15 +3,33 @@
 import { noto_sc, saira } from '@/app/[locale]/fonts'
 import {
   Button,
-  Chip, ChipProps, Dropdown, DropdownItem, DropdownMenu, DropdownSection, DropdownTrigger, Input,
-  Modal, ModalBody, ModalContent, ModalFooter, ModalHeader, SelectedItems, Selection, SortDescriptor,
+  Chip,
+  ChipProps,
+  Dropdown,
+  DropdownItem,
+  DropdownMenu,
+  DropdownSection,
+  DropdownTrigger,
+  Input,
+  Modal,
+  ModalBody,
+  ModalContent,
+  ModalFooter,
+  ModalHeader,
+  Popover,
+  PopoverTrigger,
+  SelectedItems,
+  Selection,
+  SortDescriptor,
   Spinner,
   Table,
   TableBody,
   TableCell,
   TableColumn,
   TableHeader,
-  TableRow, Textarea, useDisclosure,
+  TableRow,
+  Textarea,
+  useDisclosure,
 } from '@nextui-org/react'
 import TablerPlus from '@/components/Icons/TablerPlus'
 import { ChangeEvent, FormEvent, Key, useCallback, useMemo, useState } from 'react'
@@ -217,7 +235,7 @@ export default function Main() {
     })
   }, [mutate, onClose])
 
-  const onSubmit = (e: FormEvent<HTMLDivElement>) => {
+  const onSubmit = useCallback((e: FormEvent<HTMLDivElement>) => {
     e.preventDefault()
     fetch('/api/card/design', {
       method: 'POST',
@@ -233,7 +251,15 @@ export default function Main() {
       onClose()
       await mutate()
     })
-  }
+  }, [formData, mutate, onClose])
+
+  const onDelete = useCallback((id: CardDesign['id']) => {
+    fetch(`/api/card/design?id=${ id }`, {
+      method: 'DELETE',
+    }).then(res => res.json()).then(async () => {
+      await mutate()
+    })
+  }, [mutate])
 
   const renderCell = useCallback((item: CardDesign, columnKey: Key) => {
     const cellValue = item[columnKey as keyof CardDesign]
@@ -344,6 +370,7 @@ export default function Main() {
                 <DropdownItem
                   color={ 'danger' }
                   startContent={ <TablerTrash className={ iconClasses }/> }
+                  onPress={ onDelete.bind(null, item.id) }
                 >
                   { t('delete') }
                 </DropdownItem>
@@ -358,7 +385,7 @@ export default function Main() {
 
   return (
     <>
-      <div className={ 'px-4' }>
+      <div className={ 'px-4 pb-8' }>
         <h1 className={ `text-2xl font-semibold mt-8 mb-4 ${ saira.className }` }>
           { t('page_title') }
         </h1>

@@ -22,3 +22,7 @@ export const updateCardDesign = async (id: CardDesign['id'], design: CardDesignU
 export const changeCardDesignStatus = async (id: CardDesign['id'], status: CardDesign['status']) => {
   return await db.updateTable('ga_card_designs').set({ status }).where('id', '=', id).execute()
 }
+
+export const deleteCardDesign = async (id: CardDesign['id']) => {
+  return await db.deleteFrom('ga_card_designs').where('id', '=', id).execute()
+}
