@@ -13,6 +13,7 @@
   },
   "gallery": {
     "title": "Gallery",
-    "subtitle": "{callsign}'s QSL Card Gallery"
+    "subtitle": "{callsign}'s QSL Card Gallery",
+    "empty": "No public cards available at the moment"
   }
 }

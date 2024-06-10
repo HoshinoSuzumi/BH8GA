@@ -3,7 +3,7 @@
 import { noto_sc, saira } from '@/app/[locale]/fonts'
 import {
   Button,
-  Chip, Dropdown, DropdownItem, DropdownMenu, DropdownTrigger, Input,
+  Chip, ChipProps, Dropdown, DropdownItem, DropdownMenu, DropdownSection, DropdownTrigger, Input,
   Modal, ModalBody, ModalContent, ModalFooter, ModalHeader, SelectedItems, Selection, SortDescriptor,
   Spinner,
   Table,
@@ -14,19 +14,38 @@ import {
   TableRow, Textarea, useDisclosure,
 } from '@nextui-org/react'
 import TablerPlus from '@/components/Icons/TablerPlus'
-import { ChangeEvent, useCallback, useMemo, useState } from 'react'
-import { GaCardDesigns } from 'kysely-codegen'
+import { ChangeEvent, FormEvent, Key, useCallback, useMemo, useState } from 'react'
 import TablerSearch from '@/components/Icons/TablerSearch'
 import { ChevronDownIcon } from '@nextui-org/shared-icons'
-import { CardDesign } from '@/app/actions/types'
+import { CardDesign, NewCardDesign } from '@/app/actions/types'
 import useSWR from 'swr'
+import dayjs from '@/app/dayjs'
+import TablerDotsVertical from '@/components/Icons/TablerDotsVertical'
+import { Image } from '@nextui-org/image'
+import TablerPlay from '@/components/Icons/TablerPlay'
+import TablerPause from '@/components/Icons/TablerPause'
+import TablerReload from '@/components/Icons/TablerReload'
+import TablerEdit from '@/components/Icons/TablerEdit'
+import TablerTrash from '@/components/Icons/TablerTrash'
+import { uuidv4 } from '@uniiem/uuid'
+import TablerPlayerStop from '@/components/Icons/TablerPlayerStop'
 
 export default function Main() {
-  const { isOpen, onOpen, onClose } = useDisclosure()
+  const { isOpen, onOpen, onOpenChange, onClose } = useDisclosure()
+  const [formData, setFormData] = useState({} as NewCardDesign)
+
+  const onChange = (event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { name, value } = event.target
+    setFormData({
+      ...formData,
+      [name]: value,
+    })
+  }
 
   const {
     data,
     isLoading,
+    mutate,
   } = useSWR<CardDesign[]>('card-designs', async () => {
     const res = await fetch('/api/card/design')
     return await res.json()
@@ -34,11 +53,12 @@ export default function Main() {
 
   const headerColumns = useMemo(() => {
     return [
+      { key: 'image', title: '' },
       { key: 'no', title: 'No.', sortable: true },
       { key: 'name', title: '标题', sortable: true },
-      { key: 'description', title: '描述' },
       { key: 'status', title: '状态', sortable: true },
       { key: 'create_at', title: '创建时间', sortable: true },
+      { key: 'actions', title: '操作' },
     ]
   }, [])
 
@@ -50,17 +70,16 @@ export default function Main() {
     ]
   }, [])
 
-  const designStatus = (status: string) => {
-    switch (status) {
-      case 'disabled':
-        return '未启用'
-      case 'paused':
-        return '监修中'
-      case 'enabled':
-        return '已启用'
-      default:
-        return '未知'
-    }
+  const statusColorMap: Record<string, ChipProps['color']> = {
+    enabled: 'success',
+    disabled: 'default',
+    paused: 'warning',
+  }
+
+  const statusTipMap: Record<string, string> = {
+    enabled: '已启用',
+    disabled: '未启用',
+    paused: '监修中',
   }
 
   const [sortDescriptor, setSortDescriptor] = useState<SortDescriptor>({
@@ -167,6 +186,144 @@ export default function Main() {
     )
   }, [data?.length, onRowsPerPageChange, statusFilter, statusOptions])
 
+  const onAction = useCallback((key: Key) => {
+  }, [])
+
+  const onChangeCardStatus = useCallback((id: CardDesign['id'], status: 'enabled' | 'disabled' | 'paused') => {
+    fetch(`/api/card/design?id=${ id }&status=${ status }`, {
+      method: 'PATCH',
+    }).then(res => res.json()).then(async () => {
+      await mutate()
+    })
+  }, [])
+
+  const renderCell = useCallback((item: CardDesign, columnKey: Key) => {
+    const cellValue = item[columnKey as keyof CardDesign]
+    switch (columnKey) {
+      case 'image':
+        return (
+          <Image
+            radius={ 'sm' }
+            className={ 'h-20 hidden md:block' }
+            src={ cellValue as string }
+          />
+        )
+      case 'name':
+        return (
+          <div className="flex flex-col max-w-28 md:max-w-none">
+            <p className="text-bold text-small capitalize">{ cellValue as string }</p>
+            <p className="text-bold text-tiny capitalize text-default-400 overflow-hidden text-ellipsis">
+              { item.description }
+            </p>
+          </div>
+        )
+      case 'status':
+        return (
+          <Chip
+            size={ 'sm' }
+            variant={ 'flat' }
+            color={ statusColorMap[item.status] }
+          >
+            { statusTipMap[item.status] }
+          </Chip>
+        )
+      case 'create_at':
+        return dayjs(item.create_at).format('YYYY-MM-DD HH:mm:ss')
+      case 'actions':
+        const iconClasses = 'text-lg flex-shrink-0'
+        return (
+          <div className="relative flex justify-end items-center gap-2">
+            <Dropdown>
+              <DropdownTrigger>
+                <Button isIconOnly size="sm" variant="light">
+                  <TablerDotsVertical className={ 'text-xl text-default-300' }/>
+                </Button>
+              </DropdownTrigger>
+              <DropdownMenu variant={ 'flat' } onAction={ onAction } disabledKeys={
+                item.status !== 'disabled' ? [] : ['disable']
+              }>
+                <DropdownSection>
+                  {
+                    item.status === 'disabled'
+                      ? (
+                        <DropdownItem
+                          key={ 'enable' }
+                          color={ 'success' }
+                          startContent={ <TablerPlay className={ iconClasses }/> }
+                          onPress={ onChangeCardStatus.bind(null, item.id, 'enabled') }
+                        >
+                          启用
+                        </DropdownItem>
+                      )
+                      : item.status === 'enabled'
+                        ? (
+                          <DropdownItem
+                            key={ 'pause' }
+                            color={ 'warning' }
+                            startContent={ <TablerPause className={ iconClasses }/> }
+                            onPress={ onChangeCardStatus.bind(null, item.id, 'paused') }
+                          >
+                            暂停
+                          </DropdownItem>
+                        )
+                        : (
+                          <DropdownItem
+                            key={ 'resume' }
+                            color={ 'primary' }
+                            startContent={ <TablerReload className={ iconClasses }/> }
+                            onPress={ onChangeCardStatus.bind(null, item.id, 'enabled') }
+                          >
+                            恢复
+                          </DropdownItem>
+                        )
+                  }
+                </DropdownSection>
+                <DropdownItem
+                  startContent={ <TablerEdit className={ iconClasses }/> }
+                >
+                  编辑
+                </DropdownItem>
+                <DropdownItem
+                  key={ 'disable' }
+                  color={ 'danger' }
+                  startContent={ <TablerPlayerStop className={ iconClasses }/> }
+                  onPress={ onChangeCardStatus.bind(null, item.id, 'disabled') }
+                >
+                  停用
+                </DropdownItem>
+                <DropdownItem
+                  color={ 'danger' }
+                  startContent={ <TablerTrash className={ iconClasses }/> }
+                >
+                  删除
+                </DropdownItem>
+              </DropdownMenu>
+            </Dropdown>
+          </div>
+        )
+      default:
+        return `${ cellValue }`
+    }
+  }, [])
+
+  const onSubmit = (e: FormEvent<HTMLDivElement>) => {
+    e.preventDefault()
+    fetch('/api/card/design', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        ...formData,
+        id: uuidv4(),
+      }),
+    }).then(res => res.json()).then(async () => {
+      setFormData({} as NewCardDesign)
+      onClose()
+      await mutate()
+    })
+  }
+
   return (
     <>
       <div className={ 'px-4' }>
@@ -199,24 +356,11 @@ export default function Main() {
             >
               { item => (
                 <TableRow key={ item.id }>
-                  <TableCell>{ `${ item.no }` }</TableCell>
-                  <TableCell>{ item.name }</TableCell>
-                  <TableCell>{ item.description }</TableCell>
-                  <TableCell>
-                    <Chip
-                      color={
-                        `${ item.status }` === 'disabled' ? 'default' :
-                          `${ item.status }` === 'paused' ? 'warning' :
-                            `${ item.status }` === 'enabled' ? 'success' :
-                              undefined
-                      }
-                      variant="flat"
-                      size={ 'sm' }
-                    >
-                      { designStatus(`${ item.status }`) }
-                    </Chip>
-                  </TableCell>
-                  <TableCell>{ `${ item.create_at }` }</TableCell>
+                  { (columnKey) => (
+                    <TableCell className={ 'whitespace-nowrap' }>
+                      { renderCell(item, columnKey) }
+                    </TableCell>
+                  ) }
                 </TableRow>
               ) }
             </TableBody>
@@ -227,9 +371,12 @@ export default function Main() {
         size={ 'xl' }
         hideCloseButton
         isOpen={ isOpen }
-        onClose={ onClose }
+        onOpenChange={ onOpenChange }
       >
-        <ModalContent>
+        <ModalContent
+          as={ 'form' }
+          onSubmit={ onSubmit }
+        >
           { onClose => (
             <>
               <ModalHeader className="flex flex-col gap-1">
@@ -237,14 +384,24 @@ export default function Main() {
               </ModalHeader>
               <ModalBody>
                 <Input
-                  autoFocus
+                  isRequired
                   label="标题"
+                  name={ 'name' }
+                  value={ formData.name || '' }
+                  onChange={ onChange }
                 />
                 <Textarea
                   label={ '描述' }
+                  name={ 'description' }
+                  value={ formData.description || '' }
+                  onChange={ onChange }
                 />
                 <Input
-                  type={ 'file' }
+                  isRequired
+                  label="图片链接"
+                  name={ 'image' }
+                  value={ formData.image || '' }
+                  onChange={ onChange }
                 />
               </ModalBody>
               <ModalFooter className={ 'justify-between md:justify-start' }>
@@ -261,6 +418,7 @@ export default function Main() {
                   color="primary"
                   size={ 'md' }
                   startContent={ <TablerPlus className={ 'text-lg' }/> }
+                  type={ 'submit' }
                 >
                   创建
                 </Button>

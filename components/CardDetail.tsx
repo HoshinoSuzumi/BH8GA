@@ -19,6 +19,7 @@ import TablerDeviceMobile from '@/components/Icons/TablerDeviceMobile'
 import TablerMailPin from '@/components/Icons/TablerMailPin'
 import TablerMailFast from '@/components/Icons/TablerMailFast'
 import { CardDesign } from '@/app/actions/types'
+import dayjs from '@/app/dayjs'
 
 export const CardDetail = ({
   card,
@@ -69,6 +70,13 @@ export const CardDetail = ({
                         </h2>
                         <p className={ 'text-sm font-semibold' }>
                           { card.name }
+                          {
+                            (card.status === 'paused')
+                              ? <span className={ 'text-warning-500' }> (监修中)</span>
+                              : (card.status === 'disabled')
+                                ? <span className={ 'text-primary-500' }> (交付中)</span>
+                                : null
+                          }
                         </p>
                       </li>
                       <li>
@@ -76,7 +84,7 @@ export const CardDetail = ({
                           启用日期
                         </h2>
                         <p className={ `text-sm font-medium` }>
-                          { card.create_at.toString() }
+                          { dayjs(card.create_at).format('YYYY-MM-DD HH:mm:ss') }
                         </p>
                       </li>
                       <li>

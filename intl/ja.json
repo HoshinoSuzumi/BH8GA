@@ -13,6 +13,7 @@
   },
   "gallery": {
     "title": "ギャラリー",
-    "subtitle": "{callsign}のQSLカードギャラリー"
+    "subtitle": "{callsign}のQSLカードギャラリー",
+    "empty": "現在公開されているカードはありません"
   }
 }

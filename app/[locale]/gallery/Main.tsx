@@ -11,6 +11,7 @@ import { useTranslations } from 'next-intl'
 import useSWR from 'swr'
 import { CardDesign } from '@/app/actions/types'
 import { CardDetail } from '@/components/CardDetail'
+import { card } from '@nextui-org/theme'
 
 const QSLDesign = ({
   card,
@@ -93,14 +94,24 @@ export const Main = () => {
               </div>
             )
             : (
-              <div className={ 'grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-8' }>
-                { cards?.map((card: CardDesign) => (
-                  <QSLDesign
-                    key={ card.id }
-                    card={ card }
-                  />
-                )) }
-              </div>
+              cards?.filter(card => card.status !== 'disabled').length === 0
+                ? (
+                  <div className={ 'flex justify-center items-center h-48' }>
+                    <h1 className={ 'text-xl font-semibold' }>
+                      { t('gallery.empty') }
+                    </h1>
+                  </div>
+                )
+                : (
+                  <div className={ 'grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-8' }>
+                    { cards?.filter(card => card.status !== 'disabled').map((card: CardDesign) => (
+                      <QSLDesign
+                        key={ card.id }
+                        card={ card }
+                      />
+                    )) }
+                  </div>
+                )
             )
           }
 
