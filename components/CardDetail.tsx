@@ -1,4 +1,3 @@
-import { QSLFace } from '@/types'
 import {
   Button,
   Card,
@@ -8,10 +7,10 @@ import {
   ModalContent,
   ModalFooter,
   ModalHeader,
-  Textarea, Tooltip, useDisclosure,
+  Textarea, useDisclosure,
 } from '@nextui-org/react'
 import { Image } from '@nextui-org/image'
-import { noto_sc, saira } from '@/app/[locale]/fonts'
+import { saira } from '@/app/[locale]/fonts'
 import TablerCards from '@/components/Icons/TablerCards'
 import TablerGift from '@/components/Icons/TablerGift'
 import TablerId from '@/components/Icons/TablerId'
@@ -30,7 +29,6 @@ export const CardDetail = ({
   isOpen: boolean
   onClose: () => void
 }) => {
-  // const { isOpen, onOpen, onClose } = useDisclosure()
   const {
     isOpen: isExOpen,
     onOpen: onExOpen,
@@ -58,7 +56,7 @@ export const CardDetail = ({
                   <div className={ 'flex justify-center items-start' }>
                     <Image
                       src={ card.image }
-                      alt={ card.name }
+                      alt={ card.name || 'Empty' }
                       className={ 'w-full aspect-[14/9]' }
                       isBlurred
                     />
@@ -101,7 +99,7 @@ export const CardDetail = ({
                   </Card>
                 </div>
               </ModalBody>
-              <ModalFooter className={ 'justify-between md:justify-start' }>
+              <ModalFooter>
                 <Button
                   className={ 'w-full' }
                   variant="flat"
@@ -112,12 +110,33 @@ export const CardDetail = ({
                 </Button>
                 <Button
                   className={ 'w-full' }
-                  color="primary"
+                  color={ (() => {
+                    switch (card.status) {
+                      case 'enabled':
+                        return 'primary'
+                      case 'disabled':
+                        return 'default'
+                      case 'paused':
+                        return 'primary'
+                      default:
+                        return 'default'
+                    }
+                  })() }
                   size={ 'md' }
+                  isDisabled={ card.status !== 'enabled' }
                   onPress={ onExOpenChange }
                   startContent={ <TablerCards className={ 'text-lg' }/> }
                 >
-                  换卡请求
+                  { (() => {
+                    switch (card.status) {
+                      case 'enabled':
+                        return '交换卡片'
+                      case 'disabled':
+                        return '未启用'
+                      case 'paused':
+                        return '暂停换卡'
+                    }
+                  })() }
                 </Button>
               </ModalFooter>
             </>
@@ -129,7 +148,7 @@ export const CardDetail = ({
         isOpen={ isExOpen }
         backdrop={ 'blur' }
         onOpenChange={ onExOpenChange }
-        className={saira.className}
+        className={ saira.className }
       >
         <ModalContent>
           { (onClose) => (
