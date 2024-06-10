@@ -4,6 +4,38 @@
     "dashboard": "Dashboard",
     "sign_out": "Sign out"
   },
+  "dash": {
+    "cards": {
+      "page_title": "Card Designs",
+      "enabled": "Enabled",
+      "disabled": "Disabled",
+      "paused": "Paused",
+      "enable": "Enable",
+      "disable": "Disable",
+      "pause": "Pause",
+      "resume": "Resume",
+      "edit": "Edit",
+      "delete": "Delete",
+      "status_filter": "Status",
+      "new_card_design": "New Card Design",
+      "total_count": "Total {count} card designs",
+      "per_page_count": "Per page count",
+      "search_placeholder": "Search card designs",
+      "title": "Title",
+      "status": "Status",
+      "created_at": "Created At",
+      "actions": "Actions",
+      "description": "Description",
+      "image_url": "Image URL",
+      "no_rows": "No rows to display",
+      "create_card": "Create Card",
+      "edit_card": "Edit Card",
+      "create": "Create",
+      "cancel": "Cancel"
+    },
+    "stock": {},
+    "exchange": {}
+  },
   "home": {
     "about": "About {callsign}",
     "find_me": "Find Me",

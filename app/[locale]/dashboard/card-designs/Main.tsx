@@ -29,8 +29,10 @@ import TablerEdit from '@/components/Icons/TablerEdit'
 import TablerTrash from '@/components/Icons/TablerTrash'
 import { uuidv4 } from '@uniiem/uuid'
 import TablerPlayerStop from '@/components/Icons/TablerPlayerStop'
+import { useTranslations } from 'next-intl'
 
 export default function Main() {
+  const t = useTranslations('dash.cards')
   const { isOpen, onOpen, onOpenChange, onClose } = useDisclosure()
   const [formData, setFormData] = useState({} as NewCardDesign)
   const [isEdit, setIsEdit] = useState(false)
@@ -56,18 +58,18 @@ export default function Main() {
     return [
       { key: 'image', title: '' },
       { key: 'no', title: 'No.', sortable: true },
-      { key: 'name', title: '标题', sortable: true },
-      { key: 'status', title: '状态', sortable: true },
-      { key: 'create_at', title: '创建时间', sortable: true },
-      { key: 'actions', title: '操作' },
+      { key: 'name', title: t('title'), sortable: true },
+      { key: 'status', title: t('status'), sortable: true },
+      { key: 'create_at', title: t('created_at'), sortable: true },
+      { key: 'actions', title: t('actions') },
     ]
   }, [])
 
   const statusOptions = useMemo(() => {
     return [
-      { name: '未启用', uid: 'disabled' },
-      { name: '已启用', uid: 'enabled' },
-      { name: '监修中', uid: 'paused' },
+      { name: 'disabled', uid: 'disabled' },
+      { name: 'enabled', uid: 'enabled' },
+      { name: 'paused', uid: 'paused' },
     ]
   }, [])
 
@@ -78,9 +80,9 @@ export default function Main() {
   }
 
   const statusTipMap: Record<string, string> = {
-    enabled: '已启用',
-    disabled: '未启用',
-    paused: '监修中',
+    enabled: t('enabled'),
+    disabled: t('disabled'),
+    paused: t('paused'),
   }
 
   const [sortDescriptor, setSortDescriptor] = useState<SortDescriptor>({
@@ -135,14 +137,14 @@ export default function Main() {
           <Input
             isClearable
             className="w-full sm:max-w-[44%]"
-            placeholder="搜索卡面"
+            placeholder={ t('search_placeholder') }
             startContent={ <TablerSearch className={ 'text-xl' }/> }
           />
           <div className="flex gap-3">
             <Dropdown>
               <DropdownTrigger className="hidden sm:flex">
                 <Button endContent={ <ChevronDownIcon className="text-small"/> } variant="flat">
-                  状态筛选
+                  { t('status_filter') }
                 </Button>
               </DropdownTrigger>
               <DropdownMenu
@@ -155,7 +157,7 @@ export default function Main() {
               >
                 { statusOptions.map((status) => (
                   <DropdownItem key={ status.uid } className="capitalize">
-                    { status.name }
+                    { t(status.name) }
                   </DropdownItem>
                 )) }
               </DropdownMenu>
@@ -165,14 +167,16 @@ export default function Main() {
               endContent={ <TablerPlus className={ 'text-xl' }/> }
               onClick={ onOpen }
             >
-              新建卡面
+              { t('new_card_design') }
             </Button>
           </div>
         </div>
         <div className="flex justify-between items-center">
-          <span className="text-default-400 text-small">共 { data?.length || '-' } 个卡面</span>
+          <span className="text-default-400 text-small">
+            { t('total_count', { count: data?.length || '-' }) }
+          </span>
           <label className="flex items-center text-default-400 text-small">
-            每页展示
+            { t('per_page_count') }
             <select
               onChange={ onRowsPerPageChange }
               className="bg-transparent outline-none text-default-400 text-small"
@@ -287,7 +291,7 @@ export default function Main() {
                           startContent={ <TablerPlay className={ iconClasses }/> }
                           onPress={ onChangeCardStatus.bind(null, item.id, 'enabled') }
                         >
-                          启用
+                          { t('enable') }
                         </DropdownItem>
                       )
                       : item.status === 'enabled'
@@ -298,7 +302,7 @@ export default function Main() {
                             startContent={ <TablerPause className={ iconClasses }/> }
                             onPress={ onChangeCardStatus.bind(null, item.id, 'paused') }
                           >
-                            暂停
+                            { t('pause') }
                           </DropdownItem>
                         )
                         : (
@@ -308,7 +312,7 @@ export default function Main() {
                             startContent={ <TablerReload className={ iconClasses }/> }
                             onPress={ onChangeCardStatus.bind(null, item.id, 'enabled') }
                           >
-                            恢复
+                            { t('resume') }
                           </DropdownItem>
                         )
                   }
@@ -326,7 +330,7 @@ export default function Main() {
                     onOpen()
                   } }
                 >
-                  编辑
+                  { t('edit') }
                 </DropdownItem>
                 <DropdownItem
                   key={ 'disable' }
@@ -334,13 +338,13 @@ export default function Main() {
                   startContent={ <TablerPlayerStop className={ iconClasses }/> }
                   onPress={ onChangeCardStatus.bind(null, item.id, 'disabled') }
                 >
-                  停用
+                  { t('disable') }
                 </DropdownItem>
                 <DropdownItem
                   color={ 'danger' }
                   startContent={ <TablerTrash className={ iconClasses }/> }
                 >
-                  删除
+                  { t('delete') }
                 </DropdownItem>
               </DropdownMenu>
             </Dropdown>
@@ -354,7 +358,9 @@ export default function Main() {
   return (
     <>
       <div className={ 'px-4' }>
-        <h1 className={ `text-2xl font-semibold mt-8 mb-4 ${ saira.className }` }>Card Designs</h1>
+        <h1 className={ `text-2xl font-semibold mt-8 mb-4 ${ saira.className }` }>
+          { t('page_title') }
+        </h1>
         <div>
           <Table
             topContent={ topContent }
@@ -379,7 +385,7 @@ export default function Main() {
               items={ sortedItems }
               isLoading={ isLoading }
               loadingContent={ <Spinner/> }
-              emptyContent={ 'No rows to display.' }
+              emptyContent={ t('no_rows') }
             >
               { item => (
                 <TableRow key={ item.id }>
@@ -421,26 +427,26 @@ export default function Main() {
           { onClose => (
             <>
               <ModalHeader className="flex flex-col gap-1">
-                <h1>{ isEdit ? '编辑卡面信息' : '创建新的卡面' }</h1>
+                <h1>{ isEdit ? t('edit_card') : t('create_card') }</h1>
                 { isEdit && <p className="text-xs font-semibold text-primary-500">ID: { formData.id }</p> }
               </ModalHeader>
               <ModalBody>
                 <Input
                   isRequired
-                  label="标题"
+                  label={ t('title') }
                   name={ 'name' }
                   value={ formData.name || '' }
                   onChange={ onChange }
                 />
                 <Textarea
-                  label={ '描述' }
+                  label={ t('description') }
                   name={ 'description' }
                   value={ formData.description || '' }
                   onChange={ onChange }
                 />
                 <Input
                   isRequired
-                  label="图片链接"
+                  label={ t('image_url') }
                   name={ 'image' }
                   value={ formData.image || '' }
                   onChange={ onChange }
@@ -453,7 +459,7 @@ export default function Main() {
                   size={ 'md' }
                   onPress={ onClose }
                 >
-                  取消
+                  { t('cancel') }
                 </Button>
                 <Button
                   className={ 'w-full' }
@@ -463,7 +469,7 @@ export default function Main() {
                     <TablerPlus className={ 'text-lg' }/> }
                   type={ 'submit' }
                 >
-                  { isEdit ? '编辑' : '创建' }
+                  { isEdit ? t('edit') : t('create') }
                 </Button>
               </ModalFooter>
             </>

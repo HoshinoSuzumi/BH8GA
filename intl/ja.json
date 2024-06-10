@@ -4,6 +4,38 @@
     "dashboard": "ダッシュボード",
     "sign_out": "ログアウト"
   },
+  "dash": {
+    "cards": {
+      "page_title": "カードデザイン",
+      "enabled": "有効",
+      "disabled": "無効",
+      "paused": "監修",
+      "enable": "有効化",
+      "disable": "無効化",
+      "pause": "一時停止",
+      "resume": "再開",
+      "edit": "編集",
+      "delete": "削除",
+      "status_filter": "状態フィルター",
+      "new_card_design": "新規作成",
+      "total_count": "合計 {count} 枚のカードデザイン",
+      "per_page_count": "1ページあたりの表示数",
+      "search_placeholder": "カードデザインを検索",
+      "title": "タイトル",
+      "status": "状態",
+      "created_at": "作成日",
+      "actions": "操作",
+      "description": "説明",
+      "image_url": "画像URL",
+      "no_rows": "カードデザインが見つかりません",
+      "create_card": "カードデザインを作成",
+      "edit_card": "カードデザインを編集",
+      "create": "作成",
+      "cancel": "キャンセル"
+    },
+    "stock": {},
+    "exchange": {}
+  },
   "home": {
     "about": "{callsign}について",
     "find_me": "私を見つける",

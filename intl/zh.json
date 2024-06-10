@@ -9,6 +9,38 @@
     "exchanges": "换卡记录",
     "sign_out": "退出登录"
   },
+  "dash": {
+    "cards": {
+      "page_title": "卡面管理",
+      "enabled": "已启用",
+      "disabled": "未启用",
+      "paused": "监修中",
+      "enable": "启用",
+      "disable": "停用",
+      "pause": "暂停",
+      "resume": "恢复",
+      "edit": "编辑",
+      "delete": "删除",
+      "status_filter": "状态筛选",
+      "new_card_design": "新卡面",
+      "total_count": "共 {count} 张卡面",
+      "per_page_count": "每页显示",
+      "search_placeholder": "搜索卡面",
+      "title": "标题",
+      "status": "状态",
+      "created_at": "创建时间",
+      "actions": "操作",
+      "description": "描述",
+      "image_url": "图片链接",
+      "no_rows": "没有项目",
+      "create_card": "创建卡面",
+      "edit_card": "编辑卡面",
+      "create": "创建",
+      "cancel": "取消"
+    },
+    "stock": {},
+    "exchange": {}
+  },
   "home": {
     "about": "关于 {callsign}",
     "find_me": "找到我",
