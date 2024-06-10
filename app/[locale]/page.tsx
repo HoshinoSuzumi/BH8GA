@@ -1,7 +1,9 @@
+'use client'
+
 import './page.scss'
 import { noto_sc, pacifico, saira } from '@/app/[locale]/fonts'
 import TablerCards from '@/components/Icons/TablerCards'
-import { ReactNode } from 'react'
+import { ReactNode, useEffect, useState } from 'react'
 import TablerBrandBilibili from '@/components/Icons/TablerBrandBilibili'
 import TablerBrandGithub from '@/components/Icons/TablerBrandGithub'
 import TablerBrandTelegram from '@/components/Icons/TablerBrandTelegram'
@@ -9,6 +11,9 @@ import TablerBrandSteam from '@/components/Icons/TablerBrandSteam'
 import { ContactCard } from '@/app/[locale]/ContactCard'
 import { useTranslations } from 'next-intl'
 import { Link } from '@/navigation'
+import { CardDesign } from '@/app/actions/types'
+import { fetchCardDesigns } from '@/app/actions/card'
+import { card } from '@nextui-org/theme'
 
 const FloatCard = ({
   label,
@@ -23,8 +28,6 @@ const FloatCard = ({
   className?: string
   href: string
 }) => {
-  const t = useTranslations()
-
   return (
     <Link
       href={ href }
@@ -53,6 +56,11 @@ export default function Home({
   params: { locale: string }
 }) {
   const t = useTranslations()
+  const [cards, setCards] = useState<CardDesign[]>()
+
+  useEffect(() => {
+    fetchCardDesigns().then(setCards)
+  }, [])
 
   return (
     <main className="min-h-screen pt-16 relative">
@@ -89,7 +97,7 @@ export default function Home({
               className={ 'mb-4 md:float-end md:ml-6 md:mb-2' }
               label={ t('home.my_qsl_faces') }
               content={
-                <>{ t('home.my_qsl_count', { count: 1 }) }</>
+                <>{ t('home.my_qsl_count', { count: cards?.length || '-' }) }</>
               }
               icon={
                 <TablerCards
@@ -98,9 +106,10 @@ export default function Home({
               }
             />
             <p
-              className={ `indent-6 text-sm leading-6 text-neutral-700 dark:text-neutral-400 text-justify ${ noto_sc.className }` }>
+              className={ `indent-6 text-sm leading-6 text-neutral-700 dark:text-neutral-400 text-justify ${ saira.className }` }
+            >
               非常高兴能够与您在电波中相遇！这里是&nbsp;
-              <b className={ `text-primary-400 ${ saira.className }` }>BH8GA</b>，QTH 位于重庆 (
+              <b className={ `text-primary-400` }>BH8GA</b>，QTH 位于重庆 (
               <span className={ 'text-primary-400' }>OL39</span>
               )，一座美丽的山城。我是一名独立前端开发者（在校），开发了一些有趣的东西，目前在维护&nbsp;
               <a className={ 'font-bold text-primary-400' } href="https://ham-dev.c5r.app/">HAM set</a>、

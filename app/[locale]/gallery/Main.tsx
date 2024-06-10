@@ -4,7 +4,7 @@ import '../page.scss'
 import { noto_sc, pacifico, saira } from '@/app/[locale]/fonts'
 import { Image } from '@nextui-org/image'
 import {
-  Chip,
+  Chip, Spinner,
   useDisclosure,
 } from '@nextui-org/react'
 import { useTranslations } from 'next-intl'
@@ -86,16 +86,24 @@ export const Main = () => {
         </div>
 
         <div className={ `container xl:max-w-[1280px] p-4 md:p-0 md:pt-8 space-y-12 ${ saira.className }` }>
-          <div className={ 'grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-8' }>
+          { !cards
+            ? (
+              <div className={ 'flex justify-center items-center h-48' }>
+                <Spinner size={ 'lg' }/>
+              </div>
+            )
+            : (
+              <div className={ 'grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-8' }>
+                { cards?.map((card: CardDesign) => (
+                  <QSLDesign
+                    key={ card.id }
+                    card={ card }
+                  />
+                )) }
+              </div>
+            )
+          }
 
-            { cards?.map((card: CardDesign) => (
-              <QSLDesign
-                key={ card.id }
-                card={ card }
-              />
-            )) }
-
-          </div>
         </div>
       </main>
     </>

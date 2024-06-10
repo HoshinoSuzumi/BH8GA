@@ -2,8 +2,6 @@
 
 import { createKysely } from '@vercel/postgres-kysely'
 import { DB, GaCardDesigns } from 'kysely-codegen'
-import { Selectable, Simplify } from 'kysely'
-import { auth } from '@/auth'
 
 const db = createKysely<DB>()
 
