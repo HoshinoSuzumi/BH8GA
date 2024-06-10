@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { changeCardDesignStatus, fetchCardDesigns, newCardDesign } from '@/app/actions/card'
+import { changeCardDesignStatus, fetchCardDesigns, newCardDesign, updateCardDesign } from '@/app/actions/card'
 import { auth } from '@/auth'
 
 export const GET = auth(async function GET(
@@ -17,6 +17,22 @@ export const POST = auth(async function POST(
   }
   const card = await req.json()
   await newCardDesign(card)
+  return NextResponse.json(null, { status: 201 })
+})
+
+export const PUT = auth(async function PUT(
+  req: NextRequest & { auth?: any },
+) {
+  if (!req.auth) {
+    return NextResponse.json(null, { status: 401 })
+  }
+  const searchParams = req.nextUrl.searchParams
+  const id = searchParams.get('id')
+  if (!id) {
+    return NextResponse.json(null, { status: 400 })
+  }
+  const card = await req.json()
+  await updateCardDesign(id, card)
   return NextResponse.json(null, { status: 201 })
 })
 

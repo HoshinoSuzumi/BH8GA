@@ -17,7 +17,7 @@ import TablerPlus from '@/components/Icons/TablerPlus'
 import { ChangeEvent, FormEvent, Key, useCallback, useMemo, useState } from 'react'
 import TablerSearch from '@/components/Icons/TablerSearch'
 import { ChevronDownIcon } from '@nextui-org/shared-icons'
-import { CardDesign, NewCardDesign } from '@/app/actions/types'
+import { CardDesign, CardDesignUpdate, NewCardDesign } from '@/app/actions/types'
 import useSWR from 'swr'
 import dayjs from '@/app/dayjs'
 import TablerDotsVertical from '@/components/Icons/TablerDotsVertical'
@@ -33,6 +33,7 @@ import TablerPlayerStop from '@/components/Icons/TablerPlayerStop'
 export default function Main() {
   const { isOpen, onOpen, onOpenChange, onClose } = useDisclosure()
   const [formData, setFormData] = useState({} as NewCardDesign)
+  const [isEdit, setIsEdit] = useState(false)
 
   const onChange = (event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = event.target
@@ -184,7 +185,7 @@ export default function Main() {
         </div>
       </div>
     )
-  }, [data?.length, onRowsPerPageChange, statusFilter, statusOptions])
+  }, [data?.length, onOpen, onRowsPerPageChange, statusFilter, statusOptions])
 
   const onAction = useCallback((key: Key) => {
   }, [])
@@ -195,7 +196,40 @@ export default function Main() {
     }).then(res => res.json()).then(async () => {
       await mutate()
     })
-  }, [])
+  }, [mutate])
+
+  const onEdit = useCallback((id: CardDesign['id'], card: CardDesignUpdate) => {
+    fetch(`/api/card/design?id=${ id }`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(card),
+    }).then(res => res.json()).then(async () => {
+      setFormData({} as NewCardDesign)
+      setIsEdit(false)
+      onClose()
+      await mutate()
+    })
+  }, [mutate, onClose])
+
+  const onSubmit = (e: FormEvent<HTMLDivElement>) => {
+    e.preventDefault()
+    fetch('/api/card/design', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        ...formData,
+        id: uuidv4(),
+      }),
+    }).then(res => res.json()).then(async () => {
+      setFormData({} as NewCardDesign)
+      onClose()
+      await mutate()
+    })
+  }
 
   const renderCell = useCallback((item: CardDesign, columnKey: Key) => {
     const cellValue = item[columnKey as keyof CardDesign]
@@ -203,6 +237,7 @@ export default function Main() {
       case 'image':
         return (
           <Image
+            alt={ item.name || '' }
             radius={ 'sm' }
             className={ 'h-20 hidden md:block' }
             src={ cellValue as string }
@@ -280,6 +315,16 @@ export default function Main() {
                 </DropdownSection>
                 <DropdownItem
                   startContent={ <TablerEdit className={ iconClasses }/> }
+                  onPress={ () => {
+                    setFormData({
+                      id: item.id,
+                      name: item.name,
+                      description: item.description,
+                      image: item.image,
+                    } as NewCardDesign)
+                    setIsEdit(true)
+                    onOpen()
+                  } }
                 >
                   编辑
                 </DropdownItem>
@@ -304,25 +349,7 @@ export default function Main() {
       default:
         return `${ cellValue }`
     }
-  }, [])
-
-  const onSubmit = (e: FormEvent<HTMLDivElement>) => {
-    e.preventDefault()
-    fetch('/api/card/design', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        ...formData,
-        id: uuidv4(),
-      }),
-    }).then(res => res.json()).then(async () => {
-      setFormData({} as NewCardDesign)
-      onClose()
-      await mutate()
-    })
-  }
+  }, [onAction, onChangeCardStatus, statusColorMap, statusTipMap])
 
   return (
     <>
@@ -371,16 +398,31 @@ export default function Main() {
         size={ 'xl' }
         hideCloseButton
         isOpen={ isOpen }
-        onOpenChange={ onOpenChange }
+        onOpenChange={ () => {
+          onOpenChange()
+          setIsEdit(false)
+          setFormData({} as NewCardDesign)
+        } }
       >
         <ModalContent
           as={ 'form' }
-          onSubmit={ onSubmit }
+          onSubmit={
+            isEdit
+              ? (e) => {
+                e.preventDefault()
+                onEdit(
+                  formData.id as string,
+                  formData as CardDesignUpdate,
+                )
+              }
+              : onSubmit
+          }
         >
           { onClose => (
             <>
               <ModalHeader className="flex flex-col gap-1">
-                <h1>创建新的卡面</h1>
+                <h1>{ isEdit ? '编辑卡面信息' : '创建新的卡面' }</h1>
+                { isEdit && <p className="text-xs font-semibold text-primary-500">ID: { formData.id }</p> }
               </ModalHeader>
               <ModalBody>
                 <Input
@@ -417,10 +459,11 @@ export default function Main() {
                   className={ 'w-full' }
                   color="primary"
                   size={ 'md' }
-                  startContent={ <TablerPlus className={ 'text-lg' }/> }
+                  startContent={ isEdit ? <TablerEdit className={ 'text-lg' }/> :
+                    <TablerPlus className={ 'text-lg' }/> }
                   type={ 'submit' }
                 >
-                  创建
+                  { isEdit ? '编辑' : '创建' }
                 </Button>
               </ModalFooter>
             </>
