@@ -23,20 +23,22 @@ import TablerGift from '@/components/Icons/TablerGift'
 import { useTranslations } from 'next-intl'
 import useSWR from 'swr'
 import { CardDesign } from '@/app/actions/types'
+import { CardDetail } from '@/components/CardDetail'
 
 const QSLDesign = ({
-  cardFace,
-  onClick,
+  card,
 }: {
-  cardFace: CardDesign,
-  onClick?: () => void
+  card: CardDesign,
 }) => {
+  const { isOpen, onOpen, onClose } = useDisclosure()
+
   return (
-    <div
-      className={ 'w-full aspect-[14/9] cursor-zoom-in relative' }
-      onClick={ onClick }
-    >
-      <div className={ 'absolute top-1 right-2 z-20' }>
+    <>
+      <div
+        className={ 'w-full aspect-[14/9] cursor-zoom-in relative' }
+        onClick={ onOpen }
+      >
+        <div className={ 'absolute top-1 right-2 z-20' }>
         <span
           className={ `text-xl text-primary-400 dark:text-primary-500 font-bold drop-shadow-lg` }
         >
@@ -49,23 +51,24 @@ const QSLDesign = ({
               content: `drop-shadow shadow-black text-white font-medium`,
             } }
           >
-            #{ cardFace.no as unknown as string || 'N/A' }
+            #{ card.no as unknown as string || 'N/A' }
           </Chip>
         </span>
+        </div>
+        <Image
+          src={ card.image }
+          alt={ card.name || 'QSL Image' }
+          className={ 'object-cover w-full h-full rounded-lg' }
+          isBlurred
+        />
       </div>
-      <Image
-        src={ cardFace.image }
-        alt={ cardFace.name || 'QSL Image' }
-        className={ 'object-cover w-full h-full rounded-lg' }
-        isBlurred
-      />
-    </div>
+      <CardDetail key={ card.no } card={ card } isOpen={ isOpen } onClose={ onClose }/>
+    </>
   )
 }
 
 export const Main = () => {
   const t = useTranslations()
-  const { isOpen, onOpen, onClose } = useDisclosure()
   const {
     isOpen: isExOpen,
     onOpen: onExOpen,
@@ -110,97 +113,96 @@ export const Main = () => {
             { cards?.map((card: CardDesign) => (
               <QSLDesign
                 key={ card.id }
-                cardFace={ card }
-                onClick={ onOpen }
+                card={ card }
               />
             )) }
 
           </div>
         </div>
       </main>
-      <Modal
-        size={ '3xl' }
-        hideCloseButton
-        isOpen={ isOpen }
-        onClose={ onClose }
-      >
-        <ModalContent>
-          { onClose => (
-            <>
-              <ModalHeader className="flex flex-col gap-1">
-                {/*Ryo Yamada*/ }
-              </ModalHeader>
-              <ModalBody>
-                <div className={ 'grid grid-cols-1 sm:grid-cols-2 gap-6' }>
-                  <div className={ 'flex justify-center items-start' }>
-                    <Image
-                      src={ '/qsl/QSL_H_RyoYamada.png' }
-                      alt={ 'Ryo Yamada' }
-                      className={ 'w-full aspect-[14/9]' }
-                      isBlurred
-                    />
-                  </div>
-                  <Card className={ 'px-4 py-2 md:aspect-[14/9]' }>
-                    <ul className={ `grid grid-cols-2 gap-3 ${ noto_sc.className }` }>
-                      <li className={ 'col-span-2' }>
-                        <h2 className={ 'text-xs font-bold text-primary-500' }>
-                          卡面 <span className={ `text-sm ${ saira.className }` }>#2</span>
-                        </h2>
-                        <p className={ 'text-sm font-semibold' }>
-                          Ryo Yamada
-                        </p>
-                      </li>
-                      <li>
-                        <h2 className={ 'text-xs font-bold text-primary-500' }>
-                          启用日期
-                        </h2>
-                        <p className={ `text-sm font-medium ${ saira.className }` }>
-                          2024/06/04
-                        </p>
-                      </li>
-                      <li>
-                        <h2 className={ 'text-xs font-bold text-primary-500' }>
-                          印刷批次 / 张数
-                        </h2>
-                        <p className={ `text-sm font-medium ${ saira.className }` }>
-                          1 / 100
-                        </p>
-                      </li>
-                      <li className={ 'col-span-2 relative overflow-hidden' }>
-                        <h2 className={ 'text-xs font-bold text-primary-500' }>
-                          描述
-                        </h2>
-                        <p className={ 'text-sm' }>
-                          这里写对这张卡片的描述
-                        </p>
-                      </li>
-                    </ul>
-                  </Card>
-                </div>
-              </ModalBody>
-              <ModalFooter className={ 'justify-between md:justify-start' }>
-                <Button
-                  className={ 'w-full' }
-                  variant="flat"
-                  size={ 'md' }
-                  onPress={ onClose }
-                >
-                  关闭
-                </Button>
-                <Button
-                  className={ 'w-full' }
-                  color="primary"
-                  size={ 'md' }
-                  onPress={ onExOpenChange }
-                  startContent={ <TablerCards className={ 'text-lg' }/> }
-                >
-                  换卡请求
-                </Button>
-              </ModalFooter>
-            </>
-          ) }
-        </ModalContent>
-      </Modal>
+      {/*<Modal*/ }
+      {/*  size={ '3xl' }*/ }
+      {/*  hideCloseButton*/ }
+      {/*  isOpen={ isOpen }*/ }
+      {/*  onClose={ onClose }*/ }
+      {/*>*/ }
+      {/*  <ModalContent>*/ }
+      {/*    { onClose => (*/ }
+      {/*      <>*/ }
+      {/*        <ModalHeader className="flex flex-col gap-1">*/ }
+      {/*          /!*Ryo Yamada*/ }
+      {/*        </ModalHeader>*/ }
+      {/*        <ModalBody>*/ }
+      {/*          <div className={ 'grid grid-cols-1 sm:grid-cols-2 gap-6' }>*/ }
+      {/*            <div className={ 'flex justify-center items-start' }>*/ }
+      {/*              <Image*/ }
+      {/*                src={ '/qsl/QSL_H_RyoYamada.png' }*/ }
+      {/*                alt={ 'Ryo Yamada' }*/ }
+      {/*                className={ 'w-full aspect-[14/9]' }*/ }
+      {/*                isBlurred*/ }
+      {/*              />*/ }
+      {/*            </div>*/ }
+      {/*            <Card className={ 'px-4 py-2 md:aspect-[14/9]' }>*/ }
+      {/*              <ul className={ `grid grid-cols-2 gap-3 ${ noto_sc.className }` }>*/ }
+      {/*                <li className={ 'col-span-2' }>*/ }
+      {/*                  <h2 className={ 'text-xs font-bold text-primary-500' }>*/ }
+      {/*                    卡面 <span className={ `text-sm ${ saira.className }` }>#2</span>*/ }
+      {/*                  </h2>*/ }
+      {/*                  <p className={ 'text-sm font-semibold' }>*/ }
+      {/*                    Ryo Yamada*/ }
+      {/*                  </p>*/ }
+      {/*                </li>*/ }
+      {/*                <li>*/ }
+      {/*                  <h2 className={ 'text-xs font-bold text-primary-500' }>*/ }
+      {/*                    启用日期*/ }
+      {/*                  </h2>*/ }
+      {/*                  <p className={ `text-sm font-medium ${ saira.className }` }>*/ }
+      {/*                    2024/06/04*/ }
+      {/*                  </p>*/ }
+      {/*                </li>*/ }
+      {/*                <li>*/ }
+      {/*                  <h2 className={ 'text-xs font-bold text-primary-500' }>*/ }
+      {/*                    印刷批次 / 张数*/ }
+      {/*                  </h2>*/ }
+      {/*                  <p className={ `text-sm font-medium ${ saira.className }` }>*/ }
+      {/*                    1 / 100*/ }
+      {/*                  </p>*/ }
+      {/*                </li>*/ }
+      {/*                <li className={ 'col-span-2 relative overflow-hidden' }>*/ }
+      {/*                  <h2 className={ 'text-xs font-bold text-primary-500' }>*/ }
+      {/*                    描述*/ }
+      {/*                  </h2>*/ }
+      {/*                  <p className={ 'text-sm' }>*/ }
+      {/*                    这里写对这张卡片的描述*/ }
+      {/*                  </p>*/ }
+      {/*                </li>*/ }
+      {/*              </ul>*/ }
+      {/*            </Card>*/ }
+      {/*          </div>*/ }
+      {/*        </ModalBody>*/ }
+      {/*        <ModalFooter className={ 'justify-between md:justify-start' }>*/ }
+      {/*          <Button*/ }
+      {/*            className={ 'w-full' }*/ }
+      {/*            variant="flat"*/ }
+      {/*            size={ 'md' }*/ }
+      {/*            onPress={ onClose }*/ }
+      {/*          >*/ }
+      {/*            关闭*/ }
+      {/*          </Button>*/ }
+      {/*          <Button*/ }
+      {/*            className={ 'w-full' }*/ }
+      {/*            color="primary"*/ }
+      {/*            size={ 'md' }*/ }
+      {/*            onPress={ onExOpenChange }*/ }
+      {/*            startContent={ <TablerCards className={ 'text-lg' }/> }*/ }
+      {/*          >*/ }
+      {/*            换卡请求*/ }
+      {/*          </Button>*/ }
+      {/*        </ModalFooter>*/ }
+      {/*      </>*/ }
+      {/*    ) }*/ }
+      {/*  </ModalContent>*/ }
+      {/*</Modal>*/ }
       <Modal
         size={ 'lg' }
         isOpen={ isExOpen }

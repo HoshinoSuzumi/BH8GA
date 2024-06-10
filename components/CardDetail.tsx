@@ -19,13 +19,18 @@ import TablerUser from '@/components/Icons/TablerUser'
 import TablerDeviceMobile from '@/components/Icons/TablerDeviceMobile'
 import TablerMailPin from '@/components/Icons/TablerMailPin'
 import TablerMailFast from '@/components/Icons/TablerMailFast'
+import { CardDesign } from '@/app/actions/types'
 
 export const CardDetail = ({
   card,
+  isOpen,
+  onClose,
 }: {
-  card: QSLFace
+  card: CardDesign
+  isOpen: boolean
+  onClose: () => void
 }) => {
-  const { isOpen, onOpen, onClose } = useDisclosure()
+  // const { isOpen, onOpen, onClose } = useDisclosure()
   const {
     isOpen: isExOpen,
     onOpen: onExOpen,
@@ -40,6 +45,7 @@ export const CardDetail = ({
         hideCloseButton
         isOpen={ isOpen }
         onClose={ onClose }
+        className={ saira.className }
       >
         <ModalContent>
           { onClose => (
@@ -51,35 +57,35 @@ export const CardDetail = ({
                 <div className={ 'grid grid-cols-1 sm:grid-cols-2 gap-6' }>
                   <div className={ 'flex justify-center items-start' }>
                     <Image
-                      src={ '/qsl/QSL_H_RyoYamada.png' }
-                      alt={ 'Ryo Yamada' }
+                      src={ card.image }
+                      alt={ card.name }
                       className={ 'w-full aspect-[14/9]' }
                       isBlurred
                     />
                   </div>
                   <Card className={ 'px-4 py-2 md:aspect-[14/9]' }>
-                    <ul className={ `grid grid-cols-2 gap-3 ${ noto_sc.className }` }>
+                    <ul className={ `grid grid-cols-2 gap-3` }>
                       <li className={ 'col-span-2' }>
                         <h2 className={ 'text-xs font-bold text-primary-500' }>
-                          卡面 <span className={ `text-sm ${ saira.className }` }>#2</span>
+                          卡面 <span className={ `text-sm` }>#{ card.no }</span>
                         </h2>
                         <p className={ 'text-sm font-semibold' }>
-                          Ryo Yamada
+                          { card.name }
                         </p>
                       </li>
                       <li>
                         <h2 className={ 'text-xs font-bold text-primary-500' }>
                           启用日期
                         </h2>
-                        <p className={ `text-sm font-medium ${ saira.className }` }>
-                          2024/06/04
+                        <p className={ `text-sm font-medium` }>
+                          { card.create_at.toString() }
                         </p>
                       </li>
                       <li>
                         <h2 className={ 'text-xs font-bold text-primary-500' }>
                           印刷批次 / 张数
                         </h2>
-                        <p className={ `text-sm font-medium ${ saira.className }` }>
+                        <p className={ `text-sm font-medium` }>
                           1 / 100
                         </p>
                       </li>
@@ -88,7 +94,7 @@ export const CardDetail = ({
                           描述
                         </h2>
                         <p className={ 'text-sm' }>
-                          这里写对这张卡片的描述
+                          { card.description }
                         </p>
                       </li>
                     </ul>
@@ -123,6 +129,7 @@ export const CardDetail = ({
         isOpen={ isExOpen }
         backdrop={ 'blur' }
         onOpenChange={ onExOpenChange }
+        className={saira.className}
       >
         <ModalContent>
           { (onClose) => (
@@ -130,15 +137,14 @@ export const CardDetail = ({
               <ModalHeader className="flex flex-col gap-1">
                 <h1>与 BH8GA 换卡</h1>
                 <p
-                  className={ `text-xs font-semibold flex items-center gap-0.5 text-primary-500 ${ noto_sc.className }` }>
+                  className={ `text-xs font-semibold flex items-center gap-0.5 text-primary-500` }>
                   <TablerGift className={ 'inline text-base' }/>
-                  卡面: Ryo Yamada
+                  卡面: { card.name }
                 </p>
               </ModalHeader>
               <ModalBody>
                 <div className="flex justify-between gap-2">
                   <Input
-                    autoFocus
                     endContent={
                       <TablerId className="text-2xl text-default-400 pointer-events-none flex-shrink-0"/>
                     }
@@ -174,14 +180,12 @@ export const CardDetail = ({
                 <Button variant="flat" onPress={ onClose }>
                   取消
                 </Button>
-                <Tooltip color={ 'foreground' } content={ '暂未开放此处换卡' }>
-                  <Button
-                    color="primary"
-                    startContent={ <TablerMailFast className={ 'text-lg' }/> }
-                  >
-                    提交
-                  </Button>
-                </Tooltip>
+                <Button
+                  color="primary"
+                  startContent={ <TablerMailFast className={ 'text-lg' }/> }
+                >
+                  提交
+                </Button>
               </ModalFooter>
             </>
           ) }
