@@ -21,15 +21,14 @@ import TablerUser from '@/components/Icons/TablerUser'
 import TablerMailFast from '@/components/Icons/TablerMailFast'
 import TablerGift from '@/components/Icons/TablerGift'
 import { useTranslations } from 'next-intl'
-import { QSLFace } from '@/types'
 import useSWR from 'swr'
-import { GaCardDesigns } from 'kysely-codegen'
+import { CardDesign } from '@/app/actions/types'
 
 const QSLDesign = ({
   cardFace,
   onClick,
 }: {
-  cardFace: GaCardDesigns,
+  cardFace: CardDesign,
   onClick?: () => void
 }) => {
   return (
@@ -76,27 +75,10 @@ export const Main = () => {
 
   const {
     data: cards,
-  } = useSWR<GaCardDesigns[]>('/api/card/design', async () => {
+  } = useSWR<CardDesign[]>('/api/card/design', async () => {
     const response = await fetch('/api/card/design')
     return response.json()
   })
-
-  // const cards: QSLFace[] = [
-  //   {
-  //     no: 2,
-  //     id: 'card2',
-  //     name: 'Ryo Yamada',
-  //     description: '这里写对这张卡片的描述',
-  //     image: '/qsl/QSL_H_RyoYamada.png',
-  //   },
-  //   {
-  //     no: 1,
-  //     id: 'card1',
-  //     name: 'Earth Horizon',
-  //     description: '这里写对这张卡片的描述',
-  //     image: '/qsl/QSL_H_EarthHorizon.png',
-  //   },
-  // ]
 
   return (
     <>
@@ -125,7 +107,7 @@ export const Main = () => {
         <div className={ `container xl:max-w-[1280px] p-4 md:p-0 md:pt-8 space-y-12 ${ saira.className }` }>
           <div className={ 'grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-8' }>
 
-            { (cards || []).map((card: GaCardDesigns) => (
+            { cards?.map((card: CardDesign) => (
               <QSLDesign
                 key={ card.id }
                 cardFace={ card }

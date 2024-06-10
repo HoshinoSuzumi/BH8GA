@@ -8,11 +8,30 @@ export const {
   auth,
 } = NextAuth({
   providers: [
-    GitHub,
+    GitHub({
+      profile(profile) {
+        return {
+          id: `${ profile.id }`,
+          name: profile.name,
+          email: profile.email,
+          image: profile.avatar_url,
+        }
+      },
+    }),
   ],
   callbacks: {
+    jwt({ token, user, profile }) {
+      token.id = profile?.id
+      return token
+    },
+    session({ session, token, user }) {
+      if (session.user) {
+        session.user.id = token.id as string
+      }
+      return session
+    },
     signIn({ profile }) {
-      return profile?.email === process.env.ADMIN_EMAIL || false
+      return profile?.id?.toString() === process.env.ADMIN_GITHUB_ID || false
     },
   },
 })

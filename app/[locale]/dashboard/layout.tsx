@@ -1,6 +1,6 @@
 'use client'
 
-import { ReactNode } from 'react'
+import { ReactNode, useEffect } from 'react'
 import { useSession } from 'next-auth/react'
 import { saira } from '@/app/[locale]/fonts'
 
