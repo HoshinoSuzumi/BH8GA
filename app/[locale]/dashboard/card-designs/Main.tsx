@@ -189,7 +189,7 @@ export default function Main() {
         </div>
       </div>
     )
-  }, [data?.length, onOpen, onRowsPerPageChange, statusFilter, statusOptions])
+  }, [data?.length, onOpen, onRowsPerPageChange, statusFilter, statusOptions, t])
 
   const onAction = useCallback((key: Key) => {
   }, [])
@@ -321,6 +321,7 @@ export default function Main() {
                   startContent={ <TablerEdit className={ iconClasses }/> }
                   onPress={ () => {
                     setFormData({
+                      no: item.no,
                       id: item.id,
                       name: item.name,
                       description: item.description,
@@ -353,7 +354,7 @@ export default function Main() {
       default:
         return `${ cellValue }`
     }
-  }, [onAction, onChangeCardStatus, statusColorMap, statusTipMap])
+  }, [onAction, onChangeCardStatus, onOpen, statusColorMap, statusTipMap, t])
 
   return (
     <>
@@ -431,13 +432,25 @@ export default function Main() {
                 { isEdit && <p className="text-xs font-semibold text-primary-500">ID: { formData.id }</p> }
               </ModalHeader>
               <ModalBody>
-                <Input
-                  isRequired
-                  label={ t('title') }
-                  name={ 'name' }
-                  value={ formData.name || '' }
-                  onChange={ onChange }
-                />
+                <div className={ 'flex gap-3' }>
+                  { isEdit && (
+                    <Input
+                      isRequired
+                      label={ 'No.' }
+                      name={ 'no' }
+                      type={ 'number' }
+                      value={ formData.no?.toString() }
+                      onChange={ onChange }
+                    />
+                  ) }
+                  <Input
+                    isRequired
+                    label={ t('title') }
+                    name={ 'name' }
+                    value={ formData.name || '' }
+                    onChange={ onChange }
+                  />
+                </div>
                 <Textarea
                   label={ t('description') }
                   name={ 'description' }
