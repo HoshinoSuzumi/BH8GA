@@ -39,6 +39,23 @@
   "home": {
     "about": "{callsign}について",
     "find_me": "私を見つける",
+    "works": "私が作成しました",
+    "proj": {
+      "me": "独立フロントエンド開発者で、2017年からフロントエンド技術に携わっています。主な技術スタックはVue、React、Nodeで、TypeScriptやSassなどのフロントエンド技術に精通しています。現在も独立開発者としてオープンソースを受け入れ、自分の興味関心のある分野でより良い体験を創り出しています。",
+      "try_it": "試してみる",
+      "ctfever": {
+        "name": "CTFever",
+        "desc": "CTF愛好家や皆さんのための素晴らしいツールキット。",
+        "title1": "初めてのフラグをキャプチャしよう",
+        "title2": "強力なツールキットで強化"
+      },
+      "hamset": {
+        "name": "HAM Set",
+        "desc": "アマチュア無線のための強力なツールキット。",
+        "title1": "プロのHAMになろう",
+        "title2": "HAM SETと共に"
+      }
+    },
     "my_qsl_faces": "QSLカード面を閲覧",
     "my_qsl_count": "{count}枚",
     "bilibili": "ビリビリ"

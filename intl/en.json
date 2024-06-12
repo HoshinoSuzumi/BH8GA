@@ -39,6 +39,23 @@
   "home": {
     "about": "About {callsign}",
     "find_me": "Find Me",
+    "works": "Created by me",
+    "proj": {
+      "me": "Independent front-end developer, engaged in front-end technology since 2017. My main tech stack includes Vue, React, and Node, and I am proficient in front-end technologies such as TypeScript and Sass. As of now, I continue to embrace open source as an independent developer, creating better experiences in my areas of interest.",
+      "try_it": "Try it",
+      "ctfever": {
+        "name": "CTFever",
+        "desc": "Fantastic toolkit for CTFers and everyone.",
+        "title1": "Capture Your First Flag",
+        "title2": "Empowered by powerful toolkit"
+      },
+      "hamset": {
+        "name": "HAM Set",
+        "desc": "Powerful Toolkit for Amateur Radio.",
+        "title1": "Become a Pro HAM",
+        "title2": "With HAM SET"
+      }
+    },
     "my_qsl_faces": "Browse QSL Cards",
     "my_qsl_count": "{count} cards",
     "bilibili": "BiliBili"

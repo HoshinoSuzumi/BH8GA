@@ -14,6 +14,9 @@ import { Link } from '@/navigation'
 import { CardDesign } from '@/app/actions/types'
 import { fetchCardDesigns } from '@/app/actions/card'
 import { card } from '@nextui-org/theme'
+import { CardBody, CardFooter, CardHeader } from '@nextui-org/card'
+import { Avatar, Button, Card } from '@nextui-org/react'
+import { Image } from '@nextui-org/image'
 
 const FloatCard = ({
   label,
@@ -55,7 +58,7 @@ export default function Home({
 }: {
   params: { locale: string }
 }) {
-  const t = useTranslations()
+  const t = useTranslations('home')
   const [cards, setCards] = useState<CardDesign[]>()
 
   useEffect(() => {
@@ -63,7 +66,7 @@ export default function Home({
   }, [])
 
   return (
-    <main className="min-h-screen pt-16 relative">
+    <main className="min-h-screen py-16 relative">
       <div className={ 'w-full h-96 hero' }>
         <div className={ 'w-full h-full flex flex-col justify-center items-center' }>
           <div className={ 'flex flex-col items-center' }>
@@ -88,16 +91,16 @@ export default function Home({
             className={ `text-xl font-medium mb-4 ${ saira.className } relative before:absolute before:block before:content-[''] before:w-1 before:inset-y-1 before:rounded before:bg-primary-400` }
           >
             <span className={ 'pl-2.5' }>
-              { t('home.about', { callsign: 'BH8GA' }) }
+              { t('about', { callsign: 'BH8GA' }) }
             </span>
           </h1>
           <article>
             <FloatCard
               href={ '/gallery' }
               className={ 'mb-4 md:float-end md:ml-6 md:mb-2' }
-              label={ t('home.my_qsl_faces') }
+              label={ t('my_qsl_faces') }
               content={
-                <>{ t('home.my_qsl_count', { count: cards?.filter(card => card.status !== 'disabled').length || '-' }) }</>
+                <>{ t('my_qsl_count', { count: cards?.filter(card => card.status !== 'disabled').length || '-' }) }</>
               }
               icon={
                 <TablerCards
@@ -131,7 +134,7 @@ export default function Home({
             className={ `text-xl font-medium mb-4 ${ saira.className } relative before:absolute before:block before:content-[''] before:w-1 before:inset-y-1 before:rounded before:bg-primary-400` }
           >
             <span className={ 'pl-2.5' }>
-              { t('home.find_me') }
+              { t('find_me') }
             </span>
           </h1>
           <div className={ 'grid grid-cols-2 md:grid-cols-4 gap-4' }>
@@ -147,7 +150,7 @@ export default function Home({
             />
             <ContactCard
               notoFont
-              title={ t('home.bilibili') }
+              title={ t('bilibili') }
               content={ '星野鈴美' }
               href={ 'https://space.bilibili.com/158985588' }
               icon={
@@ -176,6 +179,119 @@ export default function Home({
                 />
               }
             />
+          </div>
+        </section>
+        <section>
+          <h1
+            className={ `text-xl font-medium mb-4 ${ saira.className } relative before:absolute before:block before:content-[''] before:w-1 before:inset-y-1 before:rounded before:bg-primary-400` }
+          >
+            <span className={ 'pl-2.5' }>
+              { t('works') }
+            </span>
+          </h1>
+          <div className={ 'grid grid-cols-12 grid-rows-2 gap-4' }>
+
+            <Card
+              className={ `col-span-12 sm:col-span-5 ${ saira.className }` }
+            >
+              <CardHeader className="justify-between">
+                <div className="flex gap-4">
+                  <Avatar isBordered radius="full" size="md" src="/avatar.jpg"/>
+                  <div className="flex flex-col gap-1 items-start justify-center">
+                    <h4 className="text-small font-semibold leading-none text-default-600">星野鈴美</h4>
+                    <h5 className="text-small tracking-tight text-default-400 leading-none">HoshinoSuzumi</h5>
+                  </div>
+                </div>
+                <Button
+                  startContent={ <TablerBrandGithub className={ 'text-base opacity-60' }/> }
+                  className={ 'bg-transparent text-foreground border-default-200' }
+                  color="primary"
+                  radius="full"
+                  size="sm"
+                  variant={ 'bordered' }
+                  as={ Link }
+                  href={ 'https://github.com/HoshinoSuzumi' }
+                  target={ '_blank' }
+                >
+                  Follow
+                </Button>
+              </CardHeader>
+              <CardBody className="px-3 py-0 pb-2 text-xs text-default-400 text-justify overflow-hidden">
+                <p>{ t('proj.me') }</p>
+              </CardBody>
+            </Card>
+
+            <Card isFooterBlurred className={ `w-full h-full col-span-12 sm:col-span-7 ${ saira.className }` }>
+              <CardHeader className="absolute z-10 top-1 flex-col items-start">
+                <p className="text-tiny text-white/60 uppercase font-bold">{ t('proj.ctfever.title1') }</p>
+                <h4 className="text-white/90 font-medium text-xl">{ t('proj.ctfever.title2') }</h4>
+              </CardHeader>
+              <Image
+                removeWrapper
+                alt="CTFever app background"
+                className="z-0 w-full aspect-[16/9] sm:aspect-[16/7] object-cover"
+                src="/works/ctfever_bg.jpg"
+              />
+              <CardFooter
+                className="absolute bg-black/40 bottom-0 z-10 border-t-1 border-default-600 dark:border-default-100">
+                <div className="flex flex-grow gap-2 items-center">
+                  <Image
+                    alt="CTFever app icon"
+                    className="w-10 h-10"
+                    src="/works/ctfever_icon.png"
+                  />
+                  <div className="flex flex-col">
+                    <p className="text-tiny text-white/80 font-medium">{ t('proj.ctfever.name') }</p>
+                    <p className="text-tiny text-white/60">{ t('proj.ctfever.desc') }</p>
+                  </div>
+                </div>
+                <Button
+                  color={ 'primary' }
+                  className={ `${ noto_sc.className }` }
+                  radius="sm"
+                  size="sm"
+                  as={ Link }
+                  href={ 'https://c5r.app/' }
+                  target={ '_blank' }
+                >
+                  { t('proj.try_it') }
+                </Button>
+              </CardFooter>
+            </Card>
+
+            <Card isFooterBlurred className={ `w-full h-full col-span-12 sm:col-span-7 ${ saira.className }` }>
+              <CardHeader className="absolute z-10 top-1 flex-col items-start">
+                <p className="text-tiny text-white/60 uppercase font-bold">{ t('proj.hamset.title1') }</p>
+                <h4 className="text-white/90 font-medium text-xl">{ t('proj.hamset.title2') }</h4>
+              </CardHeader>
+              <Image
+                removeWrapper
+                alt="CTFever app background"
+                className="z-0 w-full aspect-[16/9] sm:aspect-[16/7] object-cover"
+                src="/works/hamset_bg.jpg"
+              />
+              <CardFooter
+                className="absolute bg-black/40 bottom-0 z-10 border-t-1 border-default-600 dark:border-default-100">
+                <div className="flex flex-grow gap-2 items-center">
+                  <div className="flex flex-col">
+                    <p className="text-tiny text-white/80 font-medium">{ t('proj.hamset.name') }</p>
+                    <p className="text-tiny text-white/60">{ t('proj.hamset.desc') }</p>
+                  </div>
+                </div>
+                <Button
+                  color={ 'primary' }
+                  className={ `${ noto_sc.className }` }
+                  radius="sm"
+                  size="sm"
+                  as={ Link }
+                  href={ 'https://ham-dev.c5r.app/' }
+                  target={ '_blank' }
+                >
+                  { t('proj.try_it') }
+                </Button>
+              </CardFooter>
+            </Card>
+
           </div>
         </section>
       </div>
