@@ -1,8 +1,6 @@
 ---
 title: "博客文章测试"
-date: "2020-03-16T05:35:07.322Z"
-author:
-  name: HoshinoSuzumi
+date: "2024-06-13T20:18:07.322Z"
 ---
 
 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna
@@ -24,4 +22,4 @@ nunc vel. In mollis nunc sed id semper. Egestas tellus rutrum tellus pellentesqu
 ultricies tristique nulla. Quis blandit turpis cursus in hac habitasse platea dictumst quisque. Eros donec ac odio
 tempor orci dapibus ultrices. Aliquam sem et tortor consequat id porta nibh. Adipiscing elit duis tristique sollicitudin
 nibh sit amet commodo nulla. Diam vulputate ut pharetra sit amet. Ut tellus elementum sagittis vitae et leo. Arcu non
-odio euismod lacinia at quis risus sed vulputate.
+odio euismod lacinia at quis risus sed [URL Test](https://baidu.com/).

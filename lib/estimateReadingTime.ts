@@ -1,12 +1,10 @@
 export const estimateReadingTime = (html: string): number => {
-  if (typeof window === 'undefined') {
-    return 0
+  let text = html.replace(/<[^>]+>/g, '')
+  if (typeof window !== 'undefined') {
+    const parser = new DOMParser()
+    const doc = parser.parseFromString(html, 'text/html')
+    text = doc.body.textContent || ''
   }
-
-  const parser = new DOMParser()
-  const doc = parser.parseFromString(html, 'text/html')
-
-  const text = doc.body.textContent || ''
 
   const englishWords = text.match(/[a-zA-Z]+/g) || []
   const chineseCharacters = text.match(/[\u4e00-\u9fa5]/g) || []
