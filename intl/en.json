@@ -37,6 +37,7 @@
     "exchange": {}
   },
   "home": {
+    "my_internet_oasis": "My Internet Oasis",
     "about": "About {callsign}",
     "find_me": "Find Me",
     "works": "Created by me",
@@ -59,6 +60,7 @@
     "blog": {
       "title": "Blog",
       "empty": "No blog posts available at the moment",
+      "post_not_found": "Post could not be found.",
       "mood": "Mood"
     },
     "my_qsl_faces": "Browse QSL Cards",

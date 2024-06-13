@@ -37,6 +37,7 @@
     "exchange": {}
   },
   "home": {
+    "my_internet_oasis": "私のインターネットオアシス",
     "about": "{callsign}について",
     "find_me": "私を見つける",
     "works": "私が作成しました",
@@ -59,6 +60,7 @@
     "blog": {
       "title": "ブログ",
       "empty": "現在公開されている記事はありません",
+      "post_not_found": "記事が見つかりません",
       "mood": "気分"
     },
     "my_qsl_faces": "QSLカード面を閲覧",

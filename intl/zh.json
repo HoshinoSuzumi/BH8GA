@@ -42,6 +42,7 @@
     "exchange": {}
   },
   "home": {
+    "my_internet_oasis": "我的互联网自留地",
     "about": "关于 {callsign}",
     "find_me": "找到我",
     "works": "我创造的",
@@ -64,6 +65,7 @@
     "blog": {
       "title": "博客",
       "empty": "暂时没有内容",
+      "post_not_found": "文章未找到",
       "mood": "心情"
     },
     "my_qsl_faces": "浏览 QSL 卡面",

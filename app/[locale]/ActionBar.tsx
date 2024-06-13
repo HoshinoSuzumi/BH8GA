@@ -6,12 +6,14 @@ import { noto_sc, saira } from '@/app/[locale]/fonts'
 import { Link } from '@/navigation'
 import { LanguageChanger } from '@/components/LanguageChanger'
 import { SignIn } from '@/components/auth-components'
+import { useTranslations } from 'next-intl'
 
 export const ActionBar = ({
   locale,
 }: {
   locale: string
 }) => {
+  const t = useTranslations('home')
   return (
     <header className={ `action-bar ${ noto_sc.className }` }>
       <Link className={ 'flex items-center gap-2 select-none' } href={ '/' }>
@@ -22,7 +24,7 @@ export const ActionBar = ({
             <span className={ 'opacity-50' }>&apos;s values</span>
           </span>
           <span className={ 'text-xs' }>
-            我的互联网自留地
+            { t('my_internet_oasis') }
           </span>
         </h1>
       </Link>

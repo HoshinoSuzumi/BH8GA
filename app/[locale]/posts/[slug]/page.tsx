@@ -1,5 +1,4 @@
 import './page.scss'
-import { notFound } from 'next/navigation'
 import { getPostBySlug } from '@/app/actions/posts'
 import md2html from '@/lib/md2html'
 import { rubik } from '@/app/[locale]/fonts'
@@ -35,6 +34,17 @@ const Mood = () => {
   )
 }
 
+const Translate = ({
+  translateKey,
+}: {
+  translateKey: string
+}) => {
+  'use client'
+
+  const t = useTranslations('home.blog')
+  return t(translateKey)
+}
+
 export default async function Post({
   params,
 }: {
@@ -45,7 +55,15 @@ export default async function Post({
   const post = getPostBySlug(params.slug)
 
   if (!post) {
-    return notFound()
+    return (
+      <div className={
+        'min-h-screen flex items-center justify-center'
+      }>
+        <h1 className={ 'text-2xl font-bold' }>
+          <Translate translateKey={ 'post_not_found' }/>
+        </h1>
+      </div>
+    )
   }
 
   const content = await md2html(post.content)
