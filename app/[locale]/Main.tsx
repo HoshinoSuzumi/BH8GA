@@ -105,7 +105,7 @@ const PostItem = ({
               <TablerExternalLink className={ 'text-lg opacity-60 -mt-0.5 ml-0.5' }/>
             ) }
             <span className={ 'ml-2 text-sm opacity-60' }>
-              { dayjs(post.date).format('MM月DD日') }·{ readingTime }分钟
+              { dayjs(post.date).locale('en').format('MMM D') }·{ readingTime }分钟
             </span>
           </h1>
           { post.excerpt && (
