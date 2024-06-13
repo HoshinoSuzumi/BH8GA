@@ -1,6 +1,5 @@
 'use client'
 
-import '../page.scss'
 import { noto_sc, pacifico, saira } from '@/app/[locale]/fonts'
 import { Image } from '@nextui-org/image'
 import {
@@ -12,6 +11,7 @@ import useSWR from 'swr'
 import { CardDesign } from '@/app/actions/types'
 import { CardDetail } from '@/components/CardDetail'
 import { card } from '@nextui-org/theme'
+import Hero from '@/components/Hero'
 
 const QSLDesign = ({
   card,
@@ -65,26 +65,23 @@ export const Main = () => {
   return (
     <>
       <main className="min-h-screen pt-16 relative">
-        <div className={ 'w-full h-80 md:h-96 hero' }>
-          <div className={ 'w-full h-full flex flex-col justify-center items-center' }>
-            <div className={ 'flex flex-col items-center' }>
-              <h1 className={ `text-4xl md:text-6xl font-bold drop-shadow-lg ${ saira.className }` }>
-                <span className={ 'text-amber-400' }>QSL</span>&nbsp;
-                <span className={ 'text-neutral-600 dark:text-neutral-200' }>
+        <Hero
+          title={
+            <h1 className={ `text-4xl md:text-6xl font-bold drop-shadow-lg ${ saira.className }` }>
+              <span className={ 'text-amber-400' }>QSL</span>&nbsp;
+              <span className={ 'text-neutral-600 dark:text-neutral-200' }>
                   { t('gallery.title') }
                 </span>
-              </h1>
-              <h2 className={ `text-sm font-bold mt-1 ${ saira.className }` }>
-              <span className={ `text-neutral-400 ${ saira.className }` }>
-                { t('gallery.subtitle', { callsign: 'BH8GA' }) }
-              </span>
-              </h2>
-              <h2 className={ `mt-6 text-2xl relative opacity-45 ${ pacifico.className }` }>
-                Let&apos;s get hands dirty
-              </h2>
-            </div>
-          </div>
-        </div>
+            </h1>
+          }
+          subtitle={
+            <h2 className={ `text-sm font-bold mt-1 ${ saira.className }` }>
+                <span className={ `text-neutral-400 ${ saira.className }` }>
+                  { t('gallery.subtitle', { callsign: 'BH8GA' }) }
+                </span>
+            </h2>
+          }
+        />
 
         <div className={ `container xl:max-w-[1280px] p-4 md:p-0 md:pt-8 space-y-12 ${ saira.className }` }>
           { !cards
