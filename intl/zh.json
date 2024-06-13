@@ -61,6 +61,10 @@
         "title2": "与 HAM Set 一起"
       }
     },
+    "blog": {
+      "title": "博客",
+      "empty": "暂时没有内容"
+    },
     "my_qsl_faces": "浏览 QSL 卡面",
     "my_qsl_count": "{count} 张",
     "bilibili": "哔哩哔哩"

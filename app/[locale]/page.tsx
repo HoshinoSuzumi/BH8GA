@@ -1,7 +1,7 @@
 'use client'
 
 import './page.scss'
-import { noto_sc, pacifico, saira } from '@/app/[locale]/fonts'
+import { noto_sc, pacifico, rubik, saira } from '@/app/[locale]/fonts'
 import TablerCards from '@/components/Icons/TablerCards'
 import { ReactNode, useEffect, useState } from 'react'
 import TablerBrandBilibili from '@/components/Icons/TablerBrandBilibili'
@@ -17,6 +17,9 @@ import { card } from '@nextui-org/theme'
 import { CardBody, CardFooter, CardHeader } from '@nextui-org/card'
 import { Avatar, Button, Card } from '@nextui-org/react'
 import { Image } from '@nextui-org/image'
+import TablerArticle from '@/components/Icons/TablerArticle'
+import TablerExternalLink from '@/components/Icons/TablerExternalLink'
+import dayjs from '@/app/dayjs'
 
 const FloatCard = ({
   label,
@@ -53,6 +56,29 @@ const FloatCard = ({
   )
 }
 
+const SectionBlock = ({
+  title,
+  children,
+}: {
+  title?: string
+  children: ReactNode
+}) => {
+  return (
+    <section>
+      { title && (
+        <h1
+          className={ `text-xl font-medium mb-4 ${ saira.className } relative before:absolute before:block before:content-[''] before:w-1 before:inset-y-1 before:rounded before:bg-primary-400` }
+        >
+        <span className={ 'pl-2.5' }>
+          { title }
+        </span>
+        </h1>
+      ) }
+      { children }
+    </section>
+  )
+}
+
 export default function Home({
   params: { locale },
 }: {
@@ -86,14 +112,8 @@ export default function Home({
         </div>
       </div>
       <div className={ `container max-w-[762px] p-4 md:p-0 md:pt-8 space-y-12 ${ noto_sc.className }` }>
-        <section>
-          <h1
-            className={ `text-xl font-medium mb-4 ${ saira.className } relative before:absolute before:block before:content-[''] before:w-1 before:inset-y-1 before:rounded before:bg-primary-400` }
-          >
-            <span className={ 'pl-2.5' }>
-              { t('about', { callsign: 'BH8GA' }) }
-            </span>
-          </h1>
+
+        <SectionBlock title={ t('about', { callsign: 'BH8GA' }) }>
           <article>
             <FloatCard
               href={ '/gallery' }
@@ -128,15 +148,9 @@ export default function Home({
               }
             </p>
           </article>
-        </section>
-        <section>
-          <h1
-            className={ `text-xl font-medium mb-4 ${ saira.className } relative before:absolute before:block before:content-[''] before:w-1 before:inset-y-1 before:rounded before:bg-primary-400` }
-          >
-            <span className={ 'pl-2.5' }>
-              { t('find_me') }
-            </span>
-          </h1>
+        </SectionBlock>
+
+        <SectionBlock title={ t('find_me') }>
           <div className={ 'grid grid-cols-2 md:grid-cols-4 gap-4' }>
             <ContactCard
               title={ 'GitHub' }
@@ -180,15 +194,9 @@ export default function Home({
               }
             />
           </div>
-        </section>
-        <section>
-          <h1
-            className={ `text-xl font-medium mb-4 ${ saira.className } relative before:absolute before:block before:content-[''] before:w-1 before:inset-y-1 before:rounded before:bg-primary-400` }
-          >
-            <span className={ 'pl-2.5' }>
-              { t('works') }
-            </span>
-          </h1>
+        </SectionBlock>
+
+        <SectionBlock title={ t('works') }>
           <div className={ 'grid grid-cols-12 grid-rows-2 gap-4' }>
 
             <Card
@@ -293,7 +301,71 @@ export default function Home({
             </Card>
 
           </div>
-        </section>
+        </SectionBlock>
+
+        {/*<SectionBlock title={ t('blog.title') }>*/ }
+        {/*  <ul className={ `w-full space-y-2 ${ noto_sc.className }` }>*/ }
+
+        {/*    <li*/ }
+        {/*      className={ 'w-full opacity-60 p-2 rounded hover:opacity-100 transition-opacity duration-300' }>*/ }
+        {/*      <Link*/ }
+        {/*        href={ '/blog/2021-10-01' }*/ }
+        {/*        className={ `w-full flex items-start gap-1` }*/ }
+        {/*      >*/ }
+        {/*        <div>*/ }
+        {/*          <h1 className={ 'flex items-center' }>*/ }
+        {/*            博客文章的标题*/ }
+        {/*            <span className={ 'ml-2 text-sm opacity-60' }>6月6日·2分钟</span>*/ }
+        {/*          </h1>*/ }
+        {/*        </div>*/ }
+        {/*      </Link>*/ }
+        {/*    </li>*/ }
+
+        {/*    <li*/ }
+        {/*      className={ 'w-full opacity-60 p-2 rounded hover:opacity-100 transition-opacity duration-300' }>*/ }
+        {/*      <Link*/ }
+        {/*        href={ '/blog/2021-10-01' }*/ }
+        {/*        className={ `w-full flex items-start gap-1` }*/ }
+        {/*      >*/ }
+        {/*        <div>*/ }
+        {/*          <h1 className={ 'flex items-center' }>*/ }
+        {/*            博客文章的标题*/ }
+        {/*            <span className={ 'ml-2 text-sm opacity-60' }>6月6日·2分钟</span>*/ }
+        {/*          </h1>*/ }
+        {/*          <h2 className={ 'leading-none opacity-60 text-xs' }>*/ }
+        {/*            这里可以有一个副标题或者译名之类的*/ }
+        {/*          </h2>*/ }
+        {/*        </div>*/ }
+        {/*      </Link>*/ }
+        {/*    </li>*/ }
+
+        {/*    <li*/ }
+        {/*      className={ 'w-full opacity-60 p-2 rounded hover:opacity-100 transition-opacity duration-300' }>*/ }
+        {/*      <Link*/ }
+        {/*        href={ '/blog/2021-10-01' }*/ }
+        {/*        className={ `w-full flex items-start gap-1` }*/ }
+        {/*      >*/ }
+        {/*        <div>*/ }
+        {/*          <h1 className={ 'flex items-center' }>*/ }
+        {/*            文章可以是外部链接*/ }
+        {/*            <TablerExternalLink className={ 'text-lg opacity-60 -mt-0.5 ml-0.5' }/>*/ }
+        {/*            <span className={ 'ml-2 text-sm opacity-60' }>6月6日·2分钟</span>*/ }
+        {/*          </h1>*/ }
+        {/*        </div>*/ }
+        {/*      </Link>*/ }
+        {/*    </li>*/ }
+
+        {/*  </ul>*/ }
+        {/*</SectionBlock>*/ }
+
+        <SectionBlock>
+          <footer className={ `pl-2 ${ rubik.className }` }>
+            <span className={ 'text-sm opacity-50' }>
+              { dayjs().format('YYYY') } Present &copy; Hoshino Suzumi
+            </span>
+          </footer>
+        </SectionBlock>
+
       </div>
     </main>
   )
