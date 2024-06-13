@@ -28,7 +28,7 @@ export default async function Post({
           <h1 className={ 'max-w-[80%] font-bold text-4xl' }>{ post.title }</h1>
           <p className={ 'mt-2 opacity-40' }>
             <span title={ dayjs(post.date).locale('en').format('dddd, MMMM D, YYYY') }>
-              { dayjs(post.date).locale('en').format('MMM D') }
+              { dayjs(post.date).tz('Asia/Shanghai').locale('en').format('MMM D') }
             </span>
             <span className={ 'px-2' }>·</span>
             <span>
