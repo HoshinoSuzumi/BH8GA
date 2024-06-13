@@ -7,7 +7,7 @@ import TablerBrandGithub from '@/components/Icons/TablerBrandGithub'
 import TablerBrandBilibili from '@/components/Icons/TablerBrandBilibili'
 import TablerBrandSteam from '@/components/Icons/TablerBrandSteam'
 import TablerBrandTelegram from '@/components/Icons/TablerBrandTelegram'
-import { Avatar, Button, Card } from '@nextui-org/react'
+import { Avatar, Button, Card, Tooltip } from '@nextui-org/react'
 import { CardBody, CardFooter, CardHeader } from '@nextui-org/card'
 import { Link } from '@/navigation'
 import { Image } from '@nextui-org/image'
@@ -20,6 +20,7 @@ import { ReactNode, useEffect, useState } from 'react'
 import Hero from '@/components/Hero'
 import { Post } from '@/app/actions/posts'
 import { estimateReadingTime } from '@/lib/estimateReadingTime'
+import TablerBrain from '@/components/Icons/TablerBrain'
 
 const FloatCard = ({
   label,
@@ -86,6 +87,7 @@ const PostItem = ({
   post: Post,
   isExternal?: boolean
 }) => {
+  const t = useTranslations('home.blog')
   const [readingTime, setReadingTime] = useState(0)
   useEffect(() => {
     setReadingTime(estimateReadingTime(post.content))
@@ -93,7 +95,17 @@ const PostItem = ({
 
   return (
     <li
-      className={ 'w-full opacity-60 p-2 rounded hover:opacity-100 transition-opacity duration-300' }>
+      className={ 'w-full opacity-60 p-2 rounded hover:opacity-100 transition-opacity duration-300 relative' }
+    >
+      { post.tag === 'mood' && (
+        <div className={ 'absolute -left-2.5 h-full -mt-[7px] flex items-center' }>
+          <Tooltip content={ t('mood') } placement={ 'left' } size={'sm'}>
+            <div>
+              <TablerBrain className={ 'opacity-50' }/>
+            </div>
+          </Tooltip>
+        </div>
+      ) }
       <Link
         href={ `/posts/${ post.slug }` }
         className={ `w-full flex items-start gap-1` }
@@ -173,7 +185,7 @@ export default function Main({
               非常高兴能够与您在电波中相遇！这里是&nbsp;
               <b className={ `text-primary-400` }>BH8GA</b>，QTH 位于重庆 (
               <span className={ 'text-primary-400' }>OL39</span>
-              )，一座美丽的山城。我是一名独立前端开发者（在校），开发了一些有趣的东西，目前在维护&nbsp;
+              )，一座美丽的山城。我是一名独立前端开发者（在校），开发了一些有趣的东西，喜欢<b>业余无线电</b>通信。目前在维护&nbsp;
               <a className={ 'font-bold text-primary-400' } href="https://ham-dev.c5r.app/">HAM set</a>、
               <a className={ 'font-bold text-primary-400' } href="https://ctfever.uniiem.com/">CTFever</a>，
               这两个项目都是在线工具类网站，前者是一个业余无线电工具箱，包含字母解释法速查、考试题库、卫星数据库和梅登黑德网格定位等功能；后者是为网络安全夺旗赛开发的一站式工具箱。

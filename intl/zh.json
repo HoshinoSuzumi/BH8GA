@@ -46,7 +46,7 @@
     "find_me": "找到我",
     "works": "我创造的",
     "proj": {
-      "me": "独立前端开发者，自 2017 年开始接触前端技术。主要技术栈为 Vue、React、Node，熟悉 TypeScript、Sass 等前端技术。截至目前仍以独立开发者的身份拥抱开源，在自己的兴趣爱好领域中创造更好的体验。",
+      "me": "独立前端开发者，自 2017 年开始接触前端技术。主要技术栈为 Vue、React、Node，熟悉 TypeScript、Sass 等前端技术。截至目前仍以独立开发者的身份拥抱开源，在自己的兴趣爱好领域中创造更好的体验。爱好业余无线电通信，拥有一个特别的呼号：BH8GA，期待与你空中相遇。",
       "try_it": "访问",
       "ctfever": {
         "name": "CTFever",
@@ -63,7 +63,8 @@
     },
     "blog": {
       "title": "博客",
-      "empty": "暂时没有内容"
+      "empty": "暂时没有内容",
+      "mood": "心情"
     },
     "my_qsl_faces": "浏览 QSL 卡面",
     "my_qsl_count": "{count} 张",

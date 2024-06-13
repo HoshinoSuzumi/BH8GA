@@ -3,22 +3,17 @@ import { join } from 'path'
 import matter from 'gray-matter'
 
 export type Post = {
+  tag?: 'mood',
   slug: string;
   title: string;
   date: string;
-  coverImage: string;
-  author: Author;
   excerpt: string;
+  coverImage: string;
   ogImage: {
     url: string;
   };
   content: string;
   preview?: boolean;
-};
-
-export type Author = {
-  name: string;
-  picture: string;
 };
 
 const postsDirectory = join(process.cwd(), '_posts')

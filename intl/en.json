@@ -58,7 +58,8 @@
     },
     "blog": {
       "title": "Blog",
-      "empty": "No blog posts available at the moment"
+      "empty": "No blog posts available at the moment",
+      "mood": "Mood"
     },
     "my_qsl_faces": "Browse QSL Cards",
     "my_qsl_count": "{count} cards",

@@ -19,10 +19,10 @@ export const ActionBar = ({
         <h1 className={ `flex flex-col leading-tight text-xl font-medium ${ saira.className }` }>
           <span>
             <span className={ 'font-bold' }>BH8GA</span>
-            <span className={ 'opacity-50' }>&apos;s RADIO</span>
+            <span className={ 'opacity-50' }>&apos;s values</span>
           </span>
           <span className={ 'text-xs' }>
-            QSL Gallery & Confirms
+            我的互联网自留地
           </span>
         </h1>
       </Link>

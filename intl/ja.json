@@ -58,7 +58,8 @@
     },
     "blog": {
       "title": "ブログ",
-      "empty": "現在公開されている記事はありません"
+      "empty": "現在公開されている記事はありません",
+      "mood": "気分"
     },
     "my_qsl_faces": "QSLカード面を閲覧",
     "my_qsl_count": "{count}枚",

@@ -1,0 +1,6 @@
+.post-prose {
+  @apply prose lg:prose-lg prose-neutral dark:prose-invert max-w-none;
+  @apply prose-headings:font-medium prose-headings:opacity-70;
+  @apply prose-p:opacity-70;
+  @apply prose-a:opacity-100 prose-a:no-underline prose-a:border-b-2 prose-a:border-neutral-300 hover:prose-a:border-neutral-500 prose-a:transition;
+}
