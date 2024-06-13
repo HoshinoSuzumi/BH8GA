@@ -56,6 +56,10 @@
         "title2": "HAM SETと共に"
       }
     },
+    "blog": {
+      "title": "ブログ",
+      "empty": "現在公開されている記事はありません"
+    },
     "my_qsl_faces": "QSLカード面を閲覧",
     "my_qsl_count": "{count}枚",
     "bilibili": "ビリビリ"
