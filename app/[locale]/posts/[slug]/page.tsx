@@ -5,6 +5,22 @@ import { rubik } from '@/app/[locale]/fonts'
 import dayjs from '@/app/dayjs'
 import { estimateReadingTime } from '@/lib/estimateReadingTime'
 
+const Datetime = ({
+  date,
+  isFull = false,
+}: {
+  date: string,
+  isFull?: boolean
+}) => {
+  'use client'
+
+  return (
+    <span title={ dayjs(date).locale('en').format('dddd, MMMM D, YYYY') }>
+      { dayjs(date).locale('en').format('MMM D') }
+    </span>
+  )
+}
+
 export default async function Post({
   params,
 }: {
@@ -27,9 +43,7 @@ export default async function Post({
         <div className={ `pt-6 md:pt-12 ${ rubik.className }` }>
           <h1 className={ 'max-w-[80%] font-bold text-4xl' }>{ post.title }</h1>
           <p className={ 'mt-2 opacity-40' }>
-            <span title={ dayjs(post.date).locale('en').format('dddd, MMMM D, YYYY') }>
-              { dayjs(post.date).tz('Asia/Shanghai').locale('en').format('MMM D') }
-            </span>
+            <Datetime date={ post.date }/>
             <span className={ 'px-2' }>·</span>
             <span>
               { readingTime }min
