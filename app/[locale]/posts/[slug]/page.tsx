@@ -1,10 +1,11 @@
 import './page.scss'
-import { getPostBySlug } from '@/app/actions/posts'
+import { getAllPosts, getPostBySlug } from '@/app/actions/posts'
 import md2html from '@/lib/md2html'
 import { rubik } from '@/app/[locale]/fonts'
 import dayjs from '@/app/dayjs'
 import { estimateReadingTime } from '@/lib/estimateReadingTime'
 import { useTranslations } from 'next-intl'
+import { Metadata } from 'next'
 
 const Datetime = ({
   date,
@@ -45,13 +46,7 @@ const Translate = ({
   return t(translateKey)
 }
 
-export default async function Post({
-  params,
-}: {
-  params: {
-    slug: string;
-  };
-}) {
+export default async function Post({ params }: Params) {
   const post = getPostBySlug(params.slug)
 
   if (!post) {
@@ -92,4 +87,32 @@ export default async function Post({
       </div>
     </div>
   )
+}
+
+type Params = {
+  params: {
+    slug: string;
+  };
+};
+
+export function generateMetadata({ params }: Params): Metadata {
+  const post = getPostBySlug(params.slug)
+
+  const title = `${ post?.title || '文章不存在' } | BH8GA's blog`
+
+  return {
+    title,
+    openGraph: {
+      title,
+      images: [post?.ogImage?.url || ''],
+    },
+  }
+}
+
+export async function generateStaticParams() {
+  const posts = getAllPosts()
+
+  return posts.map((post) => ({
+    slug: post.slug,
+  }))
 }
