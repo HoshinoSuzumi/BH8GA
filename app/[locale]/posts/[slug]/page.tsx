@@ -9,10 +9,8 @@ import { Metadata } from 'next'
 
 const Datetime = ({
   date,
-  isFull = false,
 }: {
   date: string,
-  isFull?: boolean
 }) => {
   'use client'
 
@@ -103,12 +101,4 @@ export function generateMetadata({ params }: Params): Metadata {
   return {
     title,
   }
-}
-
-export async function generateStaticParams() {
-  const posts = getAllPosts()
-
-  return posts.map((post) => ({
-    slug: post.slug,
-  }))
 }
