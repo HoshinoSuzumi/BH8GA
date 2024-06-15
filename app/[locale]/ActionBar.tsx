@@ -16,24 +16,24 @@ export const ActionBar = ({
 }) => {
   const t = useTranslations('home')
   const pathname = usePathname()
-  const [headerExtraClass, setHeaderExtraClass] = useState('')
+  const [hideActionbar, setHideActionbar] = useState(false)
 
   useEffect(() => {
+    let lastScrollTop = 0
     const handleScroll = () => {
-      const scrollY = window.scrollY
-      if (pathname.startsWith('/posts') && scrollY > 0) {
-        setHeaderExtraClass('-translate-y-1/2 opacity-0 pointer-events-none')
-      } else {
-        setHeaderExtraClass('')
-      }
+      const currentScrollTop = window.scrollY || document.documentElement.scrollTop
+      setHideActionbar(pathname.startsWith('/posts') && currentScrollTop > 36 && currentScrollTop > lastScrollTop)
+      lastScrollTop = currentScrollTop
     }
-
+    handleScroll()
     window.addEventListener('scroll', handleScroll)
     return () => window.removeEventListener('scroll', handleScroll)
   }, [pathname])
 
   return (
-    <header className={ `action-bar ${ noto_sc.className } ${ headerExtraClass } transition` }>
+    <header
+      className={ `action-bar ${ noto_sc.className } ${ hideActionbar && '-translate-y-1/2 opacity-0 pointer-events-none' } transition` }
+    >
       <div className={ 'flex justify-between items-center container xl:max-w-[1280px]' }>
         <Link className={ 'flex items-center gap-2 select-none' } href={ '/' }>
           <TablerBuildingBroadcastTower className={ 'text-2xl' }/>

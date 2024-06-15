@@ -86,6 +86,9 @@ importers:
       swr:
         specifier: ^2.2.5
         version: 2.2.5(react@18.3.1)
+      unified:
+        specifier: ^11.0.4
+        version: 11.0.4
     devDependencies:
       '@tailwindcss/typography':
         specifier: ^0.5.13
