@@ -5,3 +5,7 @@
   @apply prose-a:text-default-600 prose-a:no-underline prose-a:border-b-2 prose-a:border-neutral-300 hover:prose-a:border-neutral-500 prose-a:transition;
   @apply prose-img:shadow-lg prose-img:rounded-lg;
 }
+
+.katex-html {
+  @apply hidden;
+}

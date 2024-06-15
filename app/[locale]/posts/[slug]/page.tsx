@@ -1,5 +1,5 @@
 import './page.scss'
-import { getAllPosts, getPostBySlug } from '@/app/actions/posts'
+import { getPostBySlug } from '@/app/actions/posts'
 import md2html from '@/lib/md2html'
 import { rubik } from '@/app/[locale]/fonts'
 import dayjs from '@/app/dayjs'
