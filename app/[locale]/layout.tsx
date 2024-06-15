@@ -44,7 +44,9 @@ export default function RootLayout({
       >
         <Providers>
           <ActionBar locale={ locale }/>
-          { children }
+          <div className={ 'px-0 sm:px-2' }>
+            { children }
+          </div>
         </Providers>
       </NextIntlClientProvider>
     </SessionProvider>

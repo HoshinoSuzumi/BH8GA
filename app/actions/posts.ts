@@ -14,6 +14,7 @@ export type Post = {
   };
   content: string;
   preview?: boolean;
+  external?: boolean;
 };
 
 const postsDirectory = join(process.cwd(), '_posts')

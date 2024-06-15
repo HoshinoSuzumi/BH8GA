@@ -64,7 +64,7 @@ export const Main = () => {
 
   return (
     <>
-      <main className="min-h-screen pt-16 relative">
+      <main className="min-h-screen py-16 relative">
         <Hero
           title={
             <h1 className={ `text-4xl md:text-6xl font-bold drop-shadow-lg ${ saira.className }` }>

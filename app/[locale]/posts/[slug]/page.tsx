@@ -60,7 +60,7 @@ export default async function Post({ params }: Params) {
   }
 
   const content = await md2html(post.content)
-  const readingTime = estimateReadingTime(content)
+  const readingTime = estimateReadingTime(post.content)
 
   return (
     <div className={ 'min-h-screen py-16 relative' }>
