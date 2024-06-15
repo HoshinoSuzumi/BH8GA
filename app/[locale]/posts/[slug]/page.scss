@@ -1,6 +1,6 @@
 .post-prose {
   @apply prose prose-neutral dark:prose-invert max-w-none;
-  @apply prose-headings:font-medium prose-headings:text-default-700;
+  @apply prose-headings:font-medium prose-headings:text-default-700 dark:prose-headings:text-default-600;
   @apply prose-p:text-default-500 prose-strong:text-default-600;
   @apply prose-a:text-default-600 prose-a:no-underline prose-a:border-b-2 prose-a:border-neutral-300 hover:prose-a:border-neutral-500 prose-a:transition;
   @apply prose-img:shadow-lg prose-img:rounded-lg;
