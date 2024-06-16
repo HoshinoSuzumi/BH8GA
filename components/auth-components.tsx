@@ -89,14 +89,14 @@ export function SignIn() {
               >
                 { t('menu.card-designs') }
               </DropdownItem>
-              <DropdownItem
-                as={ Link }
-                href={ '/dashboard/card-stock' }
-                key="card-stock"
-                startContent={ <TablerBoxSeam className={ 'text-lg' }/> }
-              >
-                { t('menu.card-stock') }
-              </DropdownItem>
+              {/*<DropdownItem*/}
+              {/*  as={ Link }*/}
+              {/*  href={ '/dashboard/card-stock' }*/}
+              {/*  key="card-stock"*/}
+              {/*  startContent={ <TablerBoxSeam className={ 'text-lg' }/> }*/}
+              {/*>*/}
+              {/*  { t('menu.card-stock') }*/}
+              {/*</DropdownItem>*/}
               <DropdownItem
                 as={ Link }
                 href={ '/dashboard/exchanges' }

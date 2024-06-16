@@ -5,6 +5,9 @@
     "sign_out": "ログアウト"
   },
   "dash": {
+    "send": {
+      "page_title": "送信"
+    },
     "cards": {
       "page_title": "カードデザイン",
       "enabled": "有効",
@@ -33,7 +36,6 @@
       "create": "作成",
       "cancel": "キャンセル"
     },
-    "stock": {},
     "exchange": {}
   },
   "home": {

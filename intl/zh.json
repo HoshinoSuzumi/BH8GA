@@ -10,6 +10,9 @@
     "sign_out": "退出登录"
   },
   "dash": {
+    "send": {
+      "page_title": "发送卡片"
+    },
     "cards": {
       "page_title": "卡面管理",
       "enabled": "已启用",
@@ -38,7 +41,6 @@
       "create": "创建",
       "cancel": "取消"
     },
-    "stock": {},
     "exchange": {}
   },
   "home": {
