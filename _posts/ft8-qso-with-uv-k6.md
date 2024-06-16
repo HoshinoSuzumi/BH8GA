@@ -17,7 +17,7 @@ FT8 (Franke-Taylor 设计的 8-FSK 调制) 适用于业余无线电通信的一�
 开源固件中的一个，在最近更新的 [0.3Q](https://github.com/phdlee/uvk5cec/releases/tag/v0.3q) 版本开始，支持了 FT8 模式以及与
 WSJT-X 的数字通信。
 
-![CEC 0.3V](/assets/posts/ft8-qso-with-uv-k6/img.png)
+![CEC 0.3V](/assets/posts/ft8-qso-with-uv-k6/downloads.png)
 
 截至这篇文章编写之日，CEC 最新的版本为 0.3V，该版本新增了多数常用的 FT8 频率；更新了 UV-K5 DigiManager，可以直接发送 FT8
 测试数据。下载上图中的 **0.3v.zip**、**UVK5DigManager_v1.0.zip**、**wsjtx-2.6.1-win64_forUVK5.exe**
@@ -29,7 +29,42 @@ WSJT-X 的数字通信。
 我们需要改造或制作一根专用线缆，以实现 WSJT-X 与 UV-K6 之间的数字通信和数据收发。
 
 - 泉盛 UV-K6
-- Kenwood 连接头 (K头)
+- Kenwood 连接头 (K头) 或 3.5mm+2.5mm 三段音频线
 - 3.5mm 4段音频线
 
-> To be written...
+### 接线方式
+
+CEC 给出的线缆接线方案如图，这样制作的线缆是全功能的 CAT 线缆：
+
+![CEC Cable](/assets/posts/ft8-qso-with-uv-k6/cec_cable.png)
+
+实际上使用 FT8 的话，只需要三根线即可，下面是我简化的版本：
+
+![FT8 Cable](/assets/posts/ft8-qso-with-uv-k6/ft8_only_cable.png)
+
+### 成品
+
+制作比较粗糙，功能正常
+
+![Cable](/assets/posts/ft8-qso-with-uv-k6/cable.png)
+
+将引出的红色 RX 线直接链接到 USB 转 TTL 的 TX 脚即可
+
+![Cable](/assets/posts/ft8-qso-with-uv-k6/usb2ttl.png)
+
+## 使用 WSJT-X 进行 FT8 通联
+
+首先将制作好的线连接到 UV-K6，3.5mm 头插入电脑音频麦克风复合口（或分线器），USB 转 TTL 连接到电脑 USB 接口。
+
+解压并打开下载的 **UVK5DigManager_v1.0**，勾选 **"Bridge to WSJT-X"**，选择串口号并连接
+
+![Cable](/assets/posts/ft8-qso-with-uv-k6/digimanager.png)
+
+安装并打开 **WSJT-X**，进入设置，按照下面流程进行设置
+
+![wsjt-x 1](/assets/posts/ft8-qso-with-uv-k6/wsjt-setup1.png)
+![wsjt-x 2](/assets/posts/ft8-qso-with-uv-k6/wsjt-setup2.png)
+![wsjt-x 3](/assets/posts/ft8-qso-with-uv-k6/wsjt-setup3.png)
+![wsjt-x 4](/assets/posts/ft8-qso-with-uv-k6/wsjt-setup4.png)
+
+然后就可以开始愉快的进行 FT8 通联了
