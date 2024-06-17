@@ -60,8 +60,10 @@
       }
     },
     "blog": {
+      "home": "ホーム",
       "title": "ブログ",
       "empty": "現在公開されている記事はありません",
+      "posts_archive": "記事アーカイブ",
       "post_not_found": "記事が見つかりません",
       "mood": "気分"
     },

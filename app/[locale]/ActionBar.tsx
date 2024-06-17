@@ -8,6 +8,8 @@ import { LanguageChanger } from '@/components/LanguageChanger'
 import { SignIn } from '@/components/auth-components'
 import { useTranslations } from 'next-intl'
 import { useEffect, useState } from 'react'
+import TablerArticle from '@/components/Icons/TablerArticle'
+import { Button, Tooltip } from '@nextui-org/react'
 
 export const ActionBar = ({
   locale,
@@ -48,6 +50,19 @@ export const ActionBar = ({
           </h1>
         </Link>
         <div className={ 'flex items-center gap-2' }>
+          <div className={ 'flex items-center' }>
+            <Tooltip content={ t('blog.title') }>
+              <Button
+                variant={ 'light' }
+                as={ Link }
+                href={ '/posts' }
+                isIconOnly
+              >
+                <TablerArticle className={ 'text-xl' }/>
+              </Button>
+            </Tooltip>
+          </div>
+          <div className={ 'h-[20px] w-[2px] rounded-full bg-neutral-300' }></div>
           <SignIn/>
           <LanguageChanger locale={ locale }/>
         </div>

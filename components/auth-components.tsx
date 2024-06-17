@@ -53,14 +53,14 @@ export function SignIn() {
         </form>
       )
       : (
-        <Dropdown placement="bottom" className={ noto_sc.className }>
+        <Dropdown placement="bottom" className={ `${noto_sc.className}` }>
           <DropdownTrigger>
             <Avatar
               isBordered
               size={ 'sm' }
               radius={ 'sm' }
               as="button"
-              className="transition-transform"
+              className="ml-2 transition-transform"
               src={ session.user?.image || void 0 }
             />
           </DropdownTrigger>

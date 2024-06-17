@@ -65,8 +65,10 @@
       }
     },
     "blog": {
+      "home": "首页",
       "title": "博客",
       "empty": "暂时没有内容",
+      "posts_archive": "文章归档",
       "post_not_found": "文章未找到",
       "mood": "心情"
     },

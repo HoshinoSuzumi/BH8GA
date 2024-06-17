@@ -7,7 +7,7 @@ import TablerBrandGithub from '@/components/Icons/TablerBrandGithub'
 import TablerBrandBilibili from '@/components/Icons/TablerBrandBilibili'
 import TablerBrandSteam from '@/components/Icons/TablerBrandSteam'
 import TablerBrandTelegram from '@/components/Icons/TablerBrandTelegram'
-import { Avatar, Button, Card, Chip, Tooltip } from '@nextui-org/react'
+import { Avatar, BreadcrumbItem, Breadcrumbs, Button, Card, Chip, Tooltip } from '@nextui-org/react'
 import { CardBody, CardFooter, CardHeader } from '@nextui-org/card'
 import { Link } from '@/navigation'
 import { Image } from '@nextui-org/image'
@@ -21,6 +21,7 @@ import Hero from '@/components/Hero'
 import { Post } from '@/app/actions/posts'
 import { estimateReadingTime } from '@/lib/estimateReadingTime'
 import TablerBrain from '@/components/Icons/TablerBrain'
+import { PostItem } from '@/components/PostItem'
 
 const FloatCard = ({
   label,
@@ -77,60 +78,6 @@ const SectionBlock = ({
       ) }
       { children }
     </section>
-  )
-}
-
-const PostItem = ({
-  post,
-  isExternal = false,
-}: {
-  post: Post,
-  isExternal?: boolean
-}) => {
-  const t = useTranslations('home.blog')
-  const [readingTime, setReadingTime] = useState(0)
-  useEffect(() => {
-    setReadingTime(estimateReadingTime(post.content))
-  }, [post.content])
-
-  return (
-    <li
-      className={ 'w-full opacity-60 p-2 rounded hover:opacity-100 transition-opacity duration-300 relative' }
-    >
-      { post.tag === 'mood' && (
-        <div className={ 'absolute -left-2.5 h-full -mt-[7px] hidden sm:flex items-center' }>
-          <Tooltip content={ t('mood') } placement={ 'left' } size={ 'sm' }>
-            <div>
-              <TablerBrain className={ 'opacity-50' }/>
-            </div>
-          </Tooltip>
-        </div>
-      ) }
-      <Link
-        href={ `/posts/${ post.slug }` }
-        className={ `w-full flex items-start gap-1` }
-      >
-        <div>
-          <h1 className={ 'flex flex-col sm:flex-row sm:items-center sm:gap-2' }>
-            <span className={ 'flex items-center gap-0.5' }>
-              { post.title }
-              { isExternal && (
-                <TablerExternalLink className={ 'text-lg opacity-60' }/>
-              ) }
-            </span>
-            <span className={ 'text-sm text-neutral-400' }>
-              { dayjs(post.date).tz('Asia/Shanghai').locale('en').format('MMM D') }·{ readingTime }分钟
-              { post.tag === 'mood' && <span className={ 'text-primary-400 inline sm:hidden' }>·{ t('mood') }</span> }
-            </span>
-          </h1>
-          { post.excerpt && (
-            <h2 className={ 'leading-none opacity-60 text-xs' }>
-              { post.excerpt }
-            </h2>
-          ) }
-        </div>
-      </Link>
-    </li>
   )
 }
 
