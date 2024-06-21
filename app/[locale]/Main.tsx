@@ -284,8 +284,16 @@ export default function Main({
         </SectionBlock>
 
         <SectionBlock title={ t('blog.title') }>
-          <ul className={ `w-full space-y-1 ${ noto_sc.className }` }>
-            { posts.map((post, index) => <PostItem post={ post } key={ index } isExternal={ post.external }/>) }
+          <ul className={ `w-full ${ noto_sc.className }` }>
+            { posts.map((post, index) =>
+              <PostItem
+                classNames={'fade-up-in'}
+                style={{ animationDelay: `${ index * 200 }ms` }}
+                post={ post }
+                key={ index }
+                isExternal={ post.external }
+              />
+            ) }
           </ul>
         </SectionBlock>
 

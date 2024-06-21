@@ -1,7 +1,6 @@
 'use client'
 
 import { BreadcrumbItem, Breadcrumbs } from '@nextui-org/react'
-import { Link } from '@/navigation'
 
 export const Breads = ({
   breadcrumbs,
@@ -18,7 +17,6 @@ export const Breads = ({
           ? (
             <BreadcrumbItem
               key={ index }
-              as={ Link }
               href={ breadcrumb.href }
             >
               { breadcrumb.name }

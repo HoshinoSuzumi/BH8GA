@@ -31,11 +31,16 @@ export default function Page({}: {}) {
 
         <div className={ `space-y-12` }>
           { Object.entries(groupedPosts).map(([year, posts]) => (
-            <div key={ year }>
+            <div className={ 'space-y-4' } key={ year }>
               <h2 className={ `text-2xl font-bold mt-8 pl-2 ${ noto_sc.className }` }>{ year }</h2>
-              <ul className={ 'space-y-4' }>
-                { posts.map(post => (
-                  <PostItem key={ post.slug } post={ post }/>
+              <ul className={ '' }>
+                { posts.map((post, index) => (
+                  <PostItem
+                    classNames={ 'fade-up-in' }
+                    style={ { animationDelay: `${ index * 200 }ms` } }
+                    key={ post.slug }
+                    post={ post }
+                  />
                 )) }
               </ul>
             </div>

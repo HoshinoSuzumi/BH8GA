@@ -20,3 +20,20 @@ body {
     text-wrap: balance;
   }
 }
+
+.fade-up-in {
+  opacity: 0;
+  transform: translateY(1rem);
+  animation: fadeUpIn 2s cubic-bezier(0.19, 1, 0.22, 1) forwards;
+}
+
+@keyframes fadeUpIn {
+  from {
+    opacity: 0;
+    transform: translateY(1rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

@@ -2,7 +2,7 @@
 
 import { Post } from '@/app/actions/posts'
 import { useTranslations } from 'next-intl'
-import { useEffect, useState } from 'react'
+import { CSSProperties, useEffect, useState } from 'react'
 import { estimateReadingTime } from '@/lib/estimateReadingTime'
 import { Tooltip } from '@nextui-org/react'
 import TablerBrain from '@/components/Icons/TablerBrain'
@@ -13,9 +13,13 @@ import dayjs from '@/app/dayjs'
 export const PostItem = ({
   post,
   isExternal = false,
+  classNames,
+  style,
 }: {
   post: Post,
   isExternal?: boolean
+  classNames?: string
+  style?: CSSProperties
 }) => {
   const t = useTranslations('home.blog')
   const [readingTime, setReadingTime] = useState(0)
@@ -25,7 +29,8 @@ export const PostItem = ({
 
   return (
     <li
-      className={ 'w-full opacity-60 p-2 rounded hover:opacity-100 transition-opacity duration-300 relative' }
+      style={ style }
+      className={ `w-full text-neutral-400 hover:text-neutral-600 dark:hover:text-neutral-200 px-2 py-1 rounded transition duration-300 relative ${ classNames }` }
     >
       { post.tag === 'mood' && (
         <div className={ 'absolute -left-2.5 h-full -mt-[7px] hidden sm:flex items-center' }>
@@ -48,7 +53,7 @@ export const PostItem = ({
                 <TablerExternalLink className={ 'text-lg opacity-60' }/>
               ) }
             </span>
-            <span className={ 'text-sm text-neutral-400' }>
+            <span className={ 'text-sm text-neutral-300 dark:text-neutral-500' }>
               { dayjs(post.date).tz('Asia/Shanghai').locale('en').format('MMM D') }·{ readingTime }分钟
               { post.tag === 'mood' && <span className={ 'text-primary-400 inline sm:hidden' }>·{ t('mood') }</span> }
             </span>
