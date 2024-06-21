@@ -22,6 +22,8 @@ import { Post } from '@/app/actions/posts'
 import { estimateReadingTime } from '@/lib/estimateReadingTime'
 import TablerBrain from '@/components/Icons/TablerBrain'
 import { PostItem } from '@/components/PostItem'
+import { SectionBlock } from '@/components/SectionBlock'
+import { Footer } from '@/components/Footer'
 
 const FloatCard = ({
   label,
@@ -55,29 +57,6 @@ const FloatCard = ({
         { icon }
       </div>
     </Link>
-  )
-}
-
-const SectionBlock = ({
-  title,
-  children,
-}: {
-  title?: string
-  children: ReactNode
-}) => {
-  return (
-    <section>
-      { title && (
-        <h1
-          className={ `text-xl font-medium mb-4 ${ saira.className } relative before:absolute before:block before:content-[''] before:w-1 before:inset-y-1 before:rounded before:bg-primary-400` }
-        >
-        <span className={ 'pl-2.5' }>
-          { title }
-        </span>
-        </h1>
-      ) }
-      { children }
-    </section>
   )
 }
 
@@ -310,13 +289,7 @@ export default function Main({
           </ul>
         </SectionBlock>
 
-        <SectionBlock>
-          <footer className={ `pl-2 ${ rubik.className }` }>
-            <span className={ 'text-sm opacity-50' }>
-              { dayjs().format('YYYY') } Present &copy; Hoshino Suzumi
-            </span>
-          </footer>
-        </SectionBlock>
+        <Footer />
 
       </div>
     </main>
