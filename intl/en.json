@@ -62,6 +62,7 @@
     "blog": {
       "home": "Home",
       "title": "Blog",
+      "this_article": "This Article",
       "empty": "No blog posts available at the moment",
       "posts_archive": "Posts Archive",
       "post_not_found": "Post could not be found.",

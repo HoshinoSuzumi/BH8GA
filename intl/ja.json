@@ -62,6 +62,7 @@
     "blog": {
       "home": "ホーム",
       "title": "ブログ",
+      "this_article": "この記事",
       "empty": "現在公開されている記事はありません",
       "posts_archive": "記事アーカイブ",
       "post_not_found": "記事が見つかりません",

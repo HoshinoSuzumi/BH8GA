@@ -67,6 +67,7 @@
     "blog": {
       "home": "首页",
       "title": "博客",
+      "this_article": "这篇文章",
       "empty": "暂时没有内容",
       "posts_archive": "文章归档",
       "post_not_found": "文章未找到",

@@ -1,3 +1,20 @@
+.shiki,
+.shiki span {
+  background-color: #f7f7f7 !important;
+}
+
+@media (prefers-color-scheme: dark) {
+  .shiki,
+  .shiki span {
+    color: var(--shiki-dark) !important;
+    background-color: var(--shiki-dark-bg) !important;
+    /* 可选，用于定义字体样式 */
+    font-style: var(--shiki-dark-font-style) !important;
+    font-weight: var(--shiki-dark-font-weight) !important;
+    text-decoration: var(--shiki-dark-text-decoration) !important;
+  }
+}
+
 .post-prose {
   @apply prose prose-neutral dark:prose-invert max-w-none;
   @apply prose-headings:font-medium prose-headings:text-default-700 dark:prose-headings:text-default-600;

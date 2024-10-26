@@ -44,12 +44,14 @@ const Translate = (key: string) => {
 const BreadCrumbs = ({ title }: { title: string }) => {
   'use client'
   return (
-    <Breads breadcrumbs={ [
-      { name: Translate('home'), href: '/' },
-      { name: Translate('title'), href: '/posts' },
-      { name: title },
-    ] }/>
-  )
+    <Breads
+      breadcrumbs={[
+        { name: Translate("home"), href: "/" },
+        { name: Translate("title"), href: "/posts" },
+        { name: Translate("this_article") },
+      ]}
+    />
+  );
 }
 
 export default async function Post({ params }: Params) {
