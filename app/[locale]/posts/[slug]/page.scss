@@ -6,6 +6,42 @@
   @apply prose-img:shadow-md prose-img:rounded-lg prose-img:border prose-img:border-neutral-300 dark:prose-img:border-neutral-700 prose-img:w-full;
 }
 
+.post-prose {
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    @apply relative;
+
+    &:before {
+      content: '#';
+      @apply md:absolute md:block hidden -left-6 text-neutral-200 transition-colors duration-150;
+    }
+
+    &:hover:before {
+      @apply text-neutral-400;
+    }
+  }
+
+  h2 {
+    @apply mt-12 mb-4 text-2xl;
+  }
+
+  h3 {
+    @apply mt-8 mb-2 text-xl;
+  }
+
+  h4 {
+    @apply border-b border-dashed border-neutral-300 dark:border-neutral-700 w-fit;
+
+    &:before {
+      content: '·';
+      @apply text-lg font-black -left-4;
+    }
+  }
+}
+
 .katex-html {
   @apply hidden;
 }
