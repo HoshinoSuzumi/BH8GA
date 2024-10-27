@@ -45,13 +45,13 @@ const BreadCrumbs = ({ title }: { title: string }) => {
   'use client'
   return (
     <Breads
-      breadcrumbs={[
-        { name: Translate("home"), href: "/" },
-        { name: Translate("title"), href: "/posts" },
-        { name: Translate("this_article") },
-      ]}
+      breadcrumbs={ [
+        { name: Translate('home'), href: '/' },
+        { name: Translate('title'), href: '/posts' },
+        { name: Translate('this_article') },
+      ] }
     />
-  );
+  )
 }
 
 export default async function Post({ params }: Params) {
@@ -111,5 +111,8 @@ export function generateMetadata({ params }: Params): Metadata {
 
   return {
     title,
+    other: {
+      'fediverse:creator': '@HoshinoSuzumi@mastodon.uniiem.com',
+    },
   }
 }

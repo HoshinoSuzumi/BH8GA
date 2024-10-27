@@ -34,8 +34,12 @@ export default function RootLayout({
 
   const messages = useMessages()
 
+  // noinspection HtmlRequiredTitleElement
   return (
     <html lang="en" suppressHydrationWarning>
+    <head>
+      <link rel="me" href="https://mastodon.uniiem.com/@HoshinoSuzumi"/>
+    </head>
     <body className={ noto_sc.className }>
     <SessionProvider>
       <NextIntlClientProvider
