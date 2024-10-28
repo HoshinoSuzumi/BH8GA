@@ -32,7 +32,7 @@ export const PostItem = ({
       style={ style }
       className={ `w-full text-neutral-400 hover:text-neutral-600 dark:hover:text-neutral-200 px-2 py-1 rounded transition duration-300 relative ${ classNames }` }
     >
-      { post.tag === 'mood' && (
+      { post.tags?.includes('mood') && (
         <div className={ 'absolute -left-2.5 h-full -mt-[7px] hidden sm:flex items-center' }>
           <Tooltip content={ t('mood') } placement={ 'left' } size={ 'sm' }>
             <div>
@@ -53,9 +53,9 @@ export const PostItem = ({
                 <TablerExternalLink className={ 'text-lg opacity-60' }/>
               ) }
             </span>
-            <span className={ 'text-sm text-neutral-300 dark:text-neutral-500' }>
+            <span className={ 'flex items-center text-sm text-neutral-300 dark:text-neutral-500' }>
               { dayjs(post.date).tz('Asia/Shanghai').locale('en').format('MMM D') }·{ readingTime }分钟
-              { post.tag === 'mood' && <span className={ 'text-primary-400 inline sm:hidden' }>·{ t('mood') }</span> }
+              { post.tags?.includes('mood') && <span className={ 'text-primary-300 dark:text-primary-400 text-xs inline sm:hidden' }>·{ t('mood') }</span> }
             </span>
           </h1>
           { post.excerpt && (

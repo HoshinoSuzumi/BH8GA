@@ -1,6 +1,8 @@
 ---
 title: "UV-K6 基于 CEC 固件进行 FT8 通联"
 date: "2024-06-14T10:18:00.000Z"
+tags:
+  - amateur-radio
 ---
 
 ## 什么是 FT8

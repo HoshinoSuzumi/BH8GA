@@ -22,18 +22,6 @@ const Datetime = ({
   )
 }
 
-const Mood = () => {
-  'use client'
-
-  const t = useTranslations('home.blog')
-  return (
-    <span>
-      <span className={ 'px-2' }>·</span>
-      <span className={ 'text-primary-500' }>{ t('mood') }</span>
-    </span>
-  )
-}
-
 const Translate = (key: string) => {
   'use client'
 
@@ -84,8 +72,17 @@ export default async function Post({ params }: Params) {
             <span>
               { readingTime }min
             </span>
-            { post.tag === 'mood' && (
-              <Mood/>
+            { post.tags && (
+              <span>
+                <span className={ 'px-2' }>·</span>
+                <span className={ 'inline-flex gap-1' }>
+                  { post.tags.map((tag) => (
+                    <span key={ tag } className={ 'font-medium' }>
+                    #{ tag }
+                  </span>
+                  )) }
+                </span>
+              </span>
             ) }
           </p>
         </div>
@@ -104,13 +101,29 @@ type Params = {
   };
 };
 
-export function generateMetadata({ params }: Params): Metadata {
+export async function generateMetadata({ params }: Params): Promise<Metadata> {
   const post = getPostBySlug(params.slug)
+
+  if (!post) {
+    return {
+      title: '文章不存在 | BH8GA\'s blog',
+    }
+  }
+
+  const content = await md2html(post.content)
 
   const title = `${ post?.title || '文章不存在' } | BH8GA's blog`
 
   return {
     title,
+    openGraph: {
+      title,
+      description: post?.excerpt || content.replace(/<[^>]*>/g, '').slice(0, 200),
+      type: 'article',
+      publishedTime: post?.date,
+      modifiedTime: post?.date,
+      tags: post?.tags,
+    },
     other: {
       'fediverse:creator': '@HoshinoSuzumi@mastodon.uniiem.com',
     },

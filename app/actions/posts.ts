@@ -3,7 +3,7 @@ import { join } from 'path'
 import matter from 'gray-matter'
 
 export type Post = {
-  tag?: 'mood',
+  tags?: string[],
   slug: string;
   title: string;
   date: string;
