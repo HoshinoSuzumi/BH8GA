@@ -41,6 +41,7 @@ export default function RootLayout({
       <link rel="me" href="https://mastodon.uniiem.com/@HoshinoSuzumi"/>
     </head>
     <body className={ noto_sc.className }>
+    <a rel="me" href="https://mastodon.uniiem.com/@HoshinoSuzumi" style={ { display: 'none' } }>Mastodon</a>
     <SessionProvider>
       <NextIntlClientProvider
         locale={ locale }
