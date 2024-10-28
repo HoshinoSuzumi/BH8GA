@@ -24,6 +24,7 @@ import TablerBrain from '@/components/Icons/TablerBrain'
 import { PostItem } from '@/components/PostItem'
 import { SectionBlock } from '@/components/SectionBlock'
 import { Footer } from '@/components/Footer'
+import TablerBrandMastodon from '@/components/Icons/TablerBrandMastodon'
 
 const FloatCard = ({
   label,
@@ -169,6 +170,17 @@ export default function Main({
               href={ 'https://t.me/Hoshino_suzumi' }
               icon={
                 <TablerBrandTelegram
+                  className={ 'absolute -right-1 bottom-0 text-primary-800 text-5xl opacity-25' }
+                />
+              }
+            />
+            <ContactCard
+              title={ 'Mastodon' }
+              content={ '@HoshinoSuzumi' }
+              subContent={ '@mastodon.uniiem.com' }
+              href={ 'https://mastodon.uniiem.com/@HoshinoSuzumi' }
+              icon={
+                <TablerBrandMastodon
                   className={ 'absolute -right-1 bottom-0 text-primary-800 text-5xl opacity-25' }
                 />
               }
