@@ -116,6 +116,7 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
 
   return {
     title,
+    metadataBase: new URL('https://bh8.ga'),
     openGraph: {
       title,
       description: post?.excerpt || content.replace(/<[^>]*>/g, '').slice(0, 200),
