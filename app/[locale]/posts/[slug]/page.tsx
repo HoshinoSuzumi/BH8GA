@@ -126,7 +126,7 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
       tags: post?.tags,
     },
     other: {
-      'fediverse:creator': '@HoshinoSuzumi@mastodon.uniiem.com',
+      'fediverse:creator': '@HoshinoSuzumi@uniiem.com',
     },
   }
 }

@@ -177,8 +177,8 @@ export default function Main({
             <ContactCard
               title={ 'Mastodon' }
               content={ '@HoshinoSuzumi' }
-              subContent={ '@mastodon.uniiem.com' }
-              href={ 'https://mastodon.uniiem.com/@HoshinoSuzumi' }
+              subContent={ '@uniiem.com' }
+              href={ 'https://mas.uniiem.com/@HoshinoSuzumi' }
               icon={
                 <TablerBrandMastodon
                   className={ 'absolute -right-1 bottom-0 text-primary-800 text-5xl opacity-25' }
