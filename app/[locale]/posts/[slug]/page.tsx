@@ -7,6 +7,8 @@ import { estimateReadingTime } from '@/lib/estimateReadingTime'
 import { useTranslations } from 'next-intl'
 import { Metadata } from 'next'
 import { Breads } from '@/components/Breads'
+import { Footer } from '@/components/Footer'
+import { MiniLink } from '@/components/MiniLink'
 
 const Datetime = ({
   date,
@@ -61,38 +63,45 @@ export default async function Post({ params }: Params) {
   const readingTime = estimateReadingTime(post.content)
 
   return (
-    <div className={ 'min-h-screen py-16 relative' }>
-      <div className={ `container xl:max-w-[762px] p-4 md:p-0 md:pt-8 space-y-12` }>
-        <div className={ `pt-6 md:pt-12 ${ rubik.className }` }>
-          <BreadCrumbs title={ post.title }/>
-          <h1 className={ 'pt-4 sm:max-w-[80%] opacity-90 font-bold text-4xl' }>{ post.title }</h1>
-          <p className={ 'mt-2 opacity-40' }>
-            <Datetime date={ post.date }/>
-            <span className={ 'px-2' }>·</span>
-            <span>
-              { readingTime }min
-            </span>
-            { post.tags && (
+    <div className={"min-h-screen py-16 relative"}>
+      <div
+        className={`container xl:max-w-[762px] p-4 md:p-0 md:pt-8 space-y-12`}
+      >
+        <div className={`pt-6 md:pt-12 ${rubik.className}`}>
+          <BreadCrumbs title={post.title} />
+          <h1 className={"pt-4 sm:max-w-[80%] opacity-90 font-bold text-4xl"}>
+            {post.title}
+          </h1>
+          <p className={"mt-2 opacity-40"}>
+            <Datetime date={post.date} />
+            <span className={"px-2"}>·</span>
+            <span>{readingTime}min</span>
+            {post.tags && (
               <span>
-                <span className={ 'px-2' }>·</span>
-                <span className={ 'inline-flex gap-1' }>
-                  { post.tags.map((tag) => (
-                    <span key={ tag } className={ 'font-medium' }>
-                    #{ tag }
-                  </span>
-                  )) }
+                <span className={"px-2"}>·</span>
+                <span className={"inline-flex gap-1"}>
+                  {post.tags.map((tag) => (
+                    <span key={tag} className={"font-medium"}>
+                      #{tag}
+                    </span>
+                  ))}
                 </span>
               </span>
-            ) }
+            )}
           </p>
         </div>
         <article
-          className={ `post-prose text-justify ${ rubik.className }` }
-          dangerouslySetInnerHTML={ { __html: content } }
+          className={`post-prose text-justify ${rubik.className}`}
+          dangerouslySetInnerHTML={{ __html: content }}
         />
+        <div className="flex flex-col gap-2">
+          <MiniLink href="/posts">.. back</MiniLink>
+          <MiniLink href="/">/ home</MiniLink>
+          <Footer />
+        </div>
       </div>
     </div>
-  )
+  );
 }
 
 type Params = {

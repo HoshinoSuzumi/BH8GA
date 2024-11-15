@@ -306,7 +306,7 @@ export default function Main({
                 isExternal={ post.external }
               />
             ) }
-            {/* more posts link */}
+            
             <li className={ 'pt-4 w-full text-neutral-400 hover:text-neutral-600 dark:hover:text-neutral-200 px-2 py-1 rounded transition duration-300 relative' }>
               <Link href={ '/posts' } className={ 'w-full flex items-start gap-1' }>
                 <div>
