@@ -36,6 +36,6 @@ export function getPostBySlug(slug: string) {
 export function getAllPosts(): Post[] {
   const slugs = getPostSlugs()
   return slugs
-  .map((slug) => getPostBySlug(slug)!)
-  .sort((post1, post2) => (post1!.date > post2!.date ? 1 : -1))
+    .map((slug) => getPostBySlug(slug)!)
+    .sort((post1, post2) => new Date(post2!.date).getTime() - new Date(post1!.date).getTime())
 }

@@ -12,6 +12,7 @@ import { CardDesign } from '@/app/actions/types'
 import { CardDetail } from '@/components/CardDetail'
 import { card } from '@nextui-org/theme'
 import Hero from '@/components/Hero'
+import { Footer } from '@/components/Footer'
 
 const QSLDesign = ({
   card,
@@ -67,53 +68,51 @@ export const Main = () => {
       <main className="min-h-screen py-16 relative">
         <Hero
           title={
-            <h1 className={ `text-4xl md:text-6xl font-bold drop-shadow-lg ${ saira.className }` }>
-              <span className={ 'text-amber-400' }>QSL</span>&nbsp;
-              <span className={ 'text-neutral-600 dark:text-neutral-200' }>
-                  { t('gallery.title') }
-                </span>
+            <h1
+              className={`text-4xl md:text-6xl font-bold drop-shadow-lg ${saira.className}`}
+            >
+              <span className={"text-amber-400"}>QSL</span>&nbsp;
+              <span className={"text-neutral-600 dark:text-neutral-200"}>
+                {t("gallery.title")}
+              </span>
             </h1>
           }
           subtitle={
-            <h2 className={ `text-sm font-bold mt-1 ${ saira.className }` }>
-                <span className={ `text-neutral-400 ${ saira.className }` }>
-                  { t('gallery.subtitle', { callsign: 'BH8GA' }) }
-                </span>
+            <h2 className={`text-sm font-bold mt-1 ${saira.className}`}>
+              <span className={`text-neutral-400 ${saira.className}`}>
+                {t("gallery.subtitle", { callsign: "BH8GA" })}
+              </span>
             </h2>
           }
         />
 
-        <div className={ `container xl:max-w-[1280px] p-4 md:p-0 md:pt-8 space-y-12 ${ saira.className }` }>
-          { !cards
-            ? (
-              <div className={ 'flex justify-center items-center h-48' }>
-                <Spinner size={ 'lg' }/>
-              </div>
-            )
-            : (
-              cards?.filter(card => card.status !== 'disabled').length === 0
-                ? (
-                  <div className={ 'flex justify-center items-center h-48' }>
-                    <h1 className={ 'text-xl font-semibold' }>
-                      { t('gallery.empty') }
-                    </h1>
-                  </div>
-                )
-                : (
-                  <div className={ 'grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-8' }>
-                    { cards?.filter(card => card.status !== 'disabled').map((card: CardDesign) => (
-                      <QSLDesign
-                        key={ card.id }
-                        card={ card }
-                      />
-                    )) }
-                  </div>
-                )
-            )
-          }
+        <div
+          className={`container xl:max-w-[1280px] p-4 md:p-0 md:pt-8 space-y-12 ${saira.className}`}
+        >
+          {!cards ? (
+            <div className={"flex justify-center items-center h-48"}>
+              <Spinner size={"lg"} />
+            </div>
+          ) : cards?.filter((card) => card.status !== "disabled").length ===
+            0 ? (
+            <div className={"flex justify-center items-center h-48"}>
+              <h1 className={"text-xl font-semibold"}>{t("gallery.empty")}</h1>
+            </div>
+          ) : (
+            <div
+              className={"grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-8"}
+            >
+              {cards
+                ?.filter((card) => card.status !== "disabled")
+                .map((card: CardDesign) => (
+                  <QSLDesign key={card.id} card={card} />
+                ))}
+            </div>
+          )}
 
+          <Footer />
         </div>
       </main>
     </>
-  )
+  );
 }
