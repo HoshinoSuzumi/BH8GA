@@ -529,20 +529,7 @@ export default function Main({
                 key={index}
                 isExternal={post.external}
               />
-            ) }
-            
-            <li className={ 'pt-4 w-full text-neutral-400 hover:text-neutral-600 dark:hover:text-neutral-200 px-2 py-1 rounded transition duration-300 relative' }>
-              <Link href={ '/posts' } className={ 'w-full flex items-start gap-1' }>
-                <div>
-                  <h1 className={ 'flex flex-col sm:flex-row sm:items-center sm:gap-2 border-b-2' }>
-                    <span className={ 'flex items-center gap-0.5 font-sans font-bold text-xs' }>
-                      { t('all_posts') }...
-                    </span>
-                  </h1>
-                </div>
-              </Link>
-            </li>
-
+            ))}
           </ul>
         </SectionBlock>
 
