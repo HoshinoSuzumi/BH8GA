@@ -40,9 +40,10 @@
   },
   "home": {
     "my_internet_oasis": "私のインターネットオアシス",
-    "about": "{callsign}について",
+    "about": "{callsign} について",
     "find_me": "私を見つける",
     "works": "私が作成しました",
+    "footprint": "足跡",
     "proj": {
       "me": "独立フロントエンド開発者で、2017年からフロントエンド技術に携わっています。主な技術スタックはVue、React、Nodeで、TypeScriptやSassなどのフロントエンド技術に精通しています。現在も独立開発者としてオープンソースを受け入れ、自分の興味関心のある分野でより良い体験を創り出しています。",
       "try_it": "試してみる",
@@ -57,6 +58,12 @@
         "desc": "アマチュア無線のための強力なツールキット。",
         "title1": "プロのHAMになろう",
         "title2": "HAM SETと共に"
+      },
+      "rayui": {
+        "name": "Rayine UI",
+        "desc": "Multipurpose customizable UI library.",
+        "title1": "Highly customizable features",
+        "title2": "Build modern web apps"
       }
     },
     "blog": {

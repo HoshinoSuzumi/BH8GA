@@ -48,6 +48,7 @@
     "about": "关于 {callsign}",
     "find_me": "找到我",
     "works": "我创造的",
+    "footprint": "足迹",
     "proj": {
       "me": "独立前端开发者，自 2017 年开始接触前端技术。主要技术栈为 Vue、React、Node，熟悉 TypeScript、Sass 等前端技术。截至目前仍以独立开发者的身份拥抱开源，在自己的兴趣爱好领域中创造更好的体验。爱好业余无线电通信，拥有一个特别的呼号：BH8GA，期待与你空中相遇。",
       "try_it": "访问",
@@ -62,6 +63,12 @@
         "desc": "强大的业余无线电在线工具箱",
         "title1": "成为一名专业的 HAM",
         "title2": "与 HAM Set 一起"
+      },
+      "rayui": {
+        "name": "Rayine UI",
+        "desc": "多用途可配置 UI 组件库",
+        "title1": "高度自定义特性加持",
+        "title2": "构建现代化 Web 应用"
       }
     },
     "blog": {
