@@ -59,7 +59,7 @@ export const PostItem = ({
             </span>
           </h1>
           { post.excerpt && (
-            <h2 className={ 'leading-none opacity-60 text-xs' }>
+            <h2 className={ 'leading-none opacity-60 text-xs line-clamp-1 max-w-xl' }>
               { post.excerpt }
             </h2>
           ) }

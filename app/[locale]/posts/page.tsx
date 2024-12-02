@@ -5,6 +5,7 @@ import { getAllPosts } from '@/app/actions/posts'
 import groupBy from '@/lib/groupBy'
 import dayjs from '@/app/dayjs'
 import { Breads } from '@/components/Breads'
+import { Footer } from '@/components/Footer'
 
 const Translate = (key: string) => {
   'use client'
@@ -30,7 +31,9 @@ export default function Page({}: {}) {
         </div>
 
         <div className={ `space-y-12` }>
-          { Object.entries(groupedPosts).map(([year, posts]) => (
+          { Object.entries(groupedPosts).sort(
+            ([year1], [year2]) => Number(year2) - Number(year1)
+          ).map(([year, posts]) => (
             <div className={ 'space-y-4' } key={ year }>
               <h2 className={ `text-2xl font-bold mt-8 pl-2 ${ noto_sc.className }` }>{ year }</h2>
               <ul className={ '' }>
@@ -45,6 +48,7 @@ export default function Page({}: {}) {
               </ul>
             </div>
           )) }
+          <Footer />
         </div>
 
       </div>

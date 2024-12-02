@@ -44,6 +44,7 @@
     "find_me": "Find Me",
     "works": "Created by me",
     "footprint": "Footprint",
+    "all_posts": "All Posts",
     "proj": {
       "me": "Independent front-end developer, engaged in front-end technology since 2017. My main tech stack includes Vue, React, and Node, and I am proficient in front-end technologies such as TypeScript and Sass. As of now, I continue to embrace open source as an independent developer, creating better experiences in my areas of interest.",
       "try_it": "Try it",
