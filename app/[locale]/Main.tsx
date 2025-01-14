@@ -255,7 +255,7 @@ export default function Main({
                 />
               }
             />
-            <ContactCard
+            {/* <ContactCard
               title={"Telegram"}
               content={"@Hoshino_suzumi"}
               href={"https://t.me/Hoshino_suzumi"}
@@ -266,7 +266,7 @@ export default function Main({
                   }
                 />
               }
-            />
+            /> */}
             <ContactCard
               title={"Mastodon"}
               content={"@HoshinoSuzumi"}
@@ -457,7 +457,7 @@ export default function Main({
           </div>
         </SectionBlock>
 
-        <SectionBlock title={`${t("footprint")} (still WIP 🚧)`}>
+        {/* <SectionBlock title={`${t("footprint")}`}>
           <Map
             mapboxAccessToken="pk.eyJ1IjoiaG9zaGlub3N1enVtaSIsImEiOiJjbHpnMGM3bjExOTJkMmxyeWptYTlrb2tsIn0.0_TJA2LssPSTRf4GxC42ww"
             initialViewState={{
@@ -517,7 +517,7 @@ export default function Main({
               </Marker>
             ))}
           </Map>
-        </SectionBlock>
+        </SectionBlock> */}
 
         <SectionBlock title={t("blog.title")}>
           <ul className={`w-full ${noto_sc.className}`}>
@@ -531,6 +531,17 @@ export default function Main({
               />
             ))}
           </ul>
+        </SectionBlock>
+
+        <SectionBlock title={t("recently_songs")}>
+          <iframe
+            allow="autoplay *; encrypted-media *;"
+            frameBorder="0"
+            height="450"
+            className="w-full overflow-hidden bg-transparent rounded-2xl"
+            sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-storage-access-by-user-activation allow-top-navigation-by-user-activation"
+            src="https://embed.music.apple.com/cn/playlist/%E5%96%9C%E7%88%B1%E7%9A%84%E6%AD%8C%E6%9B%B2/pl.u-m6UzgB883a"
+          ></iframe>
         </SectionBlock>
 
         <Footer />
