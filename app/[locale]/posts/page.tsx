@@ -1,5 +1,5 @@
 import { noto_sc, rubik } from '@/app/[locale]/fonts'
-import { useTranslations } from 'next-intl'
+import { getTranslations } from 'next-intl/server'
 import { PostItem } from '@/components/PostItem'
 import { getAllPosts } from '@/app/actions/posts'
 import groupBy from '@/lib/groupBy'
@@ -7,13 +7,8 @@ import dayjs from '@/app/dayjs'
 import { Breads } from '@/components/Breads'
 import { Footer } from '@/components/Footer'
 
-const Translate = (key: string) => {
-  'use client'
-  const t = useTranslations('home.blog')
-  return t(key)
-}
-
-export default function Page({}: {}) {
+export default async function Page({}: {}) {
+  const t = await getTranslations('home.blog')
   const posts = getAllPosts()
   const groupedPosts = groupBy(posts, p => dayjs(p.date).year())
 
@@ -22,11 +17,11 @@ export default function Page({}: {}) {
       <div className={ `container xl:max-w-[762px] p-4 md:p-0 md:pt-8 space-y-12` }>
         <div className={ `pt-6 md:pt-12 pl-2 ${ rubik.className }` }>
           <Breads breadcrumbs={ [
-            { name: Translate('home'), href: '/' },
-            { name: Translate('title') },
+            { name: t('home'), href: '/' },
+            { name: t('title') },
           ] }/>
           <h1 className={ 'pt-4 sm:max-w-[80%] opacity-90 font-bold text-4xl' }>
-            { Translate('posts_archive') }
+            { t('posts_archive') }
           </h1>
         </div>
 

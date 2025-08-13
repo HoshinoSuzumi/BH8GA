@@ -44,6 +44,7 @@ export const PostItem = ({
       <Link
         href={ `/posts/${ post.slug }` }
         className={ `w-full flex items-start gap-1` }
+        prefetch={ true }
       >
         <div>
           <h1 className={ 'flex flex-col sm:flex-row sm:items-center sm:gap-2' }>

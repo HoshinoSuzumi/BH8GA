@@ -1,5 +1,5 @@
 import './page.scss'
-import { getPostBySlug } from '@/app/actions/posts'
+import { getPostBySlug, getAllPosts } from '@/app/actions/posts'
 import md2html from '@/lib/md2html'
 import { rubik } from '@/app/[locale]/fonts'
 import dayjs from '@/app/dayjs'
@@ -9,14 +9,13 @@ import { Metadata } from 'next'
 import { Breads } from '@/components/Breads'
 import { Footer } from '@/components/Footer'
 import { MiniLink } from '@/components/MiniLink'
+import { getTranslations } from 'next-intl/server'
 
 const Datetime = ({
   date,
 }: {
   date: string,
 }) => {
-  'use client'
-
   return (
     <span title={ dayjs(date).locale('en').format('dddd, MMMM D, YYYY') }>
       { dayjs(date).locale('en').format('MMM D') }
@@ -24,27 +23,8 @@ const Datetime = ({
   )
 }
 
-const Translate = (key: string) => {
-  'use client'
-
-  const t = useTranslations('home.blog')
-  return t(key)
-}
-
-const BreadCrumbs = ({ title }: { title: string }) => {
-  'use client'
-  return (
-    <Breads
-      breadcrumbs={ [
-        { name: Translate('home'), href: '/' },
-        { name: Translate('title'), href: '/posts' },
-        { name: Translate('this_article') },
-      ] }
-    />
-  )
-}
-
 export default async function Post({ params }: Params) {
+  const t = await getTranslations('home.blog')
   const post = getPostBySlug(params.slug)
 
   if (!post) {
@@ -53,7 +33,7 @@ export default async function Post({ params }: Params) {
         'min-h-screen flex items-center justify-center'
       }>
         <h1 className={ 'text-2xl font-bold' }>
-          { Translate('post_not_found') }
+          { t('post_not_found') }
         </h1>
       </div>
     )
@@ -68,7 +48,13 @@ export default async function Post({ params }: Params) {
         className={`container xl:max-w-[762px] p-4 md:p-0 md:pt-8 space-y-12`}
       >
         <div className={`pt-6 md:pt-12 ${rubik.className}`}>
-          <BreadCrumbs title={post.title} />
+          <Breads
+            breadcrumbs={ [
+              { name: t('home'), href: '/' },
+              { name: t('title'), href: '/posts' },
+              { name: t('this_article') },
+            ] }
+          />
           <h1 className={"pt-4 sm:max-w-[80%] opacity-90 font-bold text-4xl"}>
             {post.title}
           </h1>
@@ -109,6 +95,14 @@ type Params = {
     slug: string;
   };
 };
+
+// 生成静态参数
+export async function generateStaticParams() {
+  const posts = getAllPosts()
+  return posts.map((post) => ({
+    slug: post.slug,
+  }))
+}
 
 export async function generateMetadata({ params }: Params): Promise<Metadata> {
   const post = getPostBySlug(params.slug)
