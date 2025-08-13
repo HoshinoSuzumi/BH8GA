@@ -19,4 +19,4 @@ const nextConfig = withNextIntl()({
   swcMinify: true,
 })
 
-export default nextConfig;
+export default nextConfig

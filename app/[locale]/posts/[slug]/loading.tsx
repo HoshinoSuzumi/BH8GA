@@ -4,7 +4,9 @@ import { rubik } from '@/app/[locale]/fonts'
 export default function Loading() {
   return (
     <div className="min-h-screen py-16 relative">
-      <div className={`container xl:max-w-[762px] p-4 md:p-0 md:pt-8 space-y-12`}>
+      <div
+        className={`container xl:max-w-[762px] p-4 md:p-0 md:pt-8 space-y-12`}
+      >
         <div className={`pt-6 md:pt-12 ${rubik.className}`}>
           {/* 骨架屏 */}
           <div className="space-y-4">
@@ -22,7 +24,7 @@ export default function Loading() {
             </div>
           </div>
         </div>
-        
+
         {/* 文章内容骨架屏 */}
         <div className="space-y-4">
           <div className="w-full h-4 bg-neutral-200 dark:bg-neutral-700 rounded animate-pulse"></div>
@@ -31,9 +33,12 @@ export default function Loading() {
           <div className="w-full h-4 bg-neutral-200 dark:bg-neutral-700 rounded animate-pulse"></div>
           <div className="w-3/4 h-4 bg-neutral-200 dark:bg-neutral-700 rounded animate-pulse"></div>
         </div>
-        
+
         <div className="flex flex-col gap-2 items-center">
-          <Spinner size="lg" label="正在加载文章内容..." />
+          <Spinner
+            size="lg"
+            label="正在加载文章内容..."
+          />
         </div>
       </div>
     </div>
