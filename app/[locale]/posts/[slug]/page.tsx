@@ -1,6 +1,7 @@
 import './page.scss'
 import { getPostBySlug } from '@/app/actions/posts'
 import { getCachedMarkdown } from '@/lib/markdownCache'
+import md2html from '@/lib/md2html'
 import { rubik } from '@/app/[locale]/fonts'
 import dayjs from '@/app/dayjs'
 import { useTranslations } from 'next-intl'
