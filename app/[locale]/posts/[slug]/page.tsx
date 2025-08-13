@@ -1,9 +1,8 @@
 import './page.scss'
 import { getPostBySlug } from '@/app/actions/posts'
-import md2html from '@/lib/md2html'
+import { getCachedMarkdown } from '@/lib/markdownCache'
 import { rubik } from '@/app/[locale]/fonts'
 import dayjs from '@/app/dayjs'
-import { estimateReadingTime } from '@/lib/estimateReadingTime'
 import { useTranslations } from 'next-intl'
 import { Metadata } from 'next'
 import { Breads } from '@/components/Breads'
@@ -60,7 +59,8 @@ export default async function Post({ params }: Params) {
   }
 
   const content = await md2html(post.content)
-  const readingTime = estimateReadingTime(post.content)
+  // Use pre-calculated reading time from post metadata
+  const readingTime = post.readingTime || 0
 
   return (
     <div className={"min-h-screen py-16 relative"}>
@@ -119,7 +119,8 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
     }
   }
 
-  const content = await md2html(post.content)
+  // Use cached markdown processing for metadata generation too
+  const content = await getCachedMarkdown(post.slug, post.content)
 
   const title = `${ post?.title || '文章不存在' } | BH8GA's blog`
 

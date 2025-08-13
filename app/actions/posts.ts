@@ -1,6 +1,7 @@
 import * as fs from 'fs'
 import { join } from 'path'
 import matter from 'gray-matter'
+import { estimateReadingTime } from '@/lib/estimateReadingTime'
 
 export type Post = {
   tags?: string[],
@@ -13,6 +14,7 @@ export type Post = {
     url: string;
   };
   content: string;
+  readingTime?: number;
   preview?: boolean;
   external?: boolean;
 };
@@ -30,7 +32,10 @@ export function getPostBySlug(slug: string) {
   const fileContents = fs.readFileSync(fullPath, 'utf8')
   const { data, content } = matter(fileContents)
 
-  return { ...data, slug: realSlug, content } as Post
+  // Pre-calculate reading time
+  const readingTime = estimateReadingTime(content)
+
+  return { ...data, slug: realSlug, content, readingTime } as Post
 }
 
 export function getAllPosts(): Post[] {

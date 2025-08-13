@@ -2,8 +2,7 @@
 
 import { Post } from '@/app/actions/posts'
 import { useTranslations } from 'next-intl'
-import { CSSProperties, useEffect, useState } from 'react'
-import { estimateReadingTime } from '@/lib/estimateReadingTime'
+import { CSSProperties } from 'react'
 import { Tooltip } from '@nextui-org/react'
 import TablerBrain from '@/components/Icons/TablerBrain'
 import { Link } from '@/navigation'
@@ -22,10 +21,9 @@ export const PostItem = ({
   style?: CSSProperties
 }) => {
   const t = useTranslations('home.blog')
-  const [readingTime, setReadingTime] = useState(0)
-  useEffect(() => {
-    setReadingTime(estimateReadingTime(post.content))
-  }, [post.content])
+  
+  // Use pre-calculated reading time from post metadata
+  const readingTime = post.readingTime || 0
 
   return (
     <li
