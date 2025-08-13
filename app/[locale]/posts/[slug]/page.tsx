@@ -1,7 +1,6 @@
 import './page.scss'
 import { getPostBySlug } from '@/app/actions/posts'
 import { getCachedMarkdown } from '@/lib/markdownCache'
-import md2html from '@/lib/md2html'
 import { rubik } from '@/app/[locale]/fonts'
 import dayjs from '@/app/dayjs'
 import { useTranslations } from 'next-intl'
@@ -59,7 +58,8 @@ export default async function Post({ params }: Params) {
     )
   }
 
-  const content = await md2html(post.content)
+  // Use cached markdown processing for better performance
+  const content = await getCachedMarkdown(post.slug, post.content)
   // Use pre-calculated reading time from post metadata
   const readingTime = post.readingTime || 0
 
@@ -120,9 +120,8 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
     }
   }
 
-  // Use cached markdown processing for metadata generation too
-  const content = await getCachedMarkdown(post.slug, post.content)
-
+  // Use raw content for description extraction, not processed HTML
+  const description = post?.excerpt || post.content.replace(/[#*`\[\]]/g, '').slice(0, 200)
   const title = `${ post?.title || '文章不存在' } | BH8GA's blog`
 
   return {
@@ -130,7 +129,7 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
     metadataBase: new URL('https://bh8.ga'),
     openGraph: {
       title,
-      description: post?.excerpt || content.replace(/<[^>]*>/g, '').slice(0, 200),
+      description,
       type: 'article',
       publishedTime: post?.date,
       modifiedTime: post?.date,
