@@ -43,6 +43,7 @@ import {
   ScaleControl,
   useMap,
 } from "react-map-gl";
+import TablerLivePhoto from "@/components/Icons/TablerLivePhoto";
 
 const FloatCard = ({
   label,
@@ -268,12 +269,11 @@ export default function Main({
               }
             /> */}
             <ContactCard
-              title={"Mastodon"}
-              content={"@HoshinoSuzumi"}
-              subContent={"@uniiem.com"}
-              href={"https://mas.uniiem.com/@HoshinoSuzumi"}
+              title={"Chronoframe"}
+              content={"Gallery"}
+              href={"https://lens.bh8.ga"}
               icon={
-                <TablerBrandMastodon
+                <TablerLivePhoto
                   className={
                     "absolute -right-1 bottom-0 text-primary-800 text-5xl opacity-25"
                   }

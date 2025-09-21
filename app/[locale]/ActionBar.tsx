@@ -34,37 +34,46 @@ export const ActionBar = ({
 
   return (
     <header
-      className={ `action-bar ${ noto_sc.className } ${ hideActionbar && '-translate-y-1/2 opacity-0 pointer-events-none' } transition` }
+      className={`action-bar ${noto_sc.className} ${
+        hideActionbar && '-translate-y-1/2 opacity-0 pointer-events-none'
+      } transition`}
     >
-      <div className={ 'flex justify-between items-center container xl:max-w-[1280px]' }>
-        <Link className={ 'flex items-center gap-2 select-none' } href={ '/' }>
-          <TablerBuildingBroadcastTower className={ 'text-2xl' }/>
-          <h1 className={ `flex flex-col leading-tight text-xl font-medium ${ saira.className }` }>
-          <span>
-            <span className={ 'font-bold' }>BH8GA</span>
-            <span className={ 'opacity-50' }>&apos;s values</span>
-          </span>
-            <span className={ 'text-xs' }>
-            { t('my_internet_oasis') }
-          </span>
+      <div
+        className={
+          'flex justify-between items-center container xl:max-w-[1280px]'
+        }
+      >
+        <Link
+          className={'flex items-center gap-2 select-none'}
+          href={'/'}
+        >
+          <TablerBuildingBroadcastTower className={'text-2xl'} />
+          <h1
+            className={`flex flex-col leading-tight text-xl font-medium ${saira.className}`}
+          >
+            <span>
+              <span className={'font-bold'}>BH8GA</span>
+              <span className={'opacity-50'}>&apos;s values</span>
+            </span>
+            <span className={'text-xs'}>{t('my_internet_oasis')}</span>
           </h1>
         </Link>
-        <div className={ 'flex items-center gap-2' }>
-          <div className={ 'flex items-center' }>
-            <Tooltip content={ t('blog.title') }>
+        <div className={'flex items-center gap-2'}>
+          <div className={'flex items-center'}>
+            <Tooltip content={t('blog.title')}>
               <Button
-                variant={ 'light' }
-                as={ Link }
-                href={ '/posts' }
+                variant={'light'}
+                as={Link}
+                href={'/posts'}
                 isIconOnly
               >
-                <TablerArticle className={ 'text-xl' }/>
+                <TablerArticle className={'text-xl'} />
               </Button>
             </Tooltip>
           </div>
-          <div className={ 'h-[20px] w-[2px] rounded-full bg-neutral-300' }></div>
-          <SignIn/>
-          <LanguageChanger locale={ locale }/>
+          <div className={'h-[20px] w-[2px] rounded-full bg-neutral-300'}></div>
+          <SignIn />
+          <LanguageChanger locale={locale} />
         </div>
       </div>
     </header>
