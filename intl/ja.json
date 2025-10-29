@@ -1,4 +1,14 @@
 {
+  "menu": {
+    "management": "管理",
+    "account": "アカウント",
+    "signed_in_as": "ログイン中のユーザー",
+    "send-card": "カード送信",
+    "card-designs": "カードデザイン",
+    "card-stock": "カード在庫",
+    "exchanges": "交換記録",
+    "sign_out": "ログアウト"
+  },
   "avatar": {
     "signed_in_as": "ログイン中のユーザー",
     "dashboard": "ダッシュボード",
@@ -47,8 +57,14 @@
     "recently_songs": "最近聞いた曲",
     "all_posts": "すべての記事",
     "proj": {
-      "me": "独立フロントエンド開発者で、2017年からフロントエンド技術に携わっています。主な技術スタックはVue、React、Nodeで、TypeScriptやSassなどのフロントエンド技術に精通しています。現在も独立開発者としてオープンソースを受け入れ、自分の興味関心のある分野でより良い体験を創り出しています。",
+      "me": "独立フロントエンド開発者で、2017年からフロントエンド技術に携わっています。主な技術スタックはVue、React、Nodeで、TypeScriptやSassなどのフロントエンド技術に精通しています。現在も独立開発者としてオープンソースを受け入れ、自分の興味関心のある分野でより良い体験を創り出しています。アマチュア無線通信の愛好家で、特別なコールサイン「BH8GA」を持ち、空中での出会いを楽しみにしています。",
       "try_it": "試してみる",
+      "chronoframe": {
+        "name": "ChronoFrame",
+        "desc": "自己ホスト型の個人写真ギャラリー、LivePhotoと写真マップに対応",
+        "title1": "時間、フレーム、思い出",
+        "title2": "あなたの大切な瞬間をみんなに共有する"
+      },
       "ctfever": {
         "name": "CTFever",
         "desc": "CTF愛好家や皆さんのための素晴らしいツールキット。",
@@ -63,9 +79,9 @@
       },
       "rayui": {
         "name": "Rayine UI",
-        "desc": "Multipurpose customizable UI library.",
-        "title1": "Highly customizable features",
-        "title2": "Build modern web apps"
+        "desc": "多目的でカスタマイズ可能なUIコンポーネントライブラリ。",
+        "title1": "高度にカスタマイズ可能な機能",
+        "title2": "モダンなWebアプリを構築"
       }
     },
     "blog": {

@@ -1,4 +1,14 @@
 {
+  "menu": {
+    "management": "Management",
+    "account": "Account",
+    "signed_in_as": "Signed in as",
+    "send-card": "Send Card",
+    "card-designs": "Card Designs",
+    "card-stock": "Card Stock",
+    "exchanges": "Exchanges",
+    "sign_out": "Sign out"
+  },
   "avatar": {
     "signed_in_as": "Signed in as",
     "dashboard": "Dashboard",
@@ -47,8 +57,14 @@
     "recently_songs": "Recently Played",
     "all_posts": "All Posts",
     "proj": {
-      "me": "Independent front-end developer, engaged in front-end technology since 2017. My main tech stack includes Vue, React, and Node, and I am proficient in front-end technologies such as TypeScript and Sass. As of now, I continue to embrace open source as an independent developer, creating better experiences in my areas of interest.",
-      "try_it": "Try it",
+      "me": "Independent front-end developer, engaged in front-end technology since 2017. My main tech stack includes Vue, React, and Node, and I am proficient in front-end technologies such as TypeScript and Sass. As of now, I continue to embrace open source as an independent developer, creating better experiences in my areas of interest. An amateur radio enthusiast with a special call sign: BH8GA, looking forward to meeting you on the air.",
+      "try_it": "Visit",
+      "chronoframe": {
+        "name": "ChronoFrame",
+        "desc": "Self-hosted personal photo gallery with LivePhoto and photo map support",
+        "title1": "Time, frames, and memories",
+        "title2": "Share your precious moments with everyone"
+      },
       "ctfever": {
         "name": "CTFever",
         "desc": "Fantastic toolkit for CTFers and everyone.",
